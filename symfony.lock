@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "knplabs/knp-menu-bundle": {
+        "version": "v3.5.0"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -39,6 +42,15 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
+    },
+    "survos/core-bundle": {
+        "version": "1.5.529"
+    },
+    "survos/fw-bundle": {
+        "version": "1.0"
+    },
+    "survos/maker-bundle": {
+        "version": "1.5.503"
     },
     "symfony/asset-mapper": {
         "version": "7.2",

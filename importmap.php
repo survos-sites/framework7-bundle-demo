@@ -56,4 +56,7 @@ return [
     '@unlazy/core' => [
         'version' => '0.12.3',
     ],
+    '@survos-mobile/mobile' => [
+        'path' => './vendor/survos/fw-bundle/assets/src/controllers/mobile_controller.js',
+    ],
 ];
