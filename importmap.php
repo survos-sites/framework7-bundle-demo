@@ -16,13 +16,38 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    '@hotwired/stimulus' => [
-        'version' => '3.2.2',
-    ],
     '@symfony/stimulus-bundle' => [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
+    '@hotwired/stimulus' => [
+        'version' => '3.2.2',
+    ],
+    'dom7' => [
+        'version' => '4.0.6',
+    ],
+    'ssr-window' => [
+        'version' => '5.0.0',
+    ],
+    'framework7' => [
+        'version' => '8.3.4',
+    ],
+    'path-to-regexp' => [
+        'version' => '8.2.0',
+    ],
+    'htm' => [
+        'version' => '3.1.1',
+    ],
+    'swiper' => [
+        'version' => '11.2.5',
+    ],
     '@hotwired/turbo' => [
-        'version' => '7.3.0',
+        'version' => '8.0.13',
+    ],
+    'framework7/framework7-bundle' => [
+        'version' => '8.3.4',
+    ],
+    'framework7/framework7-bundle.min.css' => [
+        'version' => '8.3.4',
+        'type' => 'css',
     ],
 ];
