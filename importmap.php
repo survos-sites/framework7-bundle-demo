@@ -50,4 +50,10 @@ return [
         'version' => '8.3.4',
         'type' => 'css',
     ],
+    'unlazy' => [
+        'version' => '0.12.3',
+    ],
+    '@unlazy/core' => [
+        'version' => '0.12.3',
+    ],
 ];
