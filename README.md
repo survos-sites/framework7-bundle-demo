@@ -7,3 +7,8 @@ composer install
 symfony server:start -d
 symfony open:local
 ```
+
+run proxy server
+```bash
+symfony proxy:start
+```
