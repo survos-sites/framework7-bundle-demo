@@ -1,0 +1,1 @@
+export default ({"base_url":"","routes":{"app_index":{"tokens":[["text","\/"]],"defaults":[],"requirements":[],"hosttokens":[],"methods":["GET"],"schemes":[]}},"prefix":"","host":"localhost","port":"","scheme":"http","locale":""});

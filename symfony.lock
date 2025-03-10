@@ -26,6 +26,18 @@
             "migrations/.gitignore"
         ]
     },
+    "friendsofsymfony/jsrouting-bundle": {
+        "version": "3.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.3",
+            "ref": "a9f2e49180f75cdc71ae279a929c4b2e0638de84"
+        },
+        "files": [
+            "config/routes/fos_js_routing.yaml"
+        ]
+    },
     "knplabs/knp-menu-bundle": {
         "version": "v3.5.0"
     },
@@ -43,11 +55,27 @@
             "tests/bootstrap.php"
         ]
     },
+    "survos/command-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "2ae59ea83b8aeb1c288a149af0f594ee9ff52524"
+        },
+        "files": [
+            "config/packages/survos_command.yaml",
+            "config/routes/survos_command.yaml"
+        ]
+    },
     "survos/core-bundle": {
         "version": "1.5.529"
     },
     "survos/fw-bundle": {
         "version": "1.0"
+    },
+    "survos/js-twig-bundle": {
+        "version": "1.5.529"
     },
     "survos/maker-bundle": {
         "version": "1.5.503"
