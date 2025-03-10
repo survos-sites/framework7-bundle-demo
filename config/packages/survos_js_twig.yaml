@@ -8,5 +8,5 @@ survos_js_twig:
       name: items
       schema: "++id,category,starred"
       url: https://dummyjson.com/products
-      response_key: products
+#      response_key: products
 #      batch: 3
