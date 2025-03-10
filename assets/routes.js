@@ -5,7 +5,7 @@ export default (
         url: './index.html',
     },
     {
-        path: '/about/',
+        path: '/about',
         url: './pages/about.html',
     },
     {

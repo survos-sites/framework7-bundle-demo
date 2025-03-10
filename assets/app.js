@@ -16,10 +16,48 @@ import 'framework7/framework7-bundle.min.css';
 // import 'framework7-icons/css/framework7-icons.min.css'
 // import 'framework7-icons';
 
+// let store = [];
 
 var $ = Dom7;
 
 // import './store.js';
+import Dexie from 'dexie';
+const db = new Dexie('MyDatabase');
+db.version(1).stores({
+    products: '++id, title, category'
+});
+const count = await db.products.count();
+// await db.delete('friends');
+
+if (0)
+{
+    fetch('https://dummyjson.com/products')
+        .then(res => res.json())
+        .then(data => {
+            data.products.forEach(function(product) {
+                console.log(product);
+                db.products.add(product);
+                store.push(product);
+            })
+        });
+    // await db.friends.add({
+    //     name: 'Camilla',
+    //     age: 25,
+    //     street: 'East 13:th Street'
+    //     // picture: await getBlob('camilla.png')
+    // });
+    const products = await db.products
+        // .where('age').below(75)
+        .toArray();
+    // console.log(products);
+}
+
+
+
+import routes from "./routes.js";
+// Routing.setData(RoutingData);
+
+
 var createStore = Framework7.createStore;
 const store = createStore({
     state: {
@@ -52,18 +90,12 @@ const store = createStore({
         },
     },
 })
+console.log(routes, store);
 
-
-import routes from "./routes.js";
-// Routing.setData(RoutingData);
-
-console.log(routes);
 
 var app = new Framework7({
     name: 'My App', // App name
     theme: 'auto', // Automatic theme detection
-
-
     el: '#app', // App root element
 
     // App store
@@ -74,7 +106,27 @@ var app = new Framework7({
     // serviceWorker: {
     //     path: '/service-worker.js',
     // },
+    on: {
+        init: function () {
+            console.log('App initialized');
+        },
+        pageInit: function () {
+            console.log('Page initialized');
+        },
+    }
 });
+
+
+app.on('pageInit', function (page) {
+    console.error('page', page);
+    // do something on page init
+});
+app.on('pageAfterIn', function (page) {
+    console.log("Current url: ");
+    console.log(page.route.url);
+});
+
+app.emit('myCustomEvent', 'foo', 'bar');
 
 
 // Login Screen Demo

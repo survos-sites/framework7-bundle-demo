@@ -1,0 +1,83 @@
+{#{% block pageCongroller 'pokemon' %}#}
+{% extends '@SurvosFw/fwPage.html.twig' %}
+{% set onsMeta = ons_metadata(_self, type) %}
+
+{# {% block toolbar %} #}
+{#    {{ parent() }} #}
+{#    <div class="center">home?</div> #}
+{# {% endblock %} #}
+
+{% block title 'pokemon' %}
+{% block page_icon 'fa-download' %}
+{% block body %}
+    <div class="pokemon-box">
+        <h3 class="page-title">Pokemon-list</h3>
+
+        {% set store = 'savedTable' %}
+        {% set globals = {store: store} %}
+
+        <twig:dexie
+                refreshEvent="pokemon.prechange"
+                :store="store"
+                :globals="globals"
+                :filter="{}"
+                :caller="_self">
+
+            <twig:block name="title">
+                there are {{ rows|length }} rows
+            </twig:block>
+
+            <twig:block name="twig_template" id="hack_to_get_raw_data">
+                <span class="pokemon-count">there are {{ rows|length }} rows </span>
+                {% for row in rows %}
+                    {% set detail = row.details %}
+
+                    <ons-list-item class="list-item custom-list-layout">
+                        <div class="top list-item__top">
+                            <div class="left list-item__left">
+                                <img class="custom_thumbnail" src="{{ detail.sprites.front_default }}"
+                                     alt="{{ row.name }} image"/>
+
+                            </div>
+                            <div class="center list-item__center">
+                                {% set checked = row.owned ? 'checked' : '' %}
+                                <h6 class="custom-list-item-title">
+                                    <a {{ stimulus_action('app','test','click', {
+                                        page: 'detail',
+                                        store:globals.store,
+                                        id:row.id
+                                    }) }}>
+
+                                        {{ row.name }}
+                                    </a>
+                                </h6>
+
+                            </div>
+                            <div class="right list-item__right">
+                                {% set _sc = 'ownswitch' %}
+                                {% set checked = row.owned ? 'checked' : '' %}
+                                <ons-switch class="right"
+                                        {{ stimulus_controller(_sc, {owned: row.owned}) }}
+                                        {{ stimulus_action('app',  'add', 'click', {id: row.id}) }}>
+                                </ons-switch>
+
+                            </div>
+                        </div>
+                        <div class="expandable-content list-item__expandable-content">Expandable content</div>
+                    </ons-list-item>
+                {% endfor %}
+                <!-- hack_to_get_raw_data -->
+            </twig:block>
+        </twig:dexie>
+
+
+        {#    <ons-list {{ stimulus_target(_sc, 'list') }}> #}
+        {#        <ons-list-item>TEST</ons-list-item> #}
+        {#    </ons-list> #}
+
+        <div {{ stimulus_target('app','spinner') }}
+                id="after-list" style="display:none; margin: 20px; text-align: center;">
+            <ons-icon icon="fa-spinner" size="26px" spin></ons-icon>
+        </div>
+    </div>
+{% endblock %}

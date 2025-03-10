@@ -59,4 +59,46 @@ return [
     '@survos-mobile/mobile' => [
         'path' => './vendor/survos/fw-bundle/assets/src/controllers/mobile_controller.js',
     ],
+    'twig' => [
+        'version' => '1.17.1',
+    ],
+    'locutus/php/strings/sprintf' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/strings/vsprintf' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/math/round' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/math/max' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/math/min' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/strings/strip_tags' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/datetime/strtotime' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/datetime/date' => [
+        'version' => '2.0.16',
+    ],
+    'locutus/php/var/boolval' => [
+        'version' => '2.0.16',
+    ],
+    'dexie' => [
+        'version' => '4.0.11',
+    ],
+    'stimulus-attributes' => [
+        'version' => '1.0.1',
+    ],
+    'escape-html' => [
+        'version' => '1.0.3',
+    ],
+    'fos-routing' => [
+        'version' => '0.0.6',
+    ],
 ];

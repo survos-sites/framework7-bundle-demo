@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<!-- App root element -->
+<div id="app" {{ stimulus_controller('app') }}>
+
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main">
+        <!-- Initial Page, "data-name" contains page name -->
+        <div data-name="home" class="page">
+
+            <!-- Top Navbar -->
+            <div class="navbar">
+                <div class="navbar-bg"></div>
+                <div class="navbar-inner">
+                    <div class="title">Awesome App</div>
+                </div>
+            </div>
+
+            <!-- Bottom Toolbar -->
+            <div class="toolbar toolbar-bottom">
+                <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link">Link 2</a>
+                </div>
+            </div>
+
+            <!-- Scrollable page content -->
+            <div class="page-content">
+                <p>Page content goes here</p>
+                <!-- Link to another page -->
+                <a href="/about/">About app</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+# Default configuration for extension with alias: "survos_js_twig"
+survos_js_twig:
+  debug: true
+  db: dummy
+  version: 3
+  stores:
+    -
+      name: items
+      schema: "++id,category,starred"
+      url: https://dummyjson.com/products
+      response_key: products
+#      batch: 3

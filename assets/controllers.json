@@ -3,7 +3,19 @@
         "@survos/fw-bundle": {
             "mobile": {
                 "enabled": true,
-                "fetch": "lazy",
+                "fetch": "eager",
+                "autoimport": []
+            }
+        },
+        "@survos/js-twig-bundle": {
+            "dexie": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": []
+            },
+            "jstwig": {
+                "enabled": true,
+                "fetch": "eager",
                 "autoimport": []
             }
         },
