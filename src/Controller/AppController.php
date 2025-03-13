@@ -101,7 +101,7 @@ final class AppController extends AbstractController
 
     //add a test route name it amine
     #[Route('/map', name: 'app_map')]
-    public function amine(): Response
+    public function app_map(): Response
     {
 
         return $this->render('app/map.html.twig', [

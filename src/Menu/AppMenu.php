@@ -50,14 +50,13 @@ final class AppMenu implements KnpMenuHelperInterface
     {
         $menu = $event->getMenu();
         // the id is for getting the template directly in app/{id} during SPA, the route is for testing.  both are needed.
-        $this->add($menu, id: 'about', route: 'app_about', label: 'about', icon: 'tabler:help');
-        $this->add($menu, id: 'products', label: 'products', icon: 'tabler:list');
+        //$this->add($menu, id: 'about', route: 'app_about', label: 'about', icon: 'tabler:help');
+        //$this->add($menu, id: 'products', label: 'products', icon: 'tabler:list');
 
         $this->add($menu, id: 'map',route: "app_map", label: 'Map', icon: 'tabler:list');
 
-        $this->add($menu, id: 'map',route: "app_catalog", label: 'Catalog D', icon: 'tabler:list');
+        $this->add($menu, id: 'catalog',route: "app_catalog", label: 'Catalog D', icon: 'tabler:list');
 
-//        $this->add($menu, id: 'share', label: 'share', icon: 'tabler:qrcode');
 
     }
 }

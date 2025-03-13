@@ -1,22 +1,23 @@
-<div class="page" data-name="about">
+<template>
+  <div class="page" data-name="catalog">
     <div class="navbar">
-        <div class="navbar-bg"></div>
-        <div class="navbar-inner sliding">
-            <div class="left">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+      <div class="left">
                 <a href="#" class="link back">
                     <i class="icon icon-back"></i>
                     <span class="if-not-md">Back</span>
                 </a>
             </div>
-            <div class="title">Map</div>
-        </div>
+        <div class="title">Catalog</div>
+      </div>
     </div>
     <div class="page-content">
-        <div class="block-title">About My App</div>
-        <div class="block">
-            <h1>Map List</h1>
-    <ul>
-    </ul>
-        </div>
+      <div class="list list-strong list-dividers-ios list-outline-ios inset-md">
+        {{ _self }}
+        
+      </div>
+    
     </div>
-</div>
+  </div>
+</template>
