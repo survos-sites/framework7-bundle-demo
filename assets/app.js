@@ -22,9 +22,10 @@ var $ = Dom7;
 
 // import './store.js';
 import Dexie from 'dexie';
-const db = new Dexie('MyDatabase');
+var db = new Dexie('MyDatabase');
 db.version(1).stores({
-    products: '++id, title, category'
+    products: '++id, title, category',
+    artists 
 });
 const count = await db.products.count();
 // await db.delete('friends');
@@ -58,27 +59,10 @@ if (count == 0)
 import routes from "./routes.js";
 // Routing.setData(RoutingData);
 
-
 var createStore = Framework7.createStore;
 const store = createStore({
     state: {
-        products: [
-            {
-                id: '1',
-                title: 'Apple iPhone 8',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'
-            },
-            {
-                id: '2',
-                title: 'Apple iPhone 8 Plus',
-                description: 'Velit odit autem modi saepe ratione totam minus, aperiam, labore quia provident temporibus quasi est ut aliquid blanditiis beatae suscipit odio vel! Nostrum porro sunt sint eveniet maiores, dolorem itaque!'
-            },
-            {
-                id: '3',
-                title: 'Apple iPhone X',
-                description: 'Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.'
-            },
-        ]
+        products: []
     },
     getters: {
         products({ state }) {
@@ -86,13 +70,22 @@ const store = createStore({
         }
     },
     actions: {
+        setProduct({ state }, product) {
+            state.product = product;
+        },
+        getProducts({ state }) {
+            //get products from dixie db
+            let products = db.products.toArray().then(products => {
+                state.products = products;
+            });
+        },
         addProduct({ state }, product) {
             state.products = [...state.products, product];
         },
     },
 })
+store.dispatch('getProducts');
 //console.log(routes, store);
-
 
 var app = new Framework7({
     name: 'My App', // App name
@@ -117,6 +110,12 @@ var app = new Framework7({
     }
 });
 
+// Attach Dexie database to `app`
+app.db = new Dexie("MyDatabase");
+// Define database schema
+app.db.version(1).stores({
+    products: '++id, title, category'
+});
 
 app.on('pageInit', function (page) {
     console.error('page', page);
