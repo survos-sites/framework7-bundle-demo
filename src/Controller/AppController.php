@@ -98,4 +98,27 @@ final class AppController extends AbstractController
 
         ]);
     }
+
+    //add a test route name it amine
+    #[Route('/map', name: 'app_map')]
+    public function amine(): Response
+    {
+
+        return $this->render('app/map.html.twig', [
+            'controller_name' => 'AppController',
+            //'products' => $products,
+        ]);
+    }
+
+    #[Route('/catalog', name: 'app_catalog')]
+    public function catalog(): Response
+    {
+
+        return $this->render('app/catalog.html.twig', [
+            //'controller_name' => 'AppController',
+            //'products' => $products,
+        ]);
+    }
+
+
 }

@@ -29,7 +29,7 @@ db.version(1).stores({
 const count = await db.products.count();
 // await db.delete('friends');
 
-if (0)
+if (count == 0)
 {
     fetch('https://dummyjson.com/products')
         .then(res => res.json())
@@ -37,7 +37,7 @@ if (0)
             data.products.forEach(function(product) {
                 console.log(product);
                 db.products.add(product);
-                store.push(product);
+                //store.push(product);
             })
         });
     // await db.friends.add({
@@ -49,7 +49,8 @@ if (0)
     const products = await db.products
         // .where('age').below(75)
         .toArray();
-    // console.log(products);
+        //console.log("products   :  ");
+    //console.log(products);
 }
 
 
@@ -90,7 +91,7 @@ const store = createStore({
         },
     },
 })
-console.log(routes, store);
+//console.log(routes, store);
 
 
 var app = new Framework7({

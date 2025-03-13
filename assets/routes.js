@@ -5,7 +5,7 @@ export default (
         url: './index.html',
     },
     {
-        path: '/about',
+        path: '/about/',
         url: './pages/about.html',
     },
     {
@@ -79,6 +79,26 @@ export default (
     // Default route (404 page). MUST BE THE LAST
     {
         path: '(.*)',
-        url: './pages/404.html',
+        //url: './pages/404.html',
+        async : function ({ app, router, to, resolve }) {
+            // Requested route
+            console.log('asking for');
+            console.log(to.path);
+            // Get external data and return page content
+            fetch('https://fw.wip' + to.path)
+                .then((res) => {
+                    if (res.status === 404) {
+                        resolve({
+                            url: './pages/404.html'
+                        });
+                    } else {
+                        return res.text().then(function (data) {
+                            resolve({
+                                componentUrl:'https://fw.wip' + to.path
+                            });
+                        });
+                    }
+                });
+        }
     },
 ]);
