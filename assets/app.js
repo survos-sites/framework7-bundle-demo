@@ -24,8 +24,7 @@ var $ = Dom7;
 import Dexie from 'dexie';
 var db = new Dexie('MyDatabase');
 db.version(1).stores({
-    products: '++id, title, category',
-    artists 
+    products: '++id, title, category'
 });
 const count = await db.products.count();
 // await db.delete('friends');
