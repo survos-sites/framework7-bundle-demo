@@ -2579,12 +2579,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/JsTwigBundle.git",
-                "reference": "84581ef017a8211de7642969f9fb42a4803ca91b"
+                "reference": "60b42d8a7e4328206c40f1eb4382e90c3b421001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/JsTwigBundle/zipball/84581ef017a8211de7642969f9fb42a4803ca91b",
-                "reference": "84581ef017a8211de7642969f9fb42a4803ca91b",
+                "url": "https://api.github.com/repos/survos/JsTwigBundle/zipball/60b42d8a7e4328206c40f1eb4382e90c3b421001",
+                "reference": "60b42d8a7e4328206c40f1eb4382e90c3b421001",
                 "shasum": ""
             },
             "require": {
@@ -2630,7 +2630,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-10T16:10:51+00:00"
+            "time": "2025-03-12T14:00:33+00:00"
         },
         {
             "name": "symfony/asset",

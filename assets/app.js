@@ -29,7 +29,7 @@ db.version(1).stores({
 const count = await db.products.count();
 // await db.delete('friends');
 
-if (count == 0)
+if (count === 0)
 {
     fetch('https://dummyjson.com/products')
         .then(res => res.json())
@@ -100,6 +100,10 @@ var app = new Framework7({
     //     path: '/service-worker.js',
     // },
     on: {
+        pageBeforeIn: (x) => {
+            console.log('before ' + x.route.url);
+            console.warn('pageInBefore: %o', x);
+        },
         init: function () {
             console.log('App initialized');
         },

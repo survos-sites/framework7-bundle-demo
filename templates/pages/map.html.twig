@@ -1,3 +1,9 @@
+{#{% extends '@SurvosFw/fwPage.html.twig' %}#}
+
+{# is type page/component, or page/tab? #}
+{% set type = 'tab' %}
+{% set fw7Meta = fw7_metadata(_self, type) %}
+
 <template>
   <div class="page" data-name="catalog">
     <div class="navbar">
@@ -9,15 +15,15 @@
                     <span class="if-not-md">Back</span>
                 </a>
             </div>
-        <div class="title">Catalog</div>
+        <div class="title">{{ fw7Meta.templateId|title }}</div>
       </div>
     </div>
     <div class="page-content">
       <div class="list list-strong list-dividers-ios list-outline-ios inset-md">
         {{ _self }}
-        
+
       </div>
-    
+
     </div>
   </div>
 </template>

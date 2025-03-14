@@ -1,16 +1,23 @@
+
+
 export default (
 [
     {
         path: '/',
-        url: './index.html',
+        url: './index',
     },
     {
-        path: '/about/',
-        url: './pages/about.html',
+        path: '/about',
+        url: './pages/about', // this is the Symfony route, we can combine this
     },
     {
-        path: '/form/',
-        url: './pages/form.html',
+        path: '/map',
+        componentUrl: './pages/map',
+    },
+    {
+        path: '/form',
+        // url: './pages/form',
+        componentUrl: './pages/form',
     },
     // {
     //     path: '/catalog/',
@@ -18,11 +25,11 @@ export default (
     // },
     {
         path: '/product/:id/',
-        componentUrl: './pages/product.html',
+        componentUrl: './pages/product',
     },
     {
         path: '/settings/',
-        url: './pages/settings.html',
+        url: './pages/settings',
     },
 
     {

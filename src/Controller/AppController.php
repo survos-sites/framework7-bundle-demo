@@ -36,12 +36,12 @@ final class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/about', name: 'app_about')]
-    #[Template('app/about.html.twig')]
-    public function about(): Response|array
-    {
-        return [];
-    }
+//    #[Route('/about', name: 'app_about')]
+//    #[Template('app/about.html.twig')]
+//    public function about(): Response|array
+//    {
+//        return [];
+//    }
 
     #[Route('/', name: 'app_index', options: ['expose' => true], methods: ['GET'])]
     public function mobile(Request $request): Response
@@ -62,7 +62,7 @@ final class AppController extends AbstractController
             $this->eventDispatcher->dispatch(new KnpMenuEvent($menu, $this->factory, $options), $eventName);
             foreach ($menu->getChildren() as $route=>$child) {
                 try {
-                    $template = "app/$route.html.twig";
+                    $template = "pages/$route.html.twig";
                     $params = [
                         'type' => $type,
                         'route' => $route,
@@ -91,34 +91,23 @@ final class AppController extends AbstractController
 //        ]);
 //    }
 
-    #[Route('/pages/{page}.html', name: 'app_page', priority: 400)]
+    #[Route('/pages/{page}', name: 'app_page', priority: 400)]
     public function page(string $page): Response
     {
-        return $this->render("pages/$page.html", [
+        return $this->render("pages/$page.html.twig", [
 
         ]);
     }
 
-    //add a test route name it amine
-    #[Route('/map', name: 'app_map')]
-    public function app_map(): Response
-    {
-
-        return $this->render('app/map.html.twig', [
-            'controller_name' => 'AppController',
-            //'products' => $products,
-        ]);
-    }
-
-    #[Route('/catalog', name: 'app_catalog')]
-    public function catalog(): Response
-    {
-
-        return $this->render('app/catalog.html.twig', [
-            //'controller_name' => 'AppController',
-            //'products' => $products,
-        ]);
-    }
+//    #[Route('/catalog', name: 'app_catalog')]
+//    public function catalog(): Response
+//    {
+//
+//        return $this->render('app/catalog.html.twig', [
+//            //'controller_name' => 'AppController',
+//            //'products' => $products,
+//        ]);
+//    }
 
 
 }
