@@ -1,5 +1,13 @@
 {% extends "base.html.twig" %}
 {% block body %}
+
+    <h1>{{ _self }}</h1>
+    <div>
+
+        Not sure we need to use this yet at all. Someday
+
+    </div>
+
 <!-- App root element -->
 <div id="app" {{ stimulus_controller('app') }}>
 
@@ -29,7 +37,7 @@
             <div class="page-content">
                 <p>Page content goes here</p>
                 <!-- Link to another page -->
-                <a href="/about/">About app</a>
+                <a href="{{ path('app_page', {page: 'about'}) }}">About this app</a>
             </div>
         </div>
     </div>
