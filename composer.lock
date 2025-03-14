@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9e3c264f3e6c54c0545989c1f307502",
+    "content-hash": "d54eff0a89acb3a27cc0ce673b635c81",
     "packages": [
         {
             "name": "composer/semver",
@@ -2514,17 +2514,11 @@
         },
         {
             "name": "survos/fw-bundle",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/survos/fw-bundle.git",
-                "reference": "5af63f44335a064f2e0f001b2bccde7a19c1d800"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/5af63f44335a064f2e0f001b2bccde7a19c1d800",
-                "reference": "5af63f44335a064f2e0f001b2bccde7a19c1d800",
-                "shasum": ""
+                "type": "path",
+                "url": "../survos/packages/fw-bundle",
+                "reference": "46f404baa26b444c1ce64c33b1e9e614a5c00421"
             },
             "require": {
                 "knplabs/knp-menu-bundle": "^3.2",
@@ -2553,7 +2547,6 @@
                     "Survos\\FwBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2561,17 +2554,9 @@
             "keywords": [
                 "symfony-ux"
             ],
-            "support": {
-                "issues": "https://github.com/survos/fw-bundle/issues",
-                "source": "https://github.com/survos/fw-bundle/tree/1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/kbond",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-08T18:32:57+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "survos/js-twig-bundle",
@@ -11207,6 +11192,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "survos/fw-bundle": 20,
         "survos/js-twig-bundle": 20
     },
     "prefer-stable": true,

@@ -16,7 +16,7 @@
         "phpdocumentor/reflection-docblock": "^5.6.1",
         "phpstan/phpdoc-parser": "^2.1",
         "survos/command-bundle": "^1.5.529",
-        "survos/fw-bundle": ">=1",
+        "survos/fw-bundle": "dev-main",
         "survos/js-twig-bundle": "dev-main",
         "symfony/asset": "^7.2",
         "symfony/asset-mapper": "^7.2.3",
@@ -115,5 +115,11 @@
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "^7.2.4",
         "symfony/web-profiler-bundle": "^7.2.4"
+    },
+    "repositories": {
+        "fw7": {
+            "type": "path",
+            "url": "../survos/packages/fw-bundle"
+        }
     }
 }
