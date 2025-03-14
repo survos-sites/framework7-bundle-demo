@@ -55,8 +55,8 @@ final class AppMenu implements KnpMenuHelperInterface
         //$this->add($menu, id: 'products', label: 'products', icon: 'tabler:list');
 
         foreach ([
-            'about' => 'tabler:info-circle',
             'map' => 'tabler:map',
+            'about' => 'tabler:info-circle',
             'catalog' => 'tabler:list',
             'form' => 'tabler:settings',
                  ] as $route => $icon) {
