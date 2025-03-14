@@ -102,11 +102,11 @@ var app = new Framework7({
     on: {
         tabShow: (el) => {
             let eventName = el.id + '-show';
+            console.error(eventName);
             // app.emit(eventName, el);
             const event = new CustomEvent(eventName, { detail: el.dataset });
+            console.warn("Dispatching: " + eventName);
             document.dispatchEvent(event);
-            console.warn("tab switch Dispatched: ", event)
-            console.log('showing ' + el.id);
 
         },
         tabHide: (el) => {
