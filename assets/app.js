@@ -100,6 +100,20 @@ var app = new Framework7({
     //     path: '/service-worker.js',
     // },
     on: {
+        tabShow: (el) => {
+            let eventName = 'pokemon';
+            // app.emit(eventName, el);
+            const event = new CustomEvent(eventName, { detail: el.dataset });
+            window.dispatchEvent(event);
+            console.warn("Dispatched: ", event)
+            console.log('showing ' + el.id);
+        },
+        tabHide: (el) => {
+            console.log('hiding ' + el.id);
+        },
+        pageTabShow: (el) => {
+            console.log('pageTabShow ' + el.id);
+        },
         pageBeforeIn: (x) => {
             console.log('before ' + x.route.url);
             console.warn('pageInBefore: %o', x);

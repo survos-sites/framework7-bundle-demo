@@ -1,5 +1,3 @@
-{
-<template>
   <div class="page" data-name="catalog">
     <div class="navbar">
       <div class="navbar-bg"></div>
@@ -35,21 +33,22 @@
       `}
     </div>
   </div>
-</template>
-<script>
-  export default (props, { $store }) => {
+{#  <template>#}
+{#</template>#}
+{#<script>#}
+{#  export default (props, { $store }) => {#}
 
-    const products = $store.getters.products;
+{#    const products = $store.getters.products;#}
 
-    const addProduct = () => {
-      $store.dispatch('addProduct', {
-        id: '4',
-        title: 'Apple iPhone 12',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'
-      });
-    }
+{#    const addProduct = () => {#}
+{#      $store.dispatch('addProduct', {#}
+{#        id: '4',#}
+{#        title: 'Apple iPhone 12',#}
+{#        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'#}
+{#      });#}
+{#    }#}
 
-    return $render;
-  }
+{#    return $render;#}
+{#  }#}
 
-</script>
+{#</script>#}

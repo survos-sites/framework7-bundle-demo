@@ -4,8 +4,68 @@
 {% set type = 'tab' %}
 {% set fw7Meta = fw7_metadata(_self, type) %}
 
-<template>
-  <div class="page" data-name="map">
+{% set store = 'products' %}
+{% set globals = {
+    'self': _self
+} %}
+<twig:dexie
+        :store="store"
+        :globals="globals"
+        :filter="{}"
+        refreshEvent="pokemon"
+        :caller="_self"
+>
+
+    <twig:block name="title">
+        event...
+    </twig:block>
+
+    <twig:block name="twig_template" id="hack_to_get_raw_data">
+        <span class="pokemon-count">there are {{ rows|length }} rows </span>
+        {% for row in rows %}
+            {% set detail = row.details %}
+
+            <ons-list-item class="list-item custom-list-layout">
+                <div class="top list-item__top">
+                    <div class="left list-item__left">
+                        <img class="custom_thumbnail" src="{{ detail.sprites.front_default }}"
+                             alt="{{ row.name }} image"/>
+
+                    </div>
+                    <div class="center list-item__center">
+                        {% set checked = row.owned ? 'checked' : '' %}
+                        <h6 class="custom-list-item-title">
+                            <a {{ stimulus_action('app','test','click', {
+                                page: 'detail',
+                                store:globals.store,
+                                id:row.id
+                            }) }}>
+
+                                {{ row.name }}
+                            </a>
+                        </h6>
+
+                    </div>
+                    <div class="right list-item__right">
+                        {% set _sc = 'ownswitch' %}
+                        {% set checked = row.owned ? 'checked' : '' %}
+                        <ons-switch class="right"
+                                {{ stimulus_controller(_sc, {owned: row.owned}) }}
+                                {{ stimulus_action('app',  'add', 'click', {id: row.id}) }}>
+                        </ons-switch>
+
+                    </div>
+                </div>
+                <div class="expandable-content list-item__expandable-content">Expandable content</div>
+            </ons-list-item>
+        {% endfor %}
+        <!-- hack_to_get_raw_data -->
+    </twig:block>
+
+</twig:dexie>
+
+
+    <div class="page" data-name="map">
     <div class="navbar">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
@@ -26,4 +86,5 @@
 
     </div>
   </div>
+<template>
 </template>

@@ -1,4 +1,3 @@
-<template>
   <div class="page" data-name="product">
     <div class="navbar">
       <div class="navbar-bg"></div>
@@ -26,61 +25,62 @@
       </div>
     </div>
   </div>
-</template>
-<script>
-  export default (props, {$update,$f7route, $store,$f7 }) => {
-    //const products = $store.getters.products;
-    const productId = $f7route.params.id;
-    //alert($f7.db);
+{#  <template>#}
+{#</template>#}
+{#<script>#}
+{#  export default (props, {$update,$f7route, $store,$f7 }) => {#}
+{#    //const products = $store.getters.products;#}
+{#    const productId = $f7route.params.id;#}
+{#    //alert($f7.db);#}
 
-    
-    // $f7.db.get('products', productId).then((product) => {
-    //   console.log(product);
-    // });
+{#    #}
+{#    // $f7.db.get('products', productId).then((product) => {#}
+{#    //   console.log(product);#}
+{#    // });#}
 
-    //console.log($f7.db);
+{#    //console.log($f7.db);#}
 
-    //log $f7.db.products count
-    $f7.db.products.count().then((count) => {
-      console.log(count);
-    });
+{#    //log $f7.db.products count#}
+{#    $f7.db.products.count().then((count) => {#}
+{#      console.log(count);#}
+{#    });#}
 
-    //log all products
-    $f7.db.products.toArray().then((products) => {
-      console.log(products);
-    });
+{#    //log all products#}
+{#    $f7.db.products.toArray().then((products) => {#}
+{#      console.log(products);#}
+{#    });#}
 
-    //log productId
-    console.log(productId);
+{#    //log productId#}
+{#    console.log(productId);#}
 
-    let currentProduct = {
-      id: '1',
-      title: 'Product Title',
-      description: 'Product description',
-    };
+{#    let currentProduct = {#}
+{#      id: '1',#}
+{#      title: 'Product Title',#}
+{#      description: 'Product description',#}
+{#    };#}
 
 
-        $f7.db.products.where('id').equals(parseInt(productId)).first().then(function (product) {
-          if (product) {
-            console.log("Found product:", product);
-            currentProduct = product;
-            $update();
-          } else {
-            console.log("Product not found");
-          }
-        });
+{#        $f7.db.products.where('id').equals(parseInt(productId)).first().then(function (product) {#}
+{#          if (product) {#}
+{#            console.log("Found product:", product);#}
+{#            currentProduct = product;#}
+{#            $update();#}
+{#          } else {#}
+{#            console.log("Product not found");#}
+{#          }#}
+{#        });#}
 
-    // const count = $f7.db.products.count().then((count) => {
-    //   console.log(count);
-    // });
+{#    // const count = $f7.db.products.count().then((count) => {#}
+{#    //   console.log(count);#}
+{#    // });#}
 
-    
-    // products.value.forEach((product) => {
-    //   if (product.id === productId) {
-    //     currentProduct = product;
-    //   }
-    // });
+{#    #}
+{#    // products.value.forEach((product) => {#}
+{#    //   if (product.id === productId) {#}
+{#    //     currentProduct = product;#}
+{#    //   }#}
+{#    // });#}
 
-    return $render;
-  };
-</script>
+{#    return $render;#}
+{#  };#}
+{#</script>#}
