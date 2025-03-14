@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d54eff0a89acb3a27cc0ce673b635c81",
+    "content-hash": "f81fd564fbd88abf3cc0806f0162eb6f",
     "packages": [
         {
             "name": "composer/semver",
@@ -2517,8 +2517,8 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../survos/packages/fw-bundle",
-                "reference": "46f404baa26b444c1ce64c33b1e9e614a5c00421"
+                "url": "../fw-bundle",
+                "reference": "20982b1adfa4fb57cb24fd637e89f618c848a53a"
             },
             "require": {
                 "knplabs/knp-menu-bundle": "^3.2",

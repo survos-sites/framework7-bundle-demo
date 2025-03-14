@@ -104,9 +104,10 @@ var app = new Framework7({
             let eventName = 'pokemon';
             // app.emit(eventName, el);
             const event = new CustomEvent(eventName, { detail: el.dataset });
-            window.dispatchEvent(event);
-            console.warn("Dispatched: ", event)
+            document.dispatchEvent(event);
+            console.warn("tab switch Dispatched: ", event)
             console.log('showing ' + el.id);
+            
         },
         tabHide: (el) => {
             console.log('hiding ' + el.id);

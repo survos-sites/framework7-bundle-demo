@@ -119,7 +119,7 @@
     "repositories": {
         "fw7": {
             "type": "path",
-            "url": "../survos/packages/fw-bundle"
+            "url": "../fw-bundle"
         }
     }
 }
