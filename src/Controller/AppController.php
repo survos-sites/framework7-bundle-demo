@@ -50,8 +50,8 @@ final class AppController extends AbstractController
         // iterate through the page and tab routes to create templates, which will be rendered in the main page.
         $menu = $this->factory->createItem($options['name'] ?? KnpMenuEvent::class);
         foreach ([KnpMenuEvent::MOBILE_TAB_MENU  => 'tab',
-                     KnpMenuEvent::MOBILE_PAGE_MENU => 'page',
-                     KnpMenuEvent::MOBILE_UNLINKED_MENU => 'page',
+//                     KnpMenuEvent::MOBILE_PAGE_MENU => 'page',
+//                     KnpMenuEvent::MOBILE_UNLINKED_MENU => 'page',
                  ] as $eventName=>$type) {
             $options = [];
             $options = (new OptionsResolver())
@@ -76,6 +76,7 @@ final class AppController extends AbstractController
                 }
             }
         }
+//        dd($templates);
         return $this->render('@SurvosFw/start.html.twig', [
             'templates' => $templates,
             'playNow' => $request->get('playNow', true),
