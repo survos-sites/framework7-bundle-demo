@@ -72,7 +72,7 @@
 {% endblock %}
 {% block from_kitchen_sink %}
     {% set tabs = [
-        'products', 'obras', 'artists','locations'
+        'obras', 'artists','locations'
     ] %}
 <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="768" data-url="/">
     <div class="page page-current">
@@ -96,37 +96,7 @@
         <div class="tabs">
             {% for t in tabs %}
             <div id="tab-{{ t }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
-                <div class="block"><p><b>{{ t }}</b></p>
-                    <p>
-                        {{ t }} Content!
-                        {% set store = t %}
-                        {% set globals = {} %}
-
-                        <twig:dexie
-                                refreshEvent="tab-{{ t }}-show"
-                                :store="store"
-                                :globals="globals"
-                                :filter="{}"
-                                :caller="_self">
-
-                            <twig:block name="title">
-                                there are {{ rows|length }} rows
-                            </twig:block>
-
-                            <twig:block name="twig_template" id="hack_to_get_raw_data">
-                                <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
-                                    <ul>
-                                        {% for row in rows|slice(0,3) %}
-                                            <li>{{ row | json_encode }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                    there are {{ rows|length }} rows
-                                <!-- hack_to_get_raw_data -->
-                            </twig:block>
-
-                        </twig:dexie>
-                    </p>
-                </div>
+                    {{ include('tabs/%s.html.twig'|format(t), {t: t}) }}
             </div>
             {% endfor %}
         </div>

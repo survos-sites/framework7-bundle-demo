@@ -13,8 +13,8 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 import 'framework7/framework7-bundle.min.css';
 import routes from "./routes.js";
 
-import Dexie from 'dexie';
-const db = new Dexie("MyDatabase");
+// import Dexie from 'dexie';
+// const db = new Dexie("MyDatabase");
 
 
 import './old_app.js';

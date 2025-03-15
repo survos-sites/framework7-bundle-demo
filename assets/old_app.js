@@ -82,13 +82,13 @@ var app = new Framework7({
 // Attach Dexie database to `app`
 app.db = new Dexie("MyDatabase");
 // Define database schema
-app.db.version(1).stores({
+app.db.version(2).stores({
     artists: '++id,name',
     locations: '++id,name',
-    obras : 'title'
+    obras : '++id,title'
 });
 
-//grab data from api in laziest way for now 
+//grab data from api in laziest way for now
 const artistsCount = await app.db.artists.count();
 const locationsCount = await app.db.locations.count();
 const obrasCount = await app.db.obras.count();

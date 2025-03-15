@@ -1,0 +1,42 @@
+<h1>
+    Tab {{ t }}
+</h1>
+
+<div class="block"><p><b>{{ t }}</b></p>
+    <p>
+        This is the obra tab {{ _self }}
+        {{ t }} Content!
+        {% set store = t %}
+        {% set globals = {} %}
+
+        <twig:dexie
+                refreshEvent="tab-{{ t }}-show"
+                :store="store"
+                :globals="globals"
+                :filter="{}"
+                :caller="_self">
+
+            <twig:block name="title">
+                there are {{ rows|length }} rows
+            </twig:block>
+
+            <twig:block name="twig_template" id="hack_to_get_raw_data">
+                <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
+                <ul>
+                    {% for row in rows|slice(0,3) %}
+                        <li>
+                            {{ row.title|title }}
+                            Dimensions:
+                            {{ row.w }}
+                            {{ row|json_encode }}
+
+                        </li>
+                    {% endfor %}
+                </ul>
+                there are {{ rows|length }} rows
+                <!-- hack_to_get_raw_data -->
+            </twig:block>
+
+        </twig:dexie>
+    </p>
+</div>
