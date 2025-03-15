@@ -157,18 +157,18 @@ app.on('pageAfterIn', function (page) {
 });
 
 //event dispatch for first tab
-var tabs = document.querySelectorAll('.tabs')[0];
-var firstTab = tabs.children[0];
-var eventDispatched = false;
-firstTab.addEventListener("DOMNodeInserted", function (ev) {
-    if (!eventDispatched) {
-        document.dispatchEvent(new Event(firstTab.id + '-show'));
-        eventDispatched = true;
-    }
-}, false);
+// var tabs = document.querySelectorAll('.tabs')[0];
+// var firstTab = tabs.children[0];
+// var eventDispatched = false;
+// firstTab.addEventListener("DOMNodeInserted", function (ev) {
+//     if (!eventDispatched) {
+//         document.dispatchEvent(new Event(firstTab.id + '-show'));
+//         eventDispatched = true;
+//     }
+// }, false);
 
 
-app.emit('myCustomEvent', 'foo', 'bar');
+// app.emit('myCustomEvent', 'foo', 'bar');
 window.app = app;
 
 // Login Screen Demo
