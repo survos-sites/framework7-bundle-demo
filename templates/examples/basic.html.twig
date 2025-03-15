@@ -1,17 +1,16 @@
 {% extends "base.html.twig" %}
 {% block body %}
 
-    <h1>{{ _self }}</h1>
-    <div>
-
-        Not sure we need to use this yet at all. Someday
-
+    <!-- App root element -->
+    <div id="app" class="framework7-root" {{ stimulus_controller('app') }}>
+        {{ block('from_kitchen_sink') }}
+        <!-- Your main view, should have "view-main" class -->
     </div>
 
-<!-- App root element -->
-<div id="app" {{ stimulus_controller('app') }}>
 
-    <!-- Your main view, should have "view-main" class -->
+{% endblock %}
+
+{% block orig %}
     <div class="view view-main">
         <!-- Initial Page, "data-name" contains page name -->
         <div data-name="home" class="page">
@@ -24,22 +23,114 @@
                 </div>
             </div>
 
+            <!-- Scrollable page content -->
+            <div class="page-content">
+                <h1>{{ _self }}</h1>
+                <p>Page content goes here</p>
+                <!-- Link to another page -->
+                <a href="{{ path('app_page', {page: 'about'}) }}">About this app</a>
+
+                <div>
+
+                    Not sure we need to use this yet at all. Someday
+
+
+                </div>
+
+            </div>
+
+
+            <!-- Tabs wrapper, shoud have "tabs" class. Required element -->
             <!-- Bottom Toolbar -->
-            <div class="toolbar toolbar-bottom">
+            <div class="toolbar toolbar-bottom tabbar">
                 <div class="toolbar-inner">
+                    <!-- Link that activates first tab, has the same href attribute (#tab1) as the id attribute of first tab (tab1)  -->
+                    <a href="#tab1" class="tab-link tab-link-active">Tab 1</a>
+
+                    <!-- Link that activates 2nd tab, has the same href attribute (#tab2) as the id attribute of 2nd tab (tab2)  -->
+                    <a href="#tab2" class="tab-link">Tab 2</a>
+
+                    <!-- Link that activates 3rd tab, has the same href attribute (#tab2) as the id attribute of 3rd tab (tab3)  -->
+                    <a href="#tab3" class="tab-link">Tab 3</a>
                     <!-- Toolbar links -->
                     <a href="#" class="link">Link 1</a>
                     <a href="#" class="link">Link 2</a>
                 </div>
             </div>
-
-            <!-- Scrollable page content -->
-            <div class="page-content">
-                <p>Page content goes here</p>
-                <!-- Link to another page -->
-                <a href="{{ path('app_page', {page: 'about'}) }}">About this app</a>
+            <div class="tabs tabs-bottom">
+                <!-- First tab, should have "tab" class and unique id attribute -->
+                <!-- First tab is active by default - additional "tab-active" class -->
+                {% for id in 1..3 %}
+                    <div class="tab page-content {{ loop.first ? 'tab-active' }}" id="tab{{ id }}">
+                        ... Tab {{ id }} content goes here ...
+                    </div>
+                {% endfor %}
             </div>
+
         </div>
     </div>
-</div>
+{% endblock %}
+{% block from_kitchen_sink %}
+    {% set tabs = [
+        'products', 'obras', 'artists','locations'
+    ] %}
+<div class="view view-main view-init safe-areas" data-master-detail-breakpoint="768" data-url="/">
+    <div class="page page-current">
+
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="title">Navbar!</div>
+            </div>
+        </div>
+
+        <div class="toolbar tabbar tabbar-icons toolbar-bottom">
+            <div class="toolbar-inner">
+                {% for t in tabs %}
+                    <a href="#tab-{{ t }}" class="tab-link {{ loop.first ? 'tab-active' }}">
+                        <i class="icon f7-icons if-not-md">envelope_fill</i>
+                        <span
+                                class="tabbar-label">{{ t|title }}</span></a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tabs">
+            {% for t in tabs %}
+            <div id="tab-{{ t }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
+                <div class="block"><p><b>{{ t }}</b></p>
+                    <p>
+                        {{ t }} Content!
+                        {% set store = t %}
+                        {% set globals = {} %}
+
+                        <twig:dexie
+                                refreshEvent="tab-{{ t }}-show"
+                                :store="store"
+                                :globals="globals"
+                                :filter="{}"
+                                :caller="_self">
+
+                            <twig:block name="title">
+                                there are {{ rows|length }} rows
+                            </twig:block>
+
+                            <twig:block name="twig_template" id="hack_to_get_raw_data">
+                                <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
+                                    <ul>
+                                        {% for row in rows %}
+                                            <li>{{ row.id }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    there are {{ rows|length }} rows
+                                <!-- hack_to_get_raw_data -->
+                            </twig:block>
+
+                        </twig:dexie>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> <!-- view-main -->
 {% endblock %}

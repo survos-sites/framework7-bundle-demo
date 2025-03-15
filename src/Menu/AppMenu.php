@@ -49,15 +49,16 @@ final class AppMenu implements KnpMenuHelperInterface
     #[AsEventListener(event: KnpMenuEvent::MOBILE_TAB_MENU)]
     public function tabMenu(KnpMenuEvent $event): void
     {
+        return;
         $menu = $event->getMenu();
         // the id is for getting the template directly in app/{id} during SPA, the route is for testing.  both are needed.
         //$this->add($menu, id: 'about', route: 'app_about', label: 'about', icon: 'tabler:help');
         //$this->add($menu, id: 'products', label: 'products', icon: 'tabler:list');
 
         foreach ([
-            'map' => 'tabler:map',
             'about' => 'tabler:info-circle',
-            'catalog' => 'tabler:list',
+                     'map' => 'tabler:map',
+                     'catalog' => 'tabler:list',
             'form' => 'tabler:settings',
                  ] as $route => $icon) {
             $this->add($menu, id: $route, route: 'app_page', rp: ['page' => $route], icon: $icon,

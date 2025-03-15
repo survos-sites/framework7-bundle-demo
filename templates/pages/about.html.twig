@@ -1,22 +1,28 @@
-<div class="page" data-name="about">
-  <div class="navbar">
-    <div class="navbar-bg"></div>
-    <div class="navbar-inner sliding">
-      <div class="left">
-        <a href="#" class="link back">
-          <i class="icon icon-back"></i>
-          <span class="if-not-md">Back</span>
-        </a>
-      </div>
-      <div class="title">About</div>
-    </div>
-  </div>
-  <div class="page-content">
-    <div class="block-title">{{'app.about' | trans}}</div>
-    <div class="block">
-      <p>
-        This is {{ _self }}
-      </p>
-    </div>
-  </div>
-</div>
+<twig:FwPage :caller="_self" >
+  <twig:block name="content">
+    This is in {{ _self }}, and is specific to about.
+  </twig:block>
+
+</twig:FwPage>
+
+{#<div class="page" data-name="about">#}
+{#  <div class="navbar">#}
+{#    <div class="navbar-bg"></div>#}
+{#    <div class="navbar-inner sliding">#}
+{#      <div class="left">#}
+{#        <a href="#" class="link back">#}
+{#          <i class="icon icon-back"></i>#}
+{#          <span class="if-not-md">Back</span>#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="title">About</div>#}
+{#    </div>#}
+{#  </div>#}
+{#  <div class="page-content">#}
+{#    <div class="block-title">{{'app.about' | trans}}</div>#}
+{#    <div class="block">#}
+{#      <p>#}
+{#      </p>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}

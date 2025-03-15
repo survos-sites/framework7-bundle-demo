@@ -26,16 +26,21 @@ export default class extends MobileController {
     connect() {
         super.connect();
         let el = this.element;
-        console.log('hello from ' + this.identifier);
-        return;
-        this.start();
+        console.error('hello from ' + this.identifier);
+        // this.start();
 
     }
 
+    isPopulated() {
+        // @todo: check database in window.app.db?
+        return true;
+    }
+
     start() {
+        console.log('starting F7...');
         var app = new Framework7({
-            name: this.nameValue,
-            theme: this.themeValue,
+            // name: this.nameValue,
+            // theme: this.themeValue,
 
             el: this.element, // App root element
 

@@ -47,6 +47,7 @@ final class AppController extends AbstractController
     public function mobile(Request $request): Response
     {
 
+        $templates = [];
         // iterate through the page and tab routes to create templates, which will be rendered in the main page.
         $menu = $this->factory->createItem($options['name'] ?? KnpMenuEvent::class);
         foreach ([KnpMenuEvent::MOBILE_TAB_MENU  => 'tab',
