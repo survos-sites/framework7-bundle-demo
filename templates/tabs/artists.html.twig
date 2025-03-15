@@ -2,8 +2,9 @@
     Tab {{ t }}
 </h1>
 
-<div class="block"><p><b>{{ t }}</b></p>
-    <p>
+<div class="block">
+    <p><b>{{ t }}</b></p>
+
         This is the  {{ t }}  tab {{ _self }}
         {% set store = t %}
         {% set globals = {} %}
@@ -43,12 +44,9 @@
                     {% endfor %}
                     </ul>
                 </div>
-
-                
                 there are {{ rows|length }} rows
                 <!-- hack_to_get_raw_data -->
             </twig:block>
 
         </twig:dexie>
-    </p>
-</div>
+</div><!-- block -->

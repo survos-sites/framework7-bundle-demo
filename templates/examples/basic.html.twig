@@ -97,9 +97,10 @@
             {% for t in tabs %}
             <div id="tab-{{ t }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
                     {{ include('tabs/%s.html.twig'|format(t), {t: t}) }}
+{#                    {{ include('tabs/obras.html.twig'|format(t), {t: t}) }}#}
             </div>
             {% endfor %}
-        </div>
-    </div>
+        </div><-- tabs -->
+    </div><-- page page-current -->
 </div> <!-- view-main -->
 {% endblock %}
