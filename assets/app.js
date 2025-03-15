@@ -12,6 +12,11 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 // import Framework7 from 'framework7/framework7-bundle'
 import Framework7 from 'framework7/framework7-bundle';
 import 'framework7/framework7-bundle.min.css';
+import routes from "./routes.js";
+
+import Dexie from 'dexie';
+const db = new Dexie("MyDatabase");
+
 
 // import 'framework7-icons/css/framework7-icons.min.css'
 // import 'framework7-icons';
@@ -20,43 +25,6 @@ import 'framework7/framework7-bundle.min.css';
 
 var $ = Dom7;
 
-// import './store.js';
-import Dexie from 'dexie';
-var db = new Dexie('MyDatabase');
-db.version(1).stores({
-    products: '++id, title, category'
-});
-const count = await db.products.count();
-// await db.delete('friends');
-
-if (count === 0)
-{
-    fetch('https://dummyjson.com/products')
-        .then(res => res.json())
-        .then(data => {
-            data.products.forEach(function(product) {
-                console.log(product);
-                db.products.add(product);
-                //store.push(product);
-            })
-        });
-    // await db.friends.add({
-    //     name: 'Camilla',
-    //     age: 25,
-    //     street: 'East 13:th Street'
-    //     // picture: await getBlob('camilla.png')
-    // });
-    const products = await db.products
-        // .where('age').below(75)
-        .toArray();
-        //console.log("products   :  ");
-    //console.log(products);
-}
-
-
-
-import routes from "./routes.js";
-// Routing.setData(RoutingData);
 
 var createStore = Framework7.createStore;
 const store = createStore({
@@ -83,7 +51,7 @@ const store = createStore({
         },
     },
 })
-store.dispatch('getProducts');
+//store.dispatch('getProducts');
 //console.log(routes, store);
 
 var app = new Framework7({
@@ -128,12 +96,73 @@ var app = new Framework7({
     }
 });
 
-// Attach Dexie database to `app`
-app.db = new Dexie("MyDatabase");
+// Attach Dexie database to `app` and sync data if not there yet
+app.db = db;
 // Define database schema
 app.db.version(1).stores({
-    products: '++id, title, category'
+    artists: '++id,name',
+    locations: '++id,name',
+    obras : 'title'
 });
+
+//grab data from api in laziest way for now 
+const artistsCount = await db.artists.count();
+const locationsCount = await db.locations.count();
+const obrasCount = await db.obras.count();
+
+if (artistsCount == 0) {
+    let page = 1;
+    const maxPages = 20;
+    let fetchArtists = async () => {
+        if (page > maxPages) return;
+        let res = await fetch(`https://pgsc.wip/api/artists?page=${page}`);
+        let data = await res.json();
+        if (data.member.length > 0) {
+            data.member.forEach(function(artist) {
+                app.db.artists.add(artist);
+            });
+            page++;
+            fetchArtists(); // Fetch next page
+        }
+    };
+    fetchArtists();
+}
+
+if (locationsCount == 0) {
+    let page = 1;
+    const maxPages = 20;
+    let fetchLocations = async () => {
+        if (page > maxPages) return;
+        let res = await fetch(`https://pgsc.wip/api/locations?page=${page}`);
+        let data = await res.json();
+        if (data.member.length > 0) {
+            data.member.forEach(function(location) {
+                app.db.locations.add(location);
+            });
+            page++;
+            fetchLocations(); // Fetch next page
+        }
+    };
+    fetchLocations();
+}
+
+if (obrasCount == 0) {
+    let page = 1;
+    const maxPages = 20;
+    let fetchObras = async () => {
+        if (page > maxPages) return;
+        let res = await fetch(`https://pgsc.wip/api/obras?page=${page}`);
+        let data = await res.json();
+        if (data.member.length > 0) {
+            data.member.forEach(function(obra) {
+                app.db.obras.add(obra);
+            });
+            page++;
+            fetchObras(); // Fetch next page
+        }
+    };
+    fetchObras();
+}
 
 app.on('pageInit', function (page) {
     console.error('page', page);
