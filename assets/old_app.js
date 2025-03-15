@@ -5,8 +5,6 @@ import Framework7 from 'framework7/framework7-bundle';
 import Dexie from 'dexie';
 var db = new Dexie('MyDatabase');
 
-
-
 db.version(1).stores({
     products: '++id, title, category'
 });

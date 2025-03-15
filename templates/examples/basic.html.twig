@@ -88,7 +88,6 @@
             <div class="toolbar-inner">
                 {% for t in tabs %}
                     <a href="#tab-{{ t }}" class="tab-link {{ loop.first ? 'tab-active' }}">
-                        <i class="icon f7-icons if-not-md">envelope_fill</i>
                         <span
                                 class="tabbar-label">{{ t|title }}</span></a>
                 {% endfor %}
@@ -117,7 +116,7 @@
                             <twig:block name="twig_template" id="hack_to_get_raw_data">
                                 <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
                                     <ul>
-                                        {% for row in rows %}
+                                        {% for row in rows|slice(0,3) %}
                                             <li>{{ row.id }}</li>
                                         {% endfor %}
                                     </ul>
