@@ -4,8 +4,7 @@
 
 <div class="block"><p><b>{{ t }}</b></p>
     <p>
-        This is the obra tab {{ _self }}
-        {{ t }} Content!
+        This is the  {{ t }}  tab {{ _self }}
         {% set store = t %}
         {% set globals = {} %}
 
@@ -24,7 +23,7 @@
                 <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
                 <div class="list">
                     <ul>
-                    {% for row in rows|slice(0,3) %}
+                    {% for row in rows %}
                         <li>
                             <a href="/app/details/obras/{{row.id}}" class="item-link">
                                 <div class="item-content">
