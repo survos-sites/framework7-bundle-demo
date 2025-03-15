@@ -101,6 +101,14 @@ final class AppController extends AbstractController
         ]);
     }
 
+    #[Route('/app/details/{object}/{id}', name: 'app_details', priority: 400)]
+    public function details($object,$id): Response
+    {
+        return $this->render("pages/about.html.twig", [
+
+        ]);
+    }
+
 //    #[Route('/catalog', name: 'app_catalog')]
 //    public function catalog(): Response
 //    {

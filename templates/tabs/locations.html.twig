@@ -22,18 +22,29 @@
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
                 <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
-                <ul>
+                <div class="list">
+                    <ul>
                     {% for row in rows|slice(0,3) %}
                         <li>
-                            <b>{{ row.name|title }}</b>
-{#                            <div>#}
-{#                                Location: {{ row.address }}#}
-{#                            </div>#}
-                            <br />
-                            Number of Objects: {{ row.obraCount }}
+                            <a href="/app/details/locations/{{row.id}}" class="item-link">
+                                <div class="item-content">
+                                    <div class="item-inner
+                                    ">
+                                        <div class="item-title
+                                        ">
+                                           <b>{{ row.name|title }}</b>
+                                        </div>
+                                        <div class="item-after
+                                        ">
+                                            Number of Obras : {{ row.obraCount }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </li>
                     {% endfor %}
-                </ul>
+                    </ul>
+                </div>
                 there are {{ rows|length }} rows
                 <!-- hack_to_get_raw_data -->
             </twig:block>

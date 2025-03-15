@@ -22,20 +22,30 @@
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
                 <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
-                <ul>
+                <div class="list">
+                    <ul>
                     {% for row in rows|slice(0,3) %}
-                        <li>
-                            <b>
-                                {{ row.name }}
-                            </b>
-                            <span>
-                            born: {{ row.birthYear }}
-                            </span>
-                            <br />@ {{ row.email }}
 
-                        </li>
+                    <li>
+                        <a href="/app/details/artists/{{row.id}}" class="item-link">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        {{ row.name }}
+                                    </div>
+                                    <div class="item-after">
+                                        {{ row.birthYear }}
+                                        <br />@ {{ row.email }}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     {% endfor %}
-                </ul>
+                    </ul>
+                </div>
+
+                
                 there are {{ rows|length }} rows
                 <!-- hack_to_get_raw_data -->
             </twig:block>
