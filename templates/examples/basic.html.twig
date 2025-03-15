@@ -117,7 +117,7 @@
                                 <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
                                     <ul>
                                         {% for row in rows|slice(0,3) %}
-                                            <li>{{ row.id }}</li>
+                                            <li>{{ row | json_encode }}</li>
                                         {% endfor %}
                                     </ul>
                                     there are {{ rows|length }} rows

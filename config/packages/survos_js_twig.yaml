@@ -1,7 +1,7 @@
 # Default configuration for extension with alias: "survos_js_twig"
 survos_js_twig:
   debug: true
-  db: dummy
+  db: MyDatabase
   version: 3
   stores:
     -

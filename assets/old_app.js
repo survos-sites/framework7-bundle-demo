@@ -3,38 +3,7 @@ import Framework7 from 'framework7/framework7-bundle';
 
 // import './store.js';
 import Dexie from 'dexie';
-var db = new Dexie('MyDatabase');
-
-db.version(1).stores({
-    products: '++id, title, category'
-});
-const count = await db.products.count();
-// await db.delete('friends');
-
-if (count === 0)
-{
-    fetch('https://dummyjson.com/products')
-        .then(res => res.json())
-        .then(data => {
-            data.products.forEach(function(product) {
-                console.log(product);
-                db.products.add(product);
-                //store.push(product);
-            })
-        });
-    // await db.friends.add({
-    //     name: 'Camilla',
-    //     age: 25,
-    //     street: 'East 13:th Street'
-    //     // picture: await getBlob('camilla.png')
-    // });
-    const products = await db.products
-        // .where('age').below(75)
-        .toArray();
-    //console.log("products   :  ");
-    //console.log(products);
-}
-
+//var db = new Dexie('MyDatabase');
 
 
 import routes from "./routes.js";
@@ -56,9 +25,9 @@ const store = createStore({
         },
         getProducts({ state }) {
             //get products from dixie db
-            let products = db.products.toArray().then(products => {
-                state.products = products;
-            });
+            // let products = db.products.toArray().then(products => {
+            //     state.products = products;
+            // });
         },
         addProduct({ state }, product) {
             state.products = [...state.products, product];
@@ -114,8 +83,69 @@ var app = new Framework7({
 app.db = new Dexie("MyDatabase");
 // Define database schema
 app.db.version(1).stores({
-    products: '++id, title, category'
+    artists: '++id,name',
+    locations: '++id,name',
+    obras : 'title'
 });
+
+//grab data from api in laziest way for now 
+const artistsCount = await app.db.artists.count();
+const locationsCount = await app.db.locations.count();
+const obrasCount = await app.db.obras.count();
+
+if (artistsCount == 0) {
+    let page = 1;
+    const maxPages = 20;
+    let fetchArtists = async () => {
+        if (page > maxPages) return;
+        let res = await fetch(`https://pgsc.wip/api/artists?page=${page}`);
+        let data = await res.json();
+        if (data.member.length > 0) {
+            data.member.forEach(function(artist) {
+                app.db.artists.add(artist);
+            });
+            page++;
+            fetchArtists(); // Fetch next page
+        }
+    };
+    fetchArtists();
+}
+
+if (locationsCount == 0) {
+    let page = 1;
+    const maxPages = 20;
+    let fetchLocations = async () => {
+        if (page > maxPages) return;
+        let res = await fetch(`https://pgsc.wip/api/locations?page=${page}`);
+        let data = await res.json();
+        if (data.member.length > 0) {
+            data.member.forEach(function(location) {
+                app.db.locations.add(location);
+            });
+            page++;
+            fetchLocations(); // Fetch next page
+        }
+    };
+    fetchLocations();
+}
+
+if (obrasCount == 0) {
+    let page = 1;
+    const maxPages = 20;
+    let fetchObras = async () => {
+        if (page > maxPages) return;
+        let res = await fetch(`https://pgsc.wip/api/obras?page=${page}`);
+        let data = await res.json();
+        if (data.member.length > 0) {
+            data.member.forEach(function(obra) {
+                app.db.obras.add(obra);
+            });
+            page++;
+            fetchObras(); // Fetch next page
+        }
+    };
+    fetchObras();
+}
 
 app.on('pageInit', function (page) {
     console.error('page', page);
@@ -125,6 +155,18 @@ app.on('pageAfterIn', function (page) {
     console.log("Current url: ");
     console.log(page.route.url);
 });
+
+//event dispatch for first tab
+var tabs = document.querySelectorAll('.tabs')[0];
+var firstTab = tabs.children[0];
+var eventDispatched = false;
+firstTab.addEventListener("DOMNodeInserted", function (ev) {
+    if (!eventDispatched) {
+        document.dispatchEvent(new Event(firstTab.id + '-show'));
+        eventDispatched = true;
+    }
+}, false);
+
 
 app.emit('myCustomEvent', 'foo', 'bar');
 window.app = app;
