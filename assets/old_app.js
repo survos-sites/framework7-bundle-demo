@@ -74,6 +74,10 @@ var app = new Framework7({
             console.log('App initialized');
         },
         pageInit: function () {
+            var tabId = window.location.hash.replace('#', '');
+            if (tabId) {
+                this.tab.show('#' + tabId);
+            }
             console.log('Page initialized');
         },
     }
