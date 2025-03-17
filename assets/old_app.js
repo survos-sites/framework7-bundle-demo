@@ -9,6 +9,8 @@ import Dexie from 'dexie';
 import routes from "./routes.js";
 // Routing.setData(RoutingData);
 
+import {DbUtilities} from './js/lib/dixieDatabase.js';
+
 var createStore = Framework7.createStore;
 const store = createStore({
     state: {
@@ -93,63 +95,10 @@ app.db.version(2).stores({
 });
 
 //grab data from api in laziest way for now
-const artistsCount = await app.db.artists.count();
-const locationsCount = await app.db.locations.count();
-const obrasCount = await app.db.obras.count();
-
-if (artistsCount == 0) {
-    let page = 1;
-    const maxPages = 20;
-    let fetchArtists = async () => {
-        if (page > maxPages) return;
-        let res = await fetch(`https://pgsc.wip/api/artists?page=${page}`);
-        let data = await res.json();
-        if (data.member.length > 0) {
-            data.member.forEach(function(artist) {
-                app.db.artists.add(artist);
-            });
-            page++;
-            fetchArtists(); // Fetch next page
-        }
-    };
-    fetchArtists();
-}
-
-if (locationsCount == 0) {
-    let page = 1;
-    const maxPages = 20;
-    let fetchLocations = async () => {
-        if (page > maxPages) return;
-        let res = await fetch(`https://pgsc.wip/api/locations?page=${page}`);
-        let data = await res.json();
-        if (data.member.length > 0) {
-            data.member.forEach(function(location) {
-                app.db.locations.add(location);
-            });
-            page++;
-            fetchLocations(); // Fetch next page
-        }
-    };
-    fetchLocations();
-}
-
-if (obrasCount == 0) {
-    let page = 1;
-    const maxPages = 20;
-    let fetchObras = async () => {
-        if (page > maxPages) return;
-        let res = await fetch(`https://pgsc.wip/api/obras?page=${page}`);
-        let data = await res.json();
-        if (data.member.length > 0) {
-            data.member.forEach(function(obra) {
-                app.db.obras.add(obra);
-            });
-            page++;
-            fetchObras(); // Fetch next page
-        }
-    };
-    fetchObras();
-}
+const tables = ['artists', 'locations', 'obras'];
+tables.forEach(async (table) => {
+    await DbUtilities.syncTable(app.db, table);
+});
 
 app.on('pageInit', function (page) {
     console.error('page', page);
