@@ -75,7 +75,9 @@ var app = new Framework7({
         init: function () {
             console.log('App initialized');
         },
-        pageInit: function () {
+        pageInit: function (event) {
+            //console.log('Page initialized');
+            //console.log(this.route.query);
             var tabId = window.location.hash.replace('#', '');
             if (tabId) {
                 this.tab.show('#' + tabId);

@@ -4,7 +4,7 @@
     This is in {{ _self }}
     @todo: js-twig DETAIL for obra
 
-    {% set store = 'obra' %}
+    {% set store = 'obras' %}
     {% set globals = {
 
     } %}
@@ -14,7 +14,7 @@
             :globals="globals"
             :caller="_self">
       <twig:block name="twig_template" id="hack_to_get_raw_data">
-        This is the detail page for some specific obra ID
+        This is the detail page for some specific obra ID {{id}}
         <!-- hack_to_get_raw_data -->
       </twig:block>
 
