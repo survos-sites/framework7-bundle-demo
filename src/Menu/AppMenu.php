@@ -43,7 +43,7 @@ final class AppMenu implements KnpMenuHelperInterface
     public function pageMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
-        $this->add($menu, id: 'about', icon: 'fa-info');
+        $this->add($menu, route: 'app_page', rp: ['page' => 'obra']);
     }
 
     #[AsEventListener(event: KnpMenuEvent::MOBILE_TAB_MENU)]
