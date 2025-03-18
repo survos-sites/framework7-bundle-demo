@@ -1,0 +1,27 @@
+
+<twig:FwPage :caller="_self" >
+  <twig:block name="content">
+    This is in {{ _self }}
+    @todo: js-twig DETAIL for obra
+
+    {% set store = 'obra' %}
+    {% set globals = {
+
+    } %}
+    <twig:dexie
+            refreshEvent="obra.refresh"
+            :store="store"
+            :globals="globals"
+            :caller="_self">
+      <twig:block name="twig_template" id="hack_to_get_raw_data">
+        This is the detail page for some specific obra ID
+        <!-- hack_to_get_raw_data -->
+      </twig:block>
+
+    </twig:dexie>
+
+  </twig:block>
+
+</twig:FwPage>
+
+

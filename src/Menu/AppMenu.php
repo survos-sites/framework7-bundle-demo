@@ -39,7 +39,7 @@ final class AppMenu implements KnpMenuHelperInterface
         $this->menuService->addAuthMenu($menu);
     }
 
-    #[AsEventListener(event: KnpMenuEvent::MOBILE_PAGE_MENU)]
+    #[AsEventListener(event: KnpMenuEvent::MOBILE_UNLINKED_MENU)]
     public function pageMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();

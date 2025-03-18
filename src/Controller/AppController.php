@@ -52,7 +52,7 @@ final class AppController extends AbstractController
         $menu = $this->factory->createItem($options['name'] ?? KnpMenuEvent::class);
         foreach ([KnpMenuEvent::MOBILE_TAB_MENU  => 'tab',
 //                     KnpMenuEvent::MOBILE_PAGE_MENU => 'page',
-//                     KnpMenuEvent::MOBILE_UNLINKED_MENU => 'page',
+                     KnpMenuEvent::MOBILE_UNLINKED_MENU => 'page',
                  ] as $eventName=>$type) {
             $options = [];
             $options = (new OptionsResolver())

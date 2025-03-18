@@ -22,8 +22,13 @@ export default (
     //     componentUrl: './pages/catalog.html',
     // },
     {
-        path: '/pages/product/:id/',
+        path: '/pages/product/:id',
         componentUrl: './pages/product',
+    },
+    {
+        path: '/pages/obra/:id',
+        url: './pages/obra',
+        // componentUrl: './pages/obra',
     },
     {
         path: '/settings/',
