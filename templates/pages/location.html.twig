@@ -1,0 +1,30 @@
+
+<twig:FwPage :caller="_self" >
+  <twig:block name="content">
+    This is in {{ _self }}
+    @todo: js-twig DETAIL for location
+
+    {% set store = 'locations' %}
+    {% set globals = {
+
+    } %}
+    <twig:dexie
+            refreshEvent="location.refresh"
+            :store="store"
+            :globals="globals"
+            :caller="_self">
+      <twig:block name="twig_template" id="hack_to_get_raw_data">
+        This is the detail page for some specific location ID {{ data.id }}
+        <div class="location-detail">
+          <h1>{{ data.name|title }}</h1>
+          <p>Code: {{ data.code }}</p>
+          <p>Number of Obras: {{ data.obraCount }}</p>
+        </div>
+        <!-- hack_to_get_raw_data -->
+      </twig:block>
+    </twig:dexie>
+  </twig:block>
+
+</twig:FwPage>
+
+

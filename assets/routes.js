@@ -17,17 +17,13 @@ export default (
         // url: './pages/form',
         componentUrl: './pages/form',
     },
-    // {
-    //     path: '/catalog/',
-    //     componentUrl: './pages/catalog.html',
-    // },
     {
         path: '/pages/product/:id',
         componentUrl: './pages/product',
     },
     {
-        path: '/pages/obra/:id',
-        url: './pages/obra',
+        path: '/pages/:page/:id',
+        url: './pages/{{page}}',
         // componentUrl: './pages/obra',
     },
     {

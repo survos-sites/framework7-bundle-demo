@@ -1,0 +1,35 @@
+
+<twig:FwPage :caller="_self" >
+  <twig:block name="content">
+    This is in {{ _self }}
+    @todo: js-twig DETAIL for artist
+
+    {% set store = 'artists' %}
+    {% set globals = {
+
+    } %}
+    <twig:dexie
+            refreshEvent="artist.refresh"
+            :store="store"
+            :globals="globals"
+            :caller="_self">
+      <twig:block name="twig_template" id="hack_to_get_raw_data">
+        This is the detail page for some specific artist ID {{ data.id }}
+        <div class="artist-detail">
+          <h1>{{ data.name|title }}</h1>
+          <p>{{ data.bio }}</p>
+          <p>Birth Year: {{ data.birthYear }}</p>
+          <p>Email: {{ data.email }}</p>
+          <p>Code: {{ data.code }}</p>
+        </div>
+        
+        <!-- hack_to_get_raw_data -->
+      </twig:block>
+
+    </twig:dexie>
+
+  </twig:block>
+
+</twig:FwPage>
+
+

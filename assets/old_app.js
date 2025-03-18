@@ -77,12 +77,34 @@ var app = new Framework7({
         },
         pageInit: function (event) {
             //console.log('Page initialized');
-            //console.log(this.route.query);
+            
+        },
+        pageAfterIn: function (event) {
+            console.log('Page after in',event);
             var tabId = window.location.hash.replace('#', '');
             if (tabId) {
-                this.tab.show('#' + tabId);
+                if (!this.tabShown) {
+                    this.tabShown = true;
+                    setTimeout(() => {
+                        // Handle tab navigation based on tabId
+                        var navElement = document.querySelector('a[href="#' + tabId + '"]');
+                        this.tab.show('#' + tabId, navElement);
+
+                        // Extract current query params as object
+                        var queryParams = app.views.main.router.currentRoute.query;
+                        console.log('queryParams', queryParams);
+
+                        // Handle navigation based on query params
+                        if (queryParams.artistId && tabId === 'tab-artists') {
+                            app.views.main.router.navigate('/pages/artist/' + queryParams.artistId);
+                        } else if (queryParams.locationId && tabId === 'tab-locations') {
+                            app.views.main.router.navigate('/pages/location/' + queryParams.locationId);
+                        } else if (queryParams.obraId && tabId === 'tab-obras') {
+                            app.views.main.router.navigate('/pages/obra/' + queryParams.obraId);
+                        }
+                    }, 300);
+                }
             }
-            console.log('Page initialized');
         },
     }
 });
