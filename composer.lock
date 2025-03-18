@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f81fd564fbd88abf3cc0806f0162eb6f",
+    "content-hash": "ea01b3d8da35f627812fda64decd1454",
     "packages": [
         {
             "name": "composer/semver",
@@ -2515,10 +2515,16 @@
         {
             "name": "survos/fw-bundle",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/fw-bundle.git",
+                "reference": "6e410afc528dd76ae9d2a4be0f66e96482bb67e5"
+            },
             "dist": {
-                "type": "path",
-                "url": "../fw-bundle",
-                "reference": "20982b1adfa4fb57cb24fd637e89f618c848a53a"
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/6e410afc528dd76ae9d2a4be0f66e96482bb67e5",
+                "reference": "6e410afc528dd76ae9d2a4be0f66e96482bb67e5",
+                "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu-bundle": "^3.2",
@@ -2541,12 +2547,14 @@
                 "symfony/twig-bundle": "^6.4 || ^7.1",
                 "symfony/var-dumper": "^6.4 || ^7.1"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Survos\\FwBundle\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2554,9 +2562,17 @@
             "keywords": [
                 "symfony-ux"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/survos/fw-bundle/issues",
+                "source": "https://github.com/survos/fw-bundle/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-15T17:53:55+00:00"
         },
         {
             "name": "survos/js-twig-bundle",
