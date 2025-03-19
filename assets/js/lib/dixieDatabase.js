@@ -17,7 +17,7 @@ class DbUtilities {
 
     async fetchTable(table, maxPages) {
         if (maxPages && this.page > maxPages) return;
-        let res = await fetch(`https://pgsc.wip/api/${table}?page=${this.page}`);
+        let res = await fetch(`https://pgsc.survos.com/api/${table}?page=${this.page}`);
         let data = await res.json();
         if (data.member.length > 0) {
             data.member.forEach(row => {
