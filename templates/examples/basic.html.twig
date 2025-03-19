@@ -1,76 +1,34 @@
 {% extends "base.html.twig" %}
 {% block body %}
-
     <!-- App root element -->
     <div id="app" class="framework7-root" {{ stimulus_controller('app') }}>
-        {{ block('from_kitchen_sink') }}
+        <!-- framework7 left panel overlay -->
+        <div class="panel panel-left">
+        
+            <twig:mobile_menu
+                :caller="_self"
+                type="MOBILE_PAGE_MENU"
+            >
+            </twig:mobile_menu>
+        </div>
+
+        <div class="panel panel-right">
+            <!-- Right panel content should be a page structure -->
+            <div class="view view-init panel-view">
+                <div class="page">
+                    <div class="page-content">
+                        <p><a href="/settings/" class="link">Settings</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ block('main_app') }}
         <!-- Your main view, should have "view-main" class -->
     </div>
-
-
 {% endblock %}
 
-{% block orig %}
-    <div class="view view-main">
-        <!-- Initial Page, "data-name" contains page name -->
-        <div data-name="home" class="page">
-
-            <!-- Top Navbar -->
-            <div class="navbar">
-                <div class="navbar-bg"></div>
-                <div class="navbar-inner">
-                    <div class="title">Awesome App</div>
-                </div>
-            </div>
-
-            <!-- Scrollable page content -->
-            <div class="page-content">
-                <h1>{{ _self }}</h1>
-                <p>Page content goes here</p>
-                <!-- Link to another page -->
-                <a href="{{ path('app_page', {page: 'about'}) }}">About this app</a>
-
-                <div>
-
-                    Not sure we need to use this yet at all. Someday
-
-
-                </div>
-
-            </div>
-
-
-            <!-- Tabs wrapper, shoud have "tabs" class. Required element -->
-            <!-- Bottom Toolbar -->
-            <div class="toolbar toolbar-bottom tabbar">
-                <div class="toolbar-inner">
-                    <!-- Link that activates first tab, has the same href attribute (#tab1) as the id attribute of first tab (tab1)  -->
-                    <a href="#tab1" class="tab-link tab-link-active">Tab 1</a>
-
-                    <!-- Link that activates 2nd tab, has the same href attribute (#tab2) as the id attribute of 2nd tab (tab2)  -->
-                    <a href="#tab2" class="tab-link">Tab 2</a>
-
-                    <!-- Link that activates 3rd tab, has the same href attribute (#tab2) as the id attribute of 3rd tab (tab3)  -->
-                    <a href="#tab3" class="tab-link">Tab 3</a>
-                    <!-- Toolbar links -->
-                    <a href="#" class="link">Link 1</a>
-                    <a href="#" class="link">Link 2</a>
-                </div>
-            </div>
-            <div class="tabs tabs-bottom">
-                <!-- First tab, should have "tab" class and unique id attribute -->
-                <!-- First tab is active by default - additional "tab-active" class -->
-                {% for id in 1..3 %}
-                    <div class="tab page-content {{ loop.first ? 'tab-active' }}" id="tab{{ id }}">
-                        ... Tab {{ id }} content goes here ...
-                    </div>
-                {% endfor %}
-            </div>
-
-        </div>
-    </div>
-{% endblock %}
-{% block from_kitchen_sink %}
+{% block main_app %}
     {% set tabs = [
         'info', 'artists','obras', 'locations'
     ] %}
@@ -80,6 +38,13 @@
         <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner">
+
+                <div class="left">
+                    <a class="link icon-only panel-open ripple-inset" data-panel="left">
+                    <twig:ux:icon name="tabler:menu-2" />
+                    </a>
+                </div>
+
                 <div class="title">Navbar!</div>
             </div>
         </div>

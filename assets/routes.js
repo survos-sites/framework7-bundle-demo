@@ -31,6 +31,11 @@ export default (
         // componentUrl: './pages/obra',
     },
     {
+        path: '/pages/:page',
+        url: './pages/{{page}}',
+        // componentUrl: './pages/obra',
+    },
+    {
         path: '/settings/',
         url: './pages/settings',
     },
