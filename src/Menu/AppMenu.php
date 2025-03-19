@@ -40,10 +40,26 @@ final class AppMenu implements KnpMenuHelperInterface
     }
 
     #[AsEventListener(event: KnpMenuEvent::MOBILE_UNLINKED_MENU)]
-    public function pageMenu(KnpMenuEvent $event): void
+    public function templateMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
         $this->add($menu, route: 'app_page', rp: ['page' => 'obra']);
+    }
+
+    #[AsEventListener(event: KnpMenuEvent::MOBILE_PAGE_MENU)]
+    public function pageMenu(KnpMenuEvent $event): void
+    {
+        $menu = $event->getMenu();
+        foreach ([
+                     'about' => 'tabler:info-circle',
+                     'refresh' => 'tabler:refresh',
+                     'settings' => 'tabler:gear',
+//                     'form' => 'tabler:settings',
+                 ] as $route => $icon) {
+            $this->add($menu, id: $route, route: 'app_page',
+                rp: ['page' => $route, 'type' => 'page'], icon: $icon,
+                label: u($route)->title()->toString());
+        }
     }
 
     #[AsEventListener(event: KnpMenuEvent::MOBILE_TAB_MENU)]
@@ -61,7 +77,8 @@ final class AppMenu implements KnpMenuHelperInterface
                      'catalog' => 'tabler:list',
             'form' => 'tabler:settings',
                  ] as $route => $icon) {
-            $this->add($menu, id: $route, route: 'app_page', rp: ['page' => $route], icon: $icon,
+            $this->add($menu, id: $route, route: 'app_page',
+                rp: ['page' => $route, 'type' => 'tab'], icon: $icon,
                 label: u($route)->title()->toString());
         }
 

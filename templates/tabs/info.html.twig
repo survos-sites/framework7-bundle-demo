@@ -5,10 +5,28 @@
 <div class="block">
     <p><b>{{ t }}</b></p>
     <article>
-        This page is not dyanmic, though we could put the counts  here.
-
         Really we need to load the database and show a progress bar,
         and show how to download the app.
+
+        Dynamic:
+        {# this really isn't dexie, but right now dexie is passing window, so it works. #}
+        <twig:dexie
+                store="obras"
+                :caller="_self"
+                refreshEvent="app.load"
+        >
+            <twig:block name="twig_template">
+            <h1>Welcome to {{ window.app.name }}</h1>
+            </twig:block>
+
+        </twig:dexie>
+
+        The menu items should be a hamburger menu.
+        <twig:mobile_menu
+            type="MOBILE_PAGE_MENU"
+        >
+
+        </twig:mobile_menu>
 
     </article>
 </div>

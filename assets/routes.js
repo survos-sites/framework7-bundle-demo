@@ -9,6 +9,10 @@ export default (
         url: './pages/about', // this is the Symfony route, we can combine this
     },
     {
+        path: '/pages/settings',
+        url: './pages/settings', // this is the Symfony route, we can combine this
+    },
+    {
         path: '/pages/map',
         componentUrl: './pages/map',
     },
