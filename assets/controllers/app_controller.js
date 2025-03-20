@@ -31,9 +31,10 @@ export default class extends MobileController {
 
     }
 
-    isPopulated() {
+    async isPopulated(table) {
         // @todo: check database in window.app.db?
-        return true;
+        const count = await table.count();
+        return count > 0;
     }
 
     start() {

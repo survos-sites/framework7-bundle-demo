@@ -9,7 +9,7 @@ import Dexie from 'dexie';
 import routes from "./routes.js";
 // Routing.setData(RoutingData);
 
-import {DbUtilities} from './js/lib/dixieDatabase.js';
+//import {DbUtilities} from './js/lib/dixieDatabase.js';
 
 var createStore = Framework7.createStore;
 const store = createStore({
@@ -120,9 +120,9 @@ app.db.version(2).stores({
 
 //grab data from api in laziest way for now
 const tables = ['artists', 'locations', 'obras'];
-tables.forEach(async (table) => {
-    await DbUtilities.syncTable(app.db, table);
-});
+// tables.forEach(async (table) => {
+//     await DbUtilities.syncTable(app.db, table);
+// });
 
 app.on('pageInit', function (page) {
     console.error('page', page);

@@ -5,8 +5,16 @@ survos_js_twig:
   version: 3
   stores:
     -
-      name: items
-      schema: "++id,category,starred"
-      url: https://dummyjson.com/products
+      name: artists
+      schema: ++id,name
+      url: https://pgsc.survos.com/api/artists
 #      response_key: products
 #      batch: 3
+    -
+      name: locations
+      schema: ++id,name
+      url: https://pgsc.survos.com/api/locations
+    -
+      name: obras
+      schema: ++id,title
+      url: https://pgsc.survos.com/api/obras
