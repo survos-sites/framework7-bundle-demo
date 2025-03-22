@@ -26,7 +26,6 @@ export default class extends MobileController {
     connect() {
         super.connect();
         let el = this.element;
-        console.error('hello from ' + this.identifier);
         // this.start();
 
     }
@@ -38,7 +37,6 @@ export default class extends MobileController {
     }
 
     start() {
-        console.log('starting F7...');
         var app = new Framework7({
             // name: this.nameValue,
             // theme: this.themeValue,
