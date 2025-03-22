@@ -16,18 +16,24 @@
                 refreshEvent="app.load"
         >
             <twig:block name="twig_template">
-            <h1>Welcome to {{ window.app.name }}</h1>
+                <h1>Welcome to {{ window.app.name }}</h1>
             </twig:block>
 
         </twig:dexie>
 
-        The menu items should be a hamburger menu.
-        <twig:mobile_menu
-            :caller="_self"
-            type="MOBILE_PAGE_MENU"
-        >
+        <p>
+            We have XX artists, XX locations and XX works.
+        </p>
 
-        </twig:mobile_menu>
+        <p>
+            Use the menu in the upper left to configure and see more pages.
+        </p>
+
+        <h3>
+            Your current settings:
+        </h3>
+        Gender: ??<br/> {#  this is from the dropdown. #}
+
 
     </article>
 </div>
