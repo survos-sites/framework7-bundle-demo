@@ -30,7 +30,26 @@
 
 {% block main_app %}
     {% set tabs = [
-        'info', 'artists','obras', 'locations'
+        {
+            'name': 'info',
+            'title': 'Info',
+            'icon': 'tabler:info-circle'
+        },
+        {
+            'name': 'artists',
+            'title': 'Artists',
+            'icon': 'tabler:user-heart'
+        },
+        {
+            'name': 'obras',
+            'title': 'Obras',
+            'icon': 'tabler:building'
+        },
+        {
+            'name': 'locations',
+            'title': 'Locations',
+            'icon': 'tabler:location-search'
+        }
     ] %}
 <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="768" data-url="/">
     <div class="page page-current">
@@ -52,17 +71,20 @@
         <div class="toolbar tabbar tabbar-icons toolbar-bottom">
             <div class="toolbar-inner">
                 {% for t in tabs %}
-                    <a href="#tab-{{ t }}" class="tab-link {{ loop.first ? 'tab-active' }}">
-                        <span
-                                class="tabbar-label">{{ t|title }}</span></a>
+                    <a href="#tab-{{ t.name }}" class="tab-link {{ loop.first ? 'tab-active' }}">
+                    <twig:ux:icon name="{{t.icon}}" />
+                        <span class="tabbar-label">
+                                {{ t.title|title }}
+                        </span>
+                    </a>
                 {% endfor %}
             </div>
         </div>
 
         <div class="tabs">
             {% for t in tabs %}
-            <div id="tab-{{ t }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
-                    {{ include('tabs/%s.html.twig'|format(t), {t: t}) }}
+            <div id="tab-{{ t.title }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
+                    {{ include('tabs/%s.html.twig'|format(t.name), {t: t.name}) }}
 {#                    {{ include('tabs/obras.html.twig'|format(t), {t: t}) }}#}
             </div>
             {% endfor %}

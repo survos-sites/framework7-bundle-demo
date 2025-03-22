@@ -24,7 +24,7 @@
                 <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
                 <div class="list">
                     <ul>
-                    {% for row in rows|slice(0,3) %}
+                    {% for row in rows %}
 
                     <li>
                         <a href="/pages/artist/{{row.id}}" class="item-link">

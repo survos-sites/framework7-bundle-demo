@@ -50,22 +50,21 @@ export default class extends Controller {
         console.log(event.detail.polylines);
 
         //get locations from dexie db and add markers
-        let locations = window.db.locations.toArray().then(locations => {
+        var bounds = [];
+        window.db.locations.toArray().then(locations => {
             locations.forEach(location => {
+            if (location.lat && location.lng && location.lat !== 0 && location.lng !== 0) {
+                bounds.push([location.lat, location.lng]);
                 //prepare popup content : must show location name and a button to show details using href
                 let content = `<div>${location.name}</div><a href="/pages/location/${location.id}" class="button">Details</a>`;
                 L.marker([location.lat, location.lng]).addTo(event.detail.map).bindPopup(content);
+            }
             });
-        });
-        
-        //calculate locations bounds and fit map to it
-        var bounds = [];
-        window.db.locations.each(location => {
-            bounds.push([location.lat, location.lng]);
         }).then(() => {
+            if (bounds.length > 0) {
             event.detail.map.fitBounds(bounds);
+            }
         });
-
     }
 
     /**
