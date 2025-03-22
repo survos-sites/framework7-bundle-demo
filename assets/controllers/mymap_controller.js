@@ -50,7 +50,7 @@ export default class extends Controller {
         console.log(event.detail.polylines);
 
         //get locations from dexie db and add markers
-        let locations = db.locations.toArray().then(locations => {
+        let locations = window.db.locations.toArray().then(locations => {
             locations.forEach(location => {
                 //prepare popup content : must show location name and a button to show details using href
                 let content = `<div>${location.name}</div><a href="/pages/location/${location.id}" class="button">Details</a>`;
@@ -60,21 +60,11 @@ export default class extends Controller {
         
         //calculate locations bounds and fit map to it
         var bounds = [];
-        db.locations.each(location => {
+        window.db.locations.each(location => {
             bounds.push([location.lat, location.lng]);
         }).then(() => {
             event.detail.map.fitBounds(bounds);
         });
-
-        // //center map to the last location
-        // db.locations.orderBy('id').last().then(location => {
-        //     event.detail.map.setView([location.lat, location.lng], 15);
-        // });
-
-        // //alert locations count
-        // db.locations.count().then(count => {
-        //     alert('Locations count: ' + count);
-        // });
 
     }
 
