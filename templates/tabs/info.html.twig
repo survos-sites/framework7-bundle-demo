@@ -22,8 +22,18 @@
         </twig:dexie>
 
         <p>
-            We have XX artists, XX locations and XX works.
+            We have XX artists, XX locations and XX works. dddd
         </p>
+
+        {{ ux_map(
+            center: [51.5074, 0.1278],
+            zoom: 3,
+            attributes: {
+                'data-controller': "mymap",
+                class: 'foo',
+                style: 'height: 800px; width: 100%; border: 4px solid red; margin-block: 10vh;',
+            }
+        ) }}
 
         <p>
             Use the menu in the upper left to configure and see more pages.
