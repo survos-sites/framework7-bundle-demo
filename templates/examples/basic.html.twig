@@ -83,7 +83,7 @@
 
         <div class="tabs">
             {% for t in tabs %}
-            <div id="tab-{{ t.title }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
+            <div id="tab-{{ t.name }}" class="page-content tab {{ loop.first ? 'tab-active' }}">
                     {{ include('tabs/%s.html.twig'|format(t.name), {t: t.name}) }}
 {#                    {{ include('tabs/obras.html.twig'|format(t), {t: t}) }}#}
             </div>
