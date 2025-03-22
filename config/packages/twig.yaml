@@ -2,6 +2,7 @@ twig:
     file_name_pattern: '*.twig'
     globals:
         _app_sc: 'app'
+        app_name: 'Batsi'
 
 when@test:
     twig:

@@ -1,29 +1,7 @@
-<h1>
-    Tab {{ t }}
-</h1>
-
 <div class="block">
     <p><b>{{ t }}</b></p>
     <article>
-        Really we need to load the database and show a progress bar,
-        and show how to download the app.
-
-        Dynamic:
         {# this really isn't dexie, but right now dexie is passing window, so it works. #}
-        <twig:dexie
-                store="obras"
-                :caller="_self"
-                refreshEvent="app.load"
-        >
-            <twig:block name="twig_template">
-                <h1>Welcome to {{ window.app.name }}</h1>
-            </twig:block>
-
-        </twig:dexie>
-
-        <p>
-            We have XX artists, XX locations and XX works. dddd
-        </p>
 
         {{ ux_map(
             center: [51.5074, 0.1278],
@@ -42,7 +20,17 @@
         <h3>
             Your current settings:
         </h3>
-        Gender: ??<br/> {#  this is from the dropdown. #}
+        <twig:dexie
+                store="obras"
+                :caller="_self"
+                refreshEvent="app.load"
+        >
+            <twig:block name="twig_template">
+                <h1>Welcome to {{ window.app.name }}</h1>
+            </twig:block>
+
+        </twig:dexie>
+
 
 
     </article>
