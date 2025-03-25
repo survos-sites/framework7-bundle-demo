@@ -21,7 +21,7 @@ survos_fw:
 #          - share
 #          - scan
       database: Batsi
-      data:
+      stores:
         - store: artists
           url:   https://pgsc.survos.com/api/artists
         - store: locations
@@ -41,7 +41,7 @@ survos_fw:
 
           # indexDb database name
         database: MyDatabase
-        data:
+        stores:
 
           # Prototype
           - store: items
