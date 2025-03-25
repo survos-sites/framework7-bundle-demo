@@ -93,6 +93,7 @@ final class AppController extends AbstractController
         return $this->render('@SurvosFw/start.html.twig', [
             'templates' => $templates,
             'config' => $this->fwService->getConfigs()[$configCode],
+            'tabs' => ['tabs']??['info'],
             'playNow' => $request->get('playNow', true),
             ''
         ]);

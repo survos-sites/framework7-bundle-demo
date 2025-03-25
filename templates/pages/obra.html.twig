@@ -8,24 +8,24 @@
     {% set globals = {
 
     } %}
-    <twig:dexie
-            refreshEvent="obra.refresh"
-            :store="store"
-            :globals="globals"
-            :caller="_self">
-      <twig:block name="twig_template" id="hack_to_get_raw_data">
-        This is the detail page for some specific obra ID 
-        <div class="obra-detail">
-          <h1>{{ data.title|title }}</h1>
-          <p>{{ data.description }}</p>
-          <p>Code: {{ data.code }}</p>
-          <p>Location: {{ data.location.code }}</p>
-        </div>
+{#    <twig:dexie#}
+{#            refreshEvent="obra.refresh"#}
+{#            :store="store"#}
+{#            :globals="globals"#}
+{#            :caller="_self">#}
+{#      <twig:block name="twig_template" id="hack_to_get_raw_data">#}
+{#        This is the detail page for some specific obra ID #}
+{#        <div class="obra-detail">#}
+{#          <h1>{{ data.title|title }}</h1>#}
+{#          <p>{{ data.description }}</p>#}
+{#          <p>Code: {{ data.code }}</p>#}
+{#          <p>Location: {{ data.location.code }}</p>#}
+{#        </div>#}
 
-        <!-- hack_to_get_raw_data -->
-      </twig:block>
+{#        <!-- hack_to_get_raw_data -->#}
+{#      </twig:block>#}
 
-    </twig:dexie>
+{#    </twig:dexie>#}
 
   </twig:block>
 
