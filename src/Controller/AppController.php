@@ -95,6 +95,7 @@ final class AppController extends AbstractController
             'config' => $this->fwService->getConfigs()[$configCode],
             'tabs' => ['tabs']??['info'],
             'playNow' => $request->get('playNow', true),
+            ''
         ]);
     }
 

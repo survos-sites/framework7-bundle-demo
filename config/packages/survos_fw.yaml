@@ -35,7 +35,7 @@ survos_fw:
         name: El Modo
         tabs:
           - info
-          - share
+          # - share
             # if data is set, composer req survos/js-twig-bundle
             #      data: # must be json-ld
 
