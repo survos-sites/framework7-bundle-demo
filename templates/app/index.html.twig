@@ -55,7 +55,7 @@
                         </td>
                         <td>
                             <ol>
-                                {% for data in config.data %}
+                                {% for data in config.stores %}
                                     <li><code>{{ data.store }}</code> => <a href="{{ data.url }}"
                                                                             target="_blank">{{ data.url }}</a></li>
                                 {% endfor %}
