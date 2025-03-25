@@ -1,20 +1,20 @@
 # Default configuration for extension with alias: "survos_js_twig"
 survos_js_twig:
   debug: false
-  db: MyDatabase
-  version: 3
-  stores:
-    -
-      name: artists
-      schema: ++id,name
-      url: https://pgsc.survos.com/api/artists
-#      response_key: products
-#      batch: 3
-    -
-      name: locations
-      schema: ++id,name
-      url: https://pgsc.survos.com/api/locations
-    -
-      name: obras
-      schema: ++id,title
-      url: https://pgsc.survos.com/api/obras
+  db: DatabaseInJsTwig
+  version: 4
+#  stores:
+#    -
+#      name: artists
+#      schema: ++id,name
+#      url: https://pgsc.survos.com/api/artists
+##      response_key: products
+##      batch: 3
+#    -
+#      name: locations
+#      schema: ++id,name
+#      url: https://pgsc.survos.com/api/locations
+#    -
+#      name: obras
+#      schema: ++id,title
+#      url: https://pgsc.survos.com/api/obras

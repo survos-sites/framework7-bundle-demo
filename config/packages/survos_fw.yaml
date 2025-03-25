@@ -15,40 +15,43 @@ survos_fw:
       logo: logo/batsi.png
       name: Batsi
       tabs:
-          - locations
-          - artists
-          - obras
-#          - share
-#          - scan
+        - locations
+        - artists
+        - obras
+      #          - share
+      #          - scan
       database: Batsi
       stores:
-        - store: artists
-          url:   https://pgsc.survos.com/api/artists
-        - store: locations
-          url:   https://pgsc.survos.com/api/artists
-        - store: objects
-          url:   https://pgsc.survos.com/api/obras
+        - name: artists
+          schema: ++id,name
+          url: https://pgsc.survos.com/api/artists
+        - name: locations
+          schema: ++id,name
+          url: https://pgsc.survos.com/api/artists
+        - name: objects
+          schema: ++id,title
+          url: https://pgsc.survos.com/api/obras
 
     modo: # configuration code for database, etc.
-        code: modo
-        logo: logo/modo.png
-        name: El Modo
-        tabs:
-          - info
+      code: modo
+      logo: logo/modo.png
+      name: El Modo
+      tabs:
+        - info
           # - share
-            # if data is set, composer req survos/js-twig-bundle
-            #      data: # must be json-ld
+        # if data is set, composer req survos/js-twig-bundle
+        #      data: # must be json-ld
 
-          # indexDb database name
-        database: MyDatabase
-        stores:
+        # indexDb database name
+      database: MyDatabase
+      stores:
 
-          # Prototype
-          - store: items
-            url:   https://modo.survos.com/api/items
-            limit: 100
+        # Prototype
+        - name: items
+          url: https://modo.survos.com/api/items
+          limit: 100
 
-        members:
-          # Prototype
-          - email: tacman@gmail.com
-            role: PROJECT_ADMIN
+      members:
+        # Prototype
+        - email: tacman@gmail.com
+          role: PROJECT_ADMIN
