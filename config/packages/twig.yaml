@@ -3,6 +3,7 @@ twig:
     globals:
         _app_sc: 'app'
         app_name: 'Batsi'
+        app_logo: 'Batsi'
 
 when@test:
     twig:

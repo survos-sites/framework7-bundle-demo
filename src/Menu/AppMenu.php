@@ -43,7 +43,7 @@ final class AppMenu implements KnpMenuHelperInterface
     public function templateMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
-        $this->add($menu, route: 'app_page', rp: ['page' => 'obra']);
+        $this->add($menu, id: 'obra', route: 'app_page', rp: ['page' => 'obra']);
     }
 
     #[AsEventListener(event: KnpMenuEvent::MOBILE_PAGE_MENU)]
@@ -65,6 +65,7 @@ final class AppMenu implements KnpMenuHelperInterface
     #[AsEventListener(event: KnpMenuEvent::MOBILE_TAB_MENU)]
     public function tabMenu(KnpMenuEvent $event): void
     {
+        // for now, this has been moved to the YAML config, we may use it later, especially if we need conditional menu items.
         return;
         $menu = $event->getMenu();
         // the id is for getting the template directly in app/{id} during SPA, the route is for testing.  both are needed.
