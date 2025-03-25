@@ -106,7 +106,7 @@ final class AppController extends AbstractController
 //        ]);
 //    }
 
-    #[Route('/pages/{page}', name: 'app_page', priority: 400)]
+    #[Route('/{_locale}/pages/{page}', name: 'app_page', priority: 400)]
     public function page(string $page): Response
     {
         return $this->render("pages/$page.html.twig", [
