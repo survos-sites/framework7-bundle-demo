@@ -375,6 +375,9 @@
             "config/routes/web_profiler.yaml"
         ]
     },
+    "tacman/dictionary-bundle": {
+        "version": "4.0.9"
+    },
     "twig/extra-bundle": {
         "version": "v3.20.0"
     }

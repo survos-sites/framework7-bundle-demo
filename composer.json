@@ -51,6 +51,7 @@
         "symfony/validator": "^7.2.4",
         "symfony/web-link": "^7.2",
         "symfony/yaml": "^7.2.3",
+        "tacman/dictionary-bundle": "^4.0",
         "twig/extra-bundle": "^2.12|^3.20",
         "twig/intl-extra": "^3.20",
         "twig/twig": "^2.12|^3.20"

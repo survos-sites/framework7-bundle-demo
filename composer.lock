@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a31253da99053b6a31c6a748bb9bc3aa",
+    "content-hash": "ec3b2138dfe8c960d00f747a101cf139",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -8580,6 +8580,80 @@
                 }
             ],
             "time": "2025-01-07T12:55:42+00:00"
+        },
+        {
+            "name": "tacman/dictionary-bundle",
+            "version": "4.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tacman/DictionaryBundle.git",
+                "reference": "77d64b813707305daa1bf20139a716c12f88d337"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tacman/DictionaryBundle/zipball/77d64b813707305daa1bf20139a716c12f88d337",
+                "reference": "77d64b813707305daa1bf20139a716c12f88d337",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "symfony/config": "^6.4 || ^7.0",
+                "symfony/dependency-injection": "^6.4 || ^7.0",
+                "symfony/form": "^6.4 || ^7.0",
+                "symfony/http-foundation": "^6.4 || ^7.0",
+                "symfony/http-kernel": "^6.4 || ^7.0",
+                "symfony/validator": "^6.4 || ^7.0",
+                "twig/twig": "^3.4.3"
+            },
+            "require-dev": {
+                "beberlei/assert": "^3.3",
+                "fakerphp/faker": "^1.20",
+                "friendsofphp/php-cs-fixer": "^3.13",
+                "pedrotroller/php-cs-custom-fixer": "^2.28",
+                "phpspec/prophecy": "^1.15",
+                "phpstan/phpstan": "^2.1",
+                "rector/rector": "^2.0",
+                "symfony/twig-bridge": "^6.4 || ^7.0",
+                "symfony/var-dumper": "^6.4 || ^7.0",
+                "webmozart/assert": "^1.11"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Knp\\DictionaryBundle\\": "src/Knp/DictionaryBundle"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Knplabs",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Shivoham",
+                    "homepage": "https://github.com/Shivoham"
+                },
+                {
+                    "name": "Tac Tacelosky",
+                    "homepage": "https://github.com/tacman"
+                }
+            ],
+            "description": "Are you often tired to repeat static choices like gender or civility in your apps ?",
+            "keywords": [
+                "dictionary"
+            ],
+            "support": {
+                "source": "https://github.com/tacman/DictionaryBundle/tree/4.0.9"
+            },
+            "time": "2025-01-27T11:18:36+00:00"
         },
         {
             "name": "twig/extra-bundle",
