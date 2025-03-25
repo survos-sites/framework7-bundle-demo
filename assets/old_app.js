@@ -63,10 +63,10 @@ var app = new Framework7({
 
         },
         tabHide: (el) => {
-            console.log('hiding ' + el.id);
+            //console.log('hiding ' + el.id);
         },
         pageTabShow: (el) => {
-            console.log('pageTabShow ' + el.id);
+            //console.log('pageTabShow ' + el.id);
         },
         pageBeforeIn: (x) => {
             console.log('before ' + x.route.url);
