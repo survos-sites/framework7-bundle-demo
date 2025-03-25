@@ -1,5 +1,5 @@
 <div class="block">
-        This is the  {{ t }}  tab {{ _self }}
+    <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
         {% set store = t %}
         {% set globals = {} %}
 
@@ -7,7 +7,7 @@
                 refreshEvent="tab-{{ t }}-show"
                 :store="store"
                 :globals="globals"
-                :filter="{}"
+                :filter="{locale: 'en'}"
                 :caller="_self">
 
             <twig:block name="title">

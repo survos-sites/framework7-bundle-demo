@@ -1,9 +1,6 @@
-<h1>
-    Tab {{ t }}
-</h1>
-
 <div class="block"><p><b>{{ t }}</b></p>
-        This is the  {{ t }}  tab {{ _self }}
+    <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
+{#        This is the  {{ t }}  tab {{ _self }}#}
         {% set store = t %}
         {% set globals = {} %}
 

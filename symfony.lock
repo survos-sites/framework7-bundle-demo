@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "endroid/qr-code-bundle": {
+        "version": "6.0.0"
+    },
     "friendsofsymfony/jsrouting-bundle": {
         "version": "3.5",
         "recipe": {
@@ -334,15 +337,6 @@
         "files": [
             "config/packages/ux_map.yaml"
         ]
-    },
-    "symfony/ux-turbo": {
-        "version": "2.23",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.20",
-            "ref": "c85ff94da66841d7ff087c19cbcd97a2df744ef9"
-        }
     },
     "symfony/ux-twig-component": {
         "version": "2.23",
