@@ -24,13 +24,13 @@ survos_fw:
       stores:
         - name: artists
           schema: ++id,name
-          url: https://pgsc.survos.com/api/artists
+          url: https://pgsc.survos.com/api/artists?local={local}
         - name: locations
           schema: ++id,name
-          url: https://pgsc.survos.com/api/artists
+          url: https://pgsc.survos.com/api/locations?local={local}
         - name: objects
           schema: ++id,title
-          url: https://pgsc.survos.com/api/obras
+          url: https://pgsc.survos.com/api/obras?local={local}
 
     modo: # configuration code for database, etc.
       code: modo
