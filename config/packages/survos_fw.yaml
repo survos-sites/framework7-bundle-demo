@@ -34,7 +34,7 @@ survos_fw:
 
     modo: # configuration code for database, etc.
       code: modo
-      logo: logo/modo.png
+      logo: /logos/modo_logo.webp
       name: El Modo
       tabs:
         - info
