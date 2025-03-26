@@ -16,20 +16,6 @@ class PantherTest extends PantherTestCase
 //        $this->assertSelectorTextContains('h1', 'Hello World');
 //    }
 
-    public function testBatsiEs(): void
-    {
-        // the home page that browses projects (not fw7)
-        $browser = $this->pantherBrowser()
-            ->visit('/es/batsi')
-            ->assertSee('Batsi')
-            ->takeScreenshot('es.batsi.png');
-
-        $browser->click('Obras')
-            ->wait(200) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
-            ->takeScreenshot('artwork.png')
-        ;
-
-    }
     public function testBatsi(): void
     {
         // the home page that browses projects (not fw7)
@@ -40,23 +26,31 @@ class PantherTest extends PantherTestCase
 
         $browser
             ->visit('/en/batsi#tab-locations')
-            ->takeScreenshot('basti-locations.png')
-        ;
+            ->takeScreenshot('basti-locations.png');
 
         $browser
 //            ->waitUntilSeeIn('body', '#tab-artists')
             ->click('#tab-artists') // click on the artists
-            ->takeScreenshot('artists.png')
-            ;
+            ->takeScreenshot('artists.png');
 
         $browser->click('Artwork')
             ->wait(200) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
             ->takeScreenshot('artwork.png')
         ;
 
-
-
     }
 
+    public function testBatsiEs(): void
+    {
+        // the home page that browses projects (not fw7)
+        $browser = $this->pantherBrowser()
+            ->visit('/es/batsi')
+            ->assertSee('Batsi')
+            ->takeScreenshot('es.batsi.png');
+
+        $browser->click('Obras')
+            ->wait(200) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
+            ->takeScreenshot('artwork.png');
+    }
 
 }
