@@ -38,18 +38,20 @@ survos_fw:
       name: El Modo
       tabs:
         - info
-          # - share
+        - locations
+        # - share
         # if data is set, composer req survos/js-twig-bundle
         #      data: # must be json-ld
 
         # indexDb database name
-      database: MyDatabase
+      database: Modo
       stores:
-
-        # Prototype
-        - name: items
-          url: https://modo.survos.com/api/items
-          limit: 100
+        - name: locations
+          schema: ++id,label
+          url: https://pgsc.survos.com/api/locations
+        - name: objects
+          schema: ++id,title
+          url: https://pgsc.survos.com/api/obras
 
       members:
         # Prototype
