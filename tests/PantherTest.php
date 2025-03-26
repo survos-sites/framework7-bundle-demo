@@ -16,7 +16,21 @@ class PantherTest extends PantherTestCase
 //        $this->assertSelectorTextContains('h1', 'Hello World');
 //    }
 
-    public function testDemo(): void
+    public function testBatsiEs(): void
+    {
+        // the home page that browses projects (not fw7)
+        $browser = $this->pantherBrowser()
+            ->visit('/es/batsi')
+            ->assertSee('Batsi')
+            ->takeScreenshot('es.batsi.png');
+
+        $browser->click('Obras')
+            ->wait(200) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
+            ->takeScreenshot('artwork.png')
+        ;
+
+    }
+    public function testBatsi(): void
     {
         // the home page that browses projects (not fw7)
         $browser = $this->pantherBrowser()
@@ -39,6 +53,7 @@ class PantherTest extends PantherTestCase
             ->wait(200) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
             ->takeScreenshot('artwork.png')
         ;
+
 
 
     }
