@@ -43,6 +43,9 @@ var app = new Framework7({
     name: 'My App', // App name
     theme: 'auto', // Automatic theme detection
     el: '#app', // App root element
+    view: {
+        transition: "f7-parallax", // Change transition effect here
+    },
 
     // App store
     store: store,
