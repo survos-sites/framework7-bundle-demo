@@ -1,14 +1,16 @@
 {
+    "name": "survos-sites/vt",
+    "description": "Voxitour, a PWA audio tour",
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
+        "php": "^8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^3.9.4||^4.2.3",
-        "doctrine/doctrine-bundle": "^2.13.2",
+        "doctrine/dbal": "^4.2.3",
+        "doctrine/doctrine-bundle": "^2.14.0",
         "doctrine/doctrine-migrations-bundle": "^3.4.1",
         "doctrine/orm": "^3.3.2",
         "endroid/qr-code-bundle": "^6.0",
@@ -51,7 +53,7 @@
         "symfony/validator": "^7.2.4",
         "symfony/web-link": "^7.2",
         "symfony/yaml": "^7.2.3",
-        "tacman/dictionary-bundle": "^4.0",
+        "tacman/dictionary-bundle": "^4.0.9",
         "twig/extra-bundle": "^2.12|^3.20",
         "twig/intl-extra": "^3.20",
         "twig/twig": "^2.12|^3.20"
@@ -112,7 +114,8 @@
     "require-dev": {
         "dbrekelmans/bdi": "^1.4",
         "nikic/php-parser": "^5.4",
-        "phpunit/phpunit": "^11.5.14",
+        "phpunit/phpunit": "^12.0.10",
+        "survos/deployment-bundle": "^1.5.529",
         "survos/maker-bundle": "^1.5.529",
         "symfony/browser-kit": "^7.2.4",
         "symfony/css-selector": "^7.2",
@@ -122,6 +125,6 @@
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "^7.2.4",
         "symfony/web-profiler-bundle": "^7.2.4",
-        "zenstruck/browser": "^1.9"
+        "zenstruck/browser": "^1.9.1"
     }
 }
