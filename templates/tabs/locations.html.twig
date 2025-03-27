@@ -26,7 +26,7 @@
                                     ">
                                         <div class="item-title
                                         ">
-                                           <b>{{ row.name|title }}</b>
+                                           <b>{{ row.name|default(row.label)|title }}</b>
                                         </div>
                                         <div class="item-after
                                         ">
