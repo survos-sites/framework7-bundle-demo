@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28b2912046f3d44f75298a113ca3f4af",
+    "content-hash": "aed981f4a1f499edeb82180719bed7c3",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2970,12 +2970,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/JsTwigBundle.git",
-                "reference": "a7151ae70d97f284ea7b4944b3ac0804ba17ba87"
+                "reference": "8cca5baf34c15a12690270c3847780fcd0c5201f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/JsTwigBundle/zipball/a7151ae70d97f284ea7b4944b3ac0804ba17ba87",
-                "reference": "a7151ae70d97f284ea7b4944b3ac0804ba17ba87",
+                "url": "https://api.github.com/repos/survos/JsTwigBundle/zipball/8cca5baf34c15a12690270c3847780fcd0c5201f",
+                "reference": "8cca5baf34c15a12690270c3847780fcd0c5201f",
                 "shasum": ""
             },
             "require": {
@@ -3013,7 +3013,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/JsTwigBundle/issues",
-                "source": "https://github.com/survos/JsTwigBundle/tree/1.6.0"
+                "source": "https://github.com/survos/JsTwigBundle/tree/main"
             },
             "funding": [
                 {
@@ -3021,7 +3021,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-27T11:50:13+00:00"
+            "time": "2025-03-27T14:56:13+00:00"
         },
         {
             "name": "symfony/asset",
