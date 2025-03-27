@@ -47,11 +47,11 @@ survos_fw:
       database: Modo
       stores:
         - name: locations
-          schema: ++id,label
-          url: https://modo.wip/api/locs
+          schema: ++id
+          url: https://modo.survos.com/api/locs
         - name: objects
-          schema: ++id,title
-          url: https://modo.wip/api/objs
+          schema: ++id
+          url: https://pgsc.survos.com/api/objs
 
       members:
         # Prototype
