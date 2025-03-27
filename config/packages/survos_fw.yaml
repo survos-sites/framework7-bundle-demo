@@ -48,10 +48,10 @@ survos_fw:
       stores:
         - name: locations
           schema: ++id,label
-          url: https://pgsc.survos.com/api/locations
+          url: https://modo.wip/api/locs
         - name: objects
           schema: ++id,title
-          url: https://pgsc.survos.com/api/obras
+          url: https://modo.wip/api/objs
 
       members:
         # Prototype
