@@ -1,7 +1,14 @@
 <div class="block">
     <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
         {% set store = t %}
-        {% set globals = {} %}
+        {% set globals = {
+            icons: {
+                REST: ux_icon('material-symbols:restaurant'),
+                CC: ux_icon('icon-park-outline:building-four'),
+                GALLERIA: ux_icon('grommet-icons:gallery'),
+                MUSEO: ux_icon('material-symbols:museum')
+            }
+        } %}
 
         <twig:dexie
                 refreshEvent="tab-{{ t }}-show"
@@ -15,7 +22,6 @@
             </twig:block>
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
-                <h1>{{ storeName }}</h1> <!-- passed in from dexie -->
                 <div class="list">
                     <ul>
                     {% for row in rows %}
@@ -26,6 +32,10 @@
                                     ">
                                         <div class="item-title
                                         ">
+                                            <span title=" {{ row.typeString }}">
+                                            {{ globals.icons[row.typeString]|default('') }}
+                                            </span>
+
                                            <b>{{ row.name|default(row.label)|title }}</b>
                                         </div>
                                         <div class="item-after">
@@ -38,7 +48,6 @@
                     {% endfor %}
                     </ul>
                 </div>
-                there are {{ rows|length }} rows
                 <!-- hack_to_get_raw_data -->
             </twig:block>
 

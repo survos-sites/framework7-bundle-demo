@@ -33,7 +33,7 @@
               <p>{{ data.objCount }} Objects</p>
             <ol>
               {% for obj in data.objs %}
-                <li>{{ obj|json_encode }}</li>
+                <li>{{ obj }}</li>
               {% endfor %}
             </ol>
               @todo: pass the object records...
