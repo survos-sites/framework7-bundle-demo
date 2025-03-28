@@ -2,6 +2,7 @@
     <p><b>{{ t }}</b></p>
 
     <button class="button popover-open" data-popover=".my-popover">Change Language</button>
+
     <div class="popover my-popover">
         <div class="popover-inner">
             <div class="list inset list-strong list-dividers-ios">
@@ -26,7 +27,10 @@
 
 
     <article>
+        {{ 'modo.description'|trans|markdown_to_html }}
+
         {# this really isn't dexie, but right now dexie is passing window, so it works. #}
+        {% if false %}
 
         {{ ux_map(
             center: [51.5074, 0.1278],
@@ -37,24 +41,18 @@
                 style: 'height: 800px; width: 100%; border: 4px solid red; margin-block: 10vh;',
             }
         ) }}
+        {% endif %}
 
-        <p>
-            Use the menu in the upper left to configure and see more pages.
-        </p>
+{#        <twig:dexie#}
+{#                store="obras"#}
+{#                :caller="_self"#}
+{#                refreshEvent="app.load"#}
+{#        >#}
+{#            <twig:block name="twig_template">#}
+{#                <h1>Welcome to {{ window.app.name }}</h1>#}
+{#            </twig:block>#}
 
-        <h3>
-            Your current settings:
-        </h3>
-        <twig:dexie
-                store="obras"
-                :caller="_self"
-                refreshEvent="app.load"
-        >
-            <twig:block name="twig_template">
-                <h1>Welcome to {{ window.app.name }}</h1>
-            </twig:block>
-
-        </twig:dexie>
+{#        </twig:dexie>#}
 
 
 

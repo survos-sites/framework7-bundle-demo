@@ -27,7 +27,10 @@
         <!-- title_template -->
       </twig:block>
       <twig:block name="twig_template" id="hack_to_get_raw_data">
-
+        {% for i in 1..3 %}
+          <img style="max-width: 120px"
+                  src="https://elmodo.mx/wp-content/uploads/2025/03/LRdJ_CarruselWeb_{{ i }}.jpg" />
+        {% endfor %}
         {% set locale = globals.locale %}
         {{ data.id }}, {{ data.objCount }} objects on tour
         <div class="location-detail">
