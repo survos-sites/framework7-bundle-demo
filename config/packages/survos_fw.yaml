@@ -12,7 +12,7 @@ survos_fw:
 
     batsi: # previously pgsc
       code: batsi
-      logo: logo/batsi.png
+      logo: /logos/batsi_logo.jpeg
       name: Batsi
       tabs:
         - locations

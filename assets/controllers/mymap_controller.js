@@ -51,7 +51,7 @@ export default class extends Controller {
 
         //get locations from dexie db and add markers
         var bounds = [];
-        window.db.locations.toArray().then(locations => {
+        window.db.expos.toArray().then(locations => {
             locations.forEach(location => {
             if (location.lat && location.lng && location.lat !== 0 && location.lng !== 0) {
                 bounds.push([location.lat, location.lng]);
