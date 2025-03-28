@@ -1,5 +1,30 @@
 <div class="block">
     <p><b>{{ t }}</b></p>
+
+    <button class="button popover-open" data-popover=".my-popover">Change Language</button>
+    <div class="popover my-popover">
+        <div class="popover-inner">
+            <div class="list inset list-strong list-dividers-ios">
+                <ul>
+                    <!-- loop over enabled_locales -->
+                    {% for locale in app.enabled_locales %}
+                        <li>
+                            <a class="external list-button" href="{{ url('project_start', {configCode: config.code, _locale: locale}) }}">
+                                {{ locale|upper }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="list inset list-strong">
+                <ul>
+                    <li><a class="list-button color-red popover-close">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
     <article>
         {# this really isn't dexie, but right now dexie is passing window, so it works. #}
 
