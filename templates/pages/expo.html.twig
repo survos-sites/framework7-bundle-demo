@@ -1,8 +1,11 @@
 
 {#@todo: title icon?#}
-<twig:FwPage :caller="_self"
-             :title="'@loc: ' ~ 'location'|trans"
+<twig:SurvosFw:Framework7Page :caller="_self"
+             :title="'expo'|trans"
 >
+  <twig:block name="title">
+    @@title@@
+  </twig:block>
   <twig:block name="content">
     {% set store = 'expos' %}
     {% set globals = {
@@ -14,15 +17,21 @@
             :store="store"
             :globals="globals"
             :caller="_self">
-      <twig:block name="header_template" id="hack_to_get_raw_data">
+      {# this is really the page title, not the app title #}
+      <twig:block name="title" id="title_template">
+        <sup>
+          {{ data.id }}
+        </sup>
+        {% set locale = globals.locale %}
+        {{ data.title[locale] }}
+        <!-- title_template -->
       </twig:block>
       <twig:block name="twig_template" id="hack_to_get_raw_data">
 
         {% set locale = globals.locale %}
-        expo: {{ data.id }}, {{ data.objCount }} objects on tour
+        {{ data.id }}, {{ data.objCount }} objects on tour
         <div class="location-detail">
-          <h1>{{ data.title.locale }}</h1>
-          <p>Code: {{ data.id }}</p>
+          <h1>{{ data.title[locale] }}</h1>
           {% set description = data.content[locale] %}
           <article>
             <p>
@@ -36,7 +45,6 @@
                 <li>{{ obj }}</li>
               {% endfor %}
             </ol>
-              @todo: pass the object records...
             </div>
           </article>
         </div>
@@ -44,5 +52,5 @@
       </twig:block>
     </twig:dexie>
   </twig:block>
-</twig:FwPage>
+</twig:SurvosFw:Framework7Page>
 

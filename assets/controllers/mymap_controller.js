@@ -43,11 +43,11 @@ export default class extends Controller {
      * The instances depend on the renderer you are using.
      */
     _onConnect(event) {
-        console.log(event.detail.map);
-        console.log(event.detail.markers);
-        console.log(event.detail.infoWindows);
-        console.log(event.detail.polygons);
-        console.log(event.detail.polylines);
+        // console.log(event.detail.map);
+        // console.log(event.detail.markers);
+        // console.log(event.detail.infoWindows);
+        // console.log(event.detail.polygons);
+        // console.log(event.detail.polylines);
 
         //get locations from dexie db and add markers
         var bounds = [];

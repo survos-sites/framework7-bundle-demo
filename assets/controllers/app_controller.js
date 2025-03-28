@@ -22,6 +22,7 @@ export default class extends MobileController {
         name: String,
         theme: String,
     }
+    // targets are defined in mobile_controller, e.g. title, page_title
 
     connect() {
         super.connect();
