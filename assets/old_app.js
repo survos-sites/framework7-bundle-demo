@@ -3,13 +3,7 @@ import Framework7 from 'framework7/framework7-bundle';
 
 // import './store.js';
 import Dexie from 'dexie';
-//var db = new Dexie('MyDatabase');
-
-
 import routes from "./routes.js";
-// Routing.setData(RoutingData);
-
-//import {DbUtilities} from './js/lib/dixieDatabase.js';
 
 var createStore = Framework7.createStore;
 const store = createStore({

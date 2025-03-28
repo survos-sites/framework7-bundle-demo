@@ -59,6 +59,9 @@ return [
     '@survos-mobile/mobile' => [
         'path' => './vendor/survos/fw-bundle/assets/src/controllers/mobile_controller.js',
     ],
+    '@survos-js-twig/locale' => [
+        'path' => './vendor/survos/js-twig-bundle/assets/src/lib/localeUtilities.js',
+    ],
     'twig' => [
         'version' => '1.17.1',
     ],
