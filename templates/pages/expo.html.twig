@@ -19,8 +19,7 @@
       <twig:block name="twig_template" id="hack_to_get_raw_data">
 
         {% set locale = globals.locale %}
-        expo: {{ data.id }}
-        This is an expo (specifically, MODO). {{  data.id }}
+        expo: {{ data.id }}, {{ data.objCount }} objects on tour
         <div class="location-detail">
           <h1>{{ data.title.locale }}</h1>
           <p>Code: {{ data.id }}</p>
@@ -30,10 +29,16 @@
               {#              better would be something like https://github.com/markedjs/marked or  https://github.com/showdownjs/showdown and registering it in the stimulus controller#}
               {{ description|replace({"\n\n": "</p><p>"}) }}
             </p>
-          @todo: artwork on the tour...
-          <p>{{ data.obraCount }}</p>
+            <div>
+              <p>{{ data.objCount }} Objects</p>
+            <ol>
+              {% for obj in data.objs %}
+                <li>{{ obj|json_encode }}</li>
+              {% endfor %}
+            </ol>
+              @todo: pass the object records...
+            </div>
           </article>
-
         </div>
         <!-- hack_to_get_raw_data -->
       </twig:block>
