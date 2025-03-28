@@ -1,4 +1,6 @@
 <div{{ attributes }}>
+{#    we could put a stimulus controller here#}
+{#    {{ dump(attributes) }}#}
     <div class="page" data-name="{{ name }}">
         <div class="navbar">
             <div class="navbar-bg"></div>
@@ -21,7 +23,10 @@
             </div>
         </div>
         <div class="page-content">
-            <div class="block-title">{{ title | trans}}</div>
+            <div class="block-title">
+                @title
+                {{ title | trans}}
+            </div>
             <div class="block">
                 <p>
                     {% block content %}

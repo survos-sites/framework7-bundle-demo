@@ -1,4 +1,10 @@
 tab:
+  location: location
   locations: locations
+  expos: expos
+  expo: expo
+
+
   artists: artists
   obras: artwork
+  info: info

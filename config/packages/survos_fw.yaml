@@ -37,8 +37,8 @@ survos_fw:
       logo: /logos/modo_logo.webp
       name: El Modo
       tabs:
+        - expos
         - info
-        - locations
         # - share
         # if data is set, composer req survos/js-twig-bundle
         #      data: # must be json-ld
@@ -46,7 +46,7 @@ survos_fw:
         # indexDb database name
       database: Modo
       stores:
-        - name: locations
+        - name: expos
           schema: ++id
           url: https://modo.survos.com/api/locs
         - name: objects

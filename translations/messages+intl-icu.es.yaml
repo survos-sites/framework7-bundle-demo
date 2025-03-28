@@ -1,5 +1,12 @@
 tab:
+  location: ubi
   locations: ubis
   artists: artistas
+  artist: artista
   obras: obras
+
+
+  expos: expos
+  expo: expo
+  info: info
 

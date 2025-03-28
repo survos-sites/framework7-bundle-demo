@@ -4,12 +4,13 @@
              :title="'@loc: ' ~ 'location'|trans"
 >
   <twig:block name="content">
-    {% set store = 'locations' %}
+    {% set store = 'expos' %}
     {% set globals = {
+      locale: app.locale
 
     } %}
     <twig:dexie
-            refreshEvent="location.refresh"
+            refreshEvent="expo.refresh"
             :store="store"
             :globals="globals"
             :caller="_self">
@@ -17,24 +18,26 @@
       </twig:block>
       <twig:block name="twig_template" id="hack_to_get_raw_data">
 
-        This is the detail page for some specific location ID {{ data.id }}
+        {% set locale = globals.locale %}
+        expo: {{ data.id }}
+        This is an expo (specifically, MODO). {{  data.id }}
         <div class="location-detail">
-          <h1>{{ data.name|title }}</h1>
-          <p>Code: {{ data.code }}</p>
-          {% set description = data.description|default('no description') %}
-
+          <h1>{{ data.title.locale }}</h1>
+          <p>Code: {{ data.id }}</p>
+          {% set description = data.content[locale] %}
           <article>
             <p>
-{#              better would be something like https://github.com/markedjs/marked or  https://github.com/showdownjs/showdown and registering it in the stimulus controller#}
-              {{ data.description|replace({"\n\n": "</p><p>"}) }}
+              {#              better would be something like https://github.com/markedjs/marked or  https://github.com/showdownjs/showdown and registering it in the stimulus controller#}
+              {{ description|replace({"\n\n": "</p><p>"}) }}
             </p>
-          </article>
-
           @todo: artwork on the tour...
           <p>{{ data.obraCount }}</p>
+          </article>
+
         </div>
         <!-- hack_to_get_raw_data -->
       </twig:block>
     </twig:dexie>
   </twig:block>
 </twig:FwPage>
+
