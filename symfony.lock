@@ -68,6 +68,18 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.5.0"
     },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "2.18",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.20",
+            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
+        },
+        "files": [
+            "config/packages/knpu_oauth2_client.yaml"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -81,6 +93,9 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
+    },
+    "survos/auth-bundle": {
+        "version": "1.5.529"
     },
     "survos/command-bundle": {
         "version": "1.5",
@@ -97,6 +112,19 @@
     },
     "survos/core-bundle": {
         "version": "1.5.529"
+    },
+    "survos/crawler-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "d16db1be85e21925f873d8099ca9ae7c4d50a208"
+        },
+        "files": [
+            "config/packages/survos_crawler.yaml",
+            "config/routes/survos_crawler.yaml"
+        ]
     },
     "survos/deployment-bundle": {
         "version": "1.5.529"
@@ -410,6 +438,9 @@
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
         ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.17.3"
     },
     "tacman/dictionary-bundle": {
         "version": "4.0.9"

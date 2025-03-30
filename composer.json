@@ -22,7 +22,9 @@
         "league/commonmark": "^2.6",
         "phpdocumentor/reflection-docblock": "^5.6.1",
         "phpstan/phpdoc-parser": "^2.1",
+        "survos/auth-bundle": "*",
         "survos/command-bundle": "^1.5.529",
+        "survos/crawler-bundle": "*",
         "survos/fw-bundle": "dev-main",
         "survos/js-twig-bundle": "dev-main",
         "symfony/asset": "^7.2",
@@ -57,6 +59,7 @@
         "symfony/validator": "^7.2.4",
         "symfony/web-link": "^7.2",
         "symfony/yaml": "^7.2.3",
+        "symfonycasts/verify-email-bundle": "^1.17",
         "tacman/dictionary-bundle": "^4.0.9",
         "twig/extra-bundle": "^2.12|^3.20",
         "twig/intl-extra": "^3.20",
@@ -67,6 +70,7 @@
         "allow-plugins": {
             "endroid/installer": true,
             "php-http/discovery": true,
+            "survos/installer": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
@@ -112,7 +116,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": true,
+            "allow-contrib": "true",
             "require": "^7.2"
         }
     },
