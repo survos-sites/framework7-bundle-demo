@@ -99,7 +99,7 @@ var app = new Framework7({
                         } else if (queryParams.obraId && tabId === 'tab-obras') {
                             app.views.main.router.navigate('/pages/obra/' + queryParams.obraId);
                         }
-                    }, 300);
+                    }, 600);
                 }
             }
         },
