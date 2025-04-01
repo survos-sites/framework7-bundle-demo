@@ -46,35 +46,6 @@ export default class extends MobileController {
     }
 
     initialize() {
-
-        var createStore = Framework7.createStore;
-        const store = createStore({
-            state: {
-                products: []
-            },
-            getters: {
-                products({ state }) {
-                    return state.products;
-                }
-            },
-            actions: {
-                setProduct({ state }, product) {
-                    state.product = product;
-                },
-                getProducts({ state }) {
-                    //get products from dixie db
-                    // let products = db.products.toArray().then(products => {
-                    //     state.products = products;
-                    // });
-                },
-                addProduct({ state }, product) {
-                    state.products = [...state.products, product];
-                },
-            },
-        })
-        store.dispatch('getProducts');
-//console.log(routes, store);
-
         var app = new Framework7({
             name: 'My App', // App name
             theme: 'auto', // Automatic theme detection
@@ -82,9 +53,6 @@ export default class extends MobileController {
             view: {
                 transition: "f7-parallax", // Change transition effect here
             },
-
-            // App store
-            store: store,
             // App routes
             routes: routes,
             // Register service worker
@@ -161,37 +129,6 @@ export default class extends MobileController {
             console.log("Current url: ");
             console.log(page.route.url);
         });
-
-//event dispatch for first tab
-// var tabs = document.querySelectorAll('.tabs')[0];
-// var firstTab = tabs.children[0];
-// var eventDispatched = false;
-// firstTab.addEventListener("DOMNodeInserted", function (ev) {
-//     if (!eventDispatched) {
-//         document.dispatchEvent(new Event(firstTab.id + '-show'));
-//         eventDispatched = true;
-//     }
-// }, false);
-
-
-// app.emit('myCustomEvent', 'foo', 'bar');
         window.app = app;
-
-// Login Screen Demo
-        $('#my-login-screen .login-button').on('click', function () {
-            var username = $('#my-login-screen [name="username"]').val();
-            var password = $('#my-login-screen [name="password"]').val();
-
-            // Close login screen
-            app.loginScreen.close('#my-login-screen');
-
-            // Alert username and password
-            app.dialog.alert('Username: ' + username + '<br/>Password: ' + password);
-        });
-
-
     }
-
-
-    // ...
 }
