@@ -153,22 +153,6 @@ export default class extends MobileController {
             }
         });
 
-// Attach Dexie database to `app`
-        console.error('why is this hard-coded?');
-        app.db = new Dexie("MyDatabase");
-// Define database schema
-        app.db.version(2).stores({
-            artists: '++id,name',
-            locations: '++id,name',
-            obras : '++id,title'
-        });
-
-//grab data from api in laziest way for now
-        const tables = ['artists', 'locations', 'obras'];
-// tables.forEach(async (table) => {
-//     await DbUtilities.syncTable(app.db, table);
-// });
-
         app.on('pageInit', function (page) {
             console.error('page', page);
             // do something on page init
