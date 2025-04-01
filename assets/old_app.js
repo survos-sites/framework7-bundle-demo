@@ -3,6 +3,7 @@ import Framework7 from 'framework7/framework7-bundle';
 
 // import './store.js';
 import Dexie from 'dexie';
+// @todo: make conditional
 import routes from "./routes.js";
 
 var createStore = Framework7.createStore;
@@ -67,6 +68,7 @@ var app = new Framework7({
         },
         pageBeforeIn: (x) => {
             console.log('before ' + x.route.url);
+
             console.warn('pageInBefore: %o', x);
         },
         init: function () {
@@ -74,7 +76,7 @@ var app = new Framework7({
         },
         pageInit: function (event) {
             //console.log('Page initialized');
-            
+
         },
         pageAfterIn: function (event) {
             console.log('Page after in',event);
@@ -91,7 +93,7 @@ var app = new Framework7({
                         var queryParams = app.views.main.router.currentRoute.query;
                         console.log('queryParams', queryParams);
 
-                        // Handle navigation based on query params
+                        // Handle navigation based on query params.  Hacky
                         if (queryParams.artistId && tabId === 'tab-artists') {
                             app.views.main.router.navigate('/pages/artist/' + queryParams.artistId);
                         } else if (queryParams.locationId && tabId === 'tab-locations') {
@@ -107,6 +109,7 @@ var app = new Framework7({
 });
 
 // Attach Dexie database to `app`
+console.error('why is this hard-coded?');
 app.db = new Dexie("MyDatabase");
 // Define database schema
 app.db.version(2).stores({
