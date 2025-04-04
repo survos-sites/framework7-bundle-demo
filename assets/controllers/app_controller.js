@@ -29,6 +29,7 @@ export default class extends MobileController {
     static values = {
         name: String,
         theme: String,
+        config: Object // @todo: move to mobile_controller and merge the values
     }
     // targets are defined in mobile_controller, e.g. title, page_title
 
@@ -46,6 +47,7 @@ export default class extends MobileController {
     }
 
     initialize() {
+        console.log(this.configValue);
         var app = new Framework7({
             name: 'My App', // App name
             theme: 'auto', // Automatic theme detection
