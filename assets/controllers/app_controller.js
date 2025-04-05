@@ -3,6 +3,9 @@ import MobileController from '@survos-mobile/mobile';
 
 import Framework7 from 'framework7/framework7-bundle';
 import 'framework7/framework7-bundle.min.css';
+// import { DbUtilities } from "../lib/dexieDatabase.js";
+//@survos-js-twig/database
+import { DbUtilities } from "@survos-js-twig/database";
 // @todo: make conditional
 import routes from "./../routes.js";
 // import routes from "./routes.js";
@@ -46,6 +49,26 @@ export default class extends MobileController {
     }
 
     initialize() {
+        //init database
+        let initDbValue = false;
+        DbUtilities.check();
+        if(initDbValue){
+    
+            let dbUtils = new DbUtilities(this.globalsValue.config, this.globalsValue.locale);
+            
+            // //bind refresh db to #refreshDatabase
+            // let refreshButton = document.getElementById("refreshDatabase");
+            // if (refreshButton) {
+            //     refreshButton.addEventListener("click", (e) => {
+            //         e.preventDefault();
+            //         dbUtils.refreshDatabase();
+            //     });
+            // }
+
+            return;
+            //dbUtils.initDatabase(this.globalsValue.config);
+        }
+
         var app = new Framework7({
             name: 'My App', // App name
             theme: 'auto', // Automatic theme detection
@@ -86,6 +109,8 @@ export default class extends MobileController {
                 },
                 init: function () {
                     console.log('App initialized');
+                    alert('App initialized');
+                    alert('Begin Db Init');
                 },
                 pageInit: function (event) {
                     //console.log('Page initialized');
@@ -114,7 +139,7 @@ export default class extends MobileController {
                                 } else if (queryParams.obraId && tabId === 'tab-obras') {
                                     app.views.main.router.navigate('/pages/obra/' + queryParams.obraId);
                                 }
-                            }, 600);
+                            }, 800);
                         }
                     }
                 },
