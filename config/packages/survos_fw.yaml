@@ -2,6 +2,7 @@
 survos_fw:
   theme: fw7
   enabled: true
+  name: Voxitour
   projects:
 
     # Prototype
