@@ -8,18 +8,10 @@ import 'framework7/framework7-bundle.min.css';
 import { DbUtilities } from "@survos-js-twig/database";
 // @todo: make conditional
 import routes from "./../routes.js";
-// import routes from "./routes.js";
 
-var $ = Dom7;
 
-// import './store.js';
+// are these needed?
 import Dexie from 'dexie';
-
-
-// import 'framework7-icons/css/framework7-icons.min.css'
-// import 'framework7-icons';
-
-
 var $ = Dom7;
 
 
@@ -39,6 +31,7 @@ export default class extends MobileController {
     // targets are defined in mobile_controller, e.g. title, page_title
 
     connect() {
+        console.log("Hi from " . this.identifier);
         super.connect();
         let el = this.element;
         // this.start();
