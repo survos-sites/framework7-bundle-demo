@@ -32,6 +32,8 @@ export default class extends MobileController {
     static values = {
         name: String,
         theme: String,
+        locale: String,
+        configCode: String,
         config: Object // @todo: move to mobile_controller and merge the values
     }
     // targets are defined in mobile_controller, e.g. title, page_title
@@ -50,27 +52,9 @@ export default class extends MobileController {
     }
 
     initialize() {
-        //init database
-        let initDbValue = false;
-        DbUtilities.check();
-        if(initDbValue){
-    
-            let dbUtils = new DbUtilities(this.globalsValue.config, this.globalsValue.locale);
-            
-            // //bind refresh db to #refreshDatabase
-            // let refreshButton = document.getElementById("refreshDatabase");
-            // if (refreshButton) {
-            //     refreshButton.addEventListener("click", (e) => {
-            //         e.preventDefault();
-            //         dbUtils.refreshDatabase();
-            //     });
-            // }
-
-            return;
-            //dbUtils.initDatabase(this.globalsValue.config);
-        }
-
-        console.log(this.configValue);
+        var appController = this;
+        console.log("config values" , this.configValue);
+        console.log("config values app" , appController.configValue);
         var app = new Framework7({
             name: 'My App', // App name
             theme: 'auto', // Automatic theme detection
@@ -110,9 +94,14 @@ export default class extends MobileController {
                     console.warn('pageInBefore: %o', x);
                 },
                 init: function () {
-                    console.log('App initialized');
-                    alert('App initialized');
-                    alert('Begin Db Init');
+                    //bind to dbready event
+                    document.addEventListener('dbready', function (event) {
+                        let pageContent = document.querySelector('.page-content');
+                        pageContent.remove();
+                        let tabLink = document.querySelector('.tab-link');
+                        tabLink.click();
+                    });
+                    let dbUtils = new DbUtilities(appController.configValue.projects[appController.configCodeValue],appController.localeValue);
                 },
                 pageInit: function (event) {
                     //console.log('Page initialized');
