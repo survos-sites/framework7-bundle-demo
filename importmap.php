@@ -62,6 +62,9 @@ return [
     '@survos-js-twig/locale' => [
         'path' => './vendor/survos/js-twig-bundle/assets/src/lib/localeUtilities.js',
     ],
+    '@survos-js-twig/database' => [
+        'path' => './vendor/survos/js-twig-bundle/assets/src/lib/dexieDatabase.js',
+    ],
     'twig' => [
         'version' => '1.17.1',
     ],
