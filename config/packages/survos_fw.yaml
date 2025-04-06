@@ -48,7 +48,7 @@ survos_fw:
       database: Modo
       stores:
         - name: expos
-          schema: ++id
+          schema: code
           url: https://modo.survos.com/api/{locale}/expos
         - name: objects
           schema: ++id
