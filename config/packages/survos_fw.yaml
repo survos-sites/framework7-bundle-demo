@@ -49,10 +49,10 @@ survos_fw:
       stores:
         - name: expos
           schema: ++id
-          url: https://modo.survos.com/api/locs
+          url: https://modo.survos.com/api/{locale}/expos
         - name: objects
           schema: ++id
-          url: https://modo.survos.com/api/objs
+          url: https://modo.survos.com/api/{locale}/objs
 
       members:
         # Prototype

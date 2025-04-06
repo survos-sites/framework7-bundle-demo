@@ -22,8 +22,7 @@
         <sup>
           {{ data.id }}
         </sup>
-        {% set locale = globals.locale %}
-        {{ data.title[locale] }}
+        {{ data.title }}
         <!-- title_template -->
       </twig:block>
       <twig:block name="twig_template" id="hack_to_get_raw_data">
@@ -35,7 +34,7 @@
         {{ data.id }}, {{ data.objCount }} objects on tour
         <div class="location-detail">
           <h1>{{ data.title[locale] }}</h1>
-          {% set description = data.content[locale] %}
+          {% set description = data.content %}
           <article>
             <p>
               {#              better would be something like https://github.com/markedjs/marked or  https://github.com/showdownjs/showdown and registering it in the stimulus controller#}
