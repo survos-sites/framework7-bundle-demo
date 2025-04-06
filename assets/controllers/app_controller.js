@@ -115,14 +115,17 @@ export default class extends MobileController {
                                 var queryParams = app.views.main.router.currentRoute.query;
                                 console.log('queryParams', queryParams);
 
-                                // Handle navigation based on query params.  Hacky
-                                if (queryParams.artistId && tabId === 'tab-artists') {
-                                    app.views.main.router.navigate('/pages/artist/' + queryParams.artistId);
-                                } else if (queryParams.locationId && tabId === 'tab-locations') {
-                                    app.views.main.router.navigate('/pages/location/' + queryParams.locationId);
-                                } else if (queryParams.obraId && tabId === 'tab-obras') {
-                                    app.views.main.router.navigate('/pages/obra/' + queryParams.obraId);
-                                }
+                                let entitiesRoutes = Object.keys(queryParams).filter(key => key.endsWith('Id'));
+
+                                entitiesRoutes.forEach(entityId => {
+                                    let entity = entityId.replace('Id', '');
+                                    let tabEntity = `tab-${entity}s`;
+
+                                    if (queryParams[entityId] && tabId === tabEntity) {
+                                        app.views.main.router.navigate(`/pages/${entity}/${queryParams[entityId]}`);
+                                    }
+                                });
+
                             }, 800);
                         }
                     }
