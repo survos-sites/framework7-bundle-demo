@@ -1,20 +1,33 @@
 
 {#@todo: title icon?#}
-<twig:FwPage :caller="_self"
-             :title="'@loc: ' ~ 'location'|trans"
+<twig:SurvosFw:Framework7Page :caller="_self"
+             :title="'location'|trans"
 >
+  <twig:block name="title">
+    @@title@@
+  </twig:block>
   <twig:block name="content">
     {% set store = 'locations' %}
     {% set globals = {
-
+      locale: app.locale
     } %}
+
+
     <twig:dexie
             refreshEvent="location.refresh"
             :store="store"
             :globals="globals"
             :caller="_self">
-      <twig:block name="header_template" id="hack_to_get_raw_data">
+
+      <twig:block name="title" id="title_template">
+        <sup>
+          {{ data.id }}
+        </sup>
+        {% set locale = globals.locale %}
+        {{ data.name}}
+        <!-- title_template -->
       </twig:block>
+
       <twig:block name="twig_template" id="hack_to_get_raw_data">
 
         This is the detail page for some specific location ID {{ data.id }}
@@ -35,6 +48,8 @@
         </div>
         <!-- hack_to_get_raw_data -->
       </twig:block>
+
+      
     </twig:dexie>
   </twig:block>
-</twig:FwPage>
+</twig:SurvosFw:Framework7Page>
