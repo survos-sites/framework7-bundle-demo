@@ -31,7 +31,7 @@ export default class extends MobileController {
     // targets are defined in mobile_controller, e.g. title, page_title
 
     connect() {
-        console.log("Hi from " . this.identifier);
+        console.log("Hi from " + this.identifier);
         super.connect();
         let el = this.element;
         // this.start();
