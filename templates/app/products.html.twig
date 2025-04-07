@@ -45,7 +45,7 @@
                                     <a {{ stimulus_action('app','test','click', {
                                         page: 'detail',
                                         store:globals.store,
-                                        id:row.id
+                                        id:row.code
                                     }) }}>
 
                                         {{ row.name }}
@@ -58,7 +58,7 @@
                                 {% set checked = row.owned ? 'checked' : '' %}
                                 <ons-switch class="right"
                                         {{ stimulus_controller(_sc, {owned: row.owned}) }}
-                                        {{ stimulus_action('app',  'add', 'click', {id: row.id}) }}>
+                                        {{ stimulus_action('app',  'add', 'click', {id: row.code}) }}>
                                 </ons-switch>
 
                             </div>

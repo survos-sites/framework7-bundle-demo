@@ -21,7 +21,7 @@
 
       <twig:block name="title" id="title_template">
         <sup>
-          {{ data.id }}
+          {{ data.code }}
         </sup>
         {% set locale = globals.locale %}
         {{ data.name}}
@@ -30,7 +30,7 @@
 
       <twig:block name="twig_template" id="hack_to_get_raw_data">
 
-        This is the detail page for some specific location ID {{ data.id }}
+        This is the detail page for some specific location {{ data.code }}
         <div class="location-detail">
           <h1>{{ data.name|title }}</h1>
           <p>Code: {{ data.code }}</p>
@@ -49,7 +49,7 @@
         <!-- hack_to_get_raw_data -->
       </twig:block>
 
-      
+
     </twig:dexie>
   </twig:block>
 </twig:SurvosFw:Framework7Page>
