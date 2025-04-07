@@ -24,13 +24,13 @@ survos_fw:
       database: Batsi
       stores:
         - name: artists
-          schema: ++id,name
+          schema: code
           url: https://pgsc.survos.com/api/artists?local={locale}
         - name: locations
-          schema: ++id,name
+          schema: code
           url: https://pgsc.survos.com/api/locations?local={locale}
         - name: objects
-          schema: ++id,title
+          schema: code
           url: https://pgsc.survos.com/api/obras?local={locale}
 
     modo: # configuration code for database, etc.
