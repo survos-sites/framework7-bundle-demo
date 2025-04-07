@@ -115,6 +115,7 @@ export default class extends MobileController {
                                 var queryParams = app.views.main.router.currentRoute.query;
                                 console.log('queryParams', queryParams);
 
+                                //url pattern /?{object}Id={objectId}#tab-{object}s
                                 let entitiesRoutes = Object.keys(queryParams).filter(key => key.endsWith('Id'));
 
                                 entitiesRoutes.forEach(entityId => {
