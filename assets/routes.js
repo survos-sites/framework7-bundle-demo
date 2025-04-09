@@ -104,6 +104,13 @@ export default (
         path: '(.*)',
         //url: './pages/404.html',
         async : function ({ app, router, to, resolve }) {
+            //if the to.path contains _profiler , then open in _blank , current base url + to.path
+            if (to.path.includes('_profiler')) {
+                let url = to.path.replace(/.*?https:\//, 'https://');
+                window.open(url, '_blank');
+                return;
+            }
+
             resolve({
                 url: './pages/404.html'
             });

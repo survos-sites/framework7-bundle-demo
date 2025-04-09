@@ -12,9 +12,14 @@
       locale: app.locale
 
     } %}
+    {% set queries = {
+      artist: {store: 'artist', type: 'find' , id : '{{event.details.id}}' },
+      objects: {store: 'object', where: {artist_id: '{{artist.id}}' }, type: 'findBy'}
+    }%}
     <twig:dexie
             refreshEvent="artist.refresh"
             :store="store"
+            :queries="queries"
             :globals="globals"
             :caller="_self">
       <twig:block name="title" id="title_template">
