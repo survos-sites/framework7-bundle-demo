@@ -30,7 +30,7 @@ survos_fw:
           schema: code
           url: https://pgsc.survos.com/api/locations?local={locale}
         - name: objects
-          schema: code
+          schema: code,artistCode,location.id
           url: https://pgsc.survos.com/api/obras?local={locale}
 
     modo: # configuration code for database, etc.
