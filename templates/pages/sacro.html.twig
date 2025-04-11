@@ -1,0 +1,35 @@
+
+<twig:SurvosFw:Framework7Page :caller="_self" >
+  <twig:block name="content">
+    This is in {{ _self }}
+    @todo: js-twig DETAIL for obra
+
+    {% set store = 'sacros' %}
+    {% set globals = {
+
+    } %}
+    <twig:dexie
+            refreshEvent="sacro.refresh"
+            :store="store"
+            :globals="globals"
+            :caller="_self">
+      <twig:block name="twig_template" id="hack_to_get_raw_data">
+        This is the detail page for some specific ID
+        <div class="obra-detail">
+          {{ data|json_encode }}
+          <h1>{{ data.label }}</h1>
+          <p>{{ data.description }}</p>
+          <p>Code: {{ data.code }}</p>
+          <p>Location: {{ data.location.code }}</p>
+        </div>
+
+        <!-- hack_to_get_raw_data -->
+      </twig:block>
+
+    </twig:dexie>
+
+  </twig:block>
+
+</twig:SurvosFw:Framework7Page>
+
+
