@@ -25,18 +25,46 @@
 
 
        <twig:block name="artist" id="twig_artist_template">
+       {% set locale = globals.locale %}
         <h1>Artist</h1>
         <sup>
-          {{ data | json_encode }}
+          <div class="artist-detail">
+          <h1>{{ data.name|title }}</h1>
+          {% set description = data.content[locale] %}
+          <article>
+            <p>
+              <p>{{ data.bio }}</p>
+            </p>
+            <div>
+              <p>Birth Year: {{ data.birthYear }}</p>
+              <p>Email: {{ data.email }}</p>
+              <p>Code: {{ data.code }}</p>
+            </div>
+            <p>
+        </p>
+          </article>
+        </div>
         </sup>
         <!-- twig_artist_template -->
       </twig:block>
 
       <twig:block name="objects" id="twig_objects_template">
         <h1>Objects</h1>
-        <sup>
-          {{ data | json_encode }}
-        </sup>
+        <!-- loop through data array having the objects -->
+        {% for object in data %}
+          <div class="object-detail">
+            <h1>{{ object.name|title }}</h1>
+            <p>Code: {{ object.code }}</p>
+            {% set description = object.description|default('no description') %}
+            <article>
+              <p>
+                {{ object.description|replace({"\n\n": "</p><p>"}) }}
+              </p>
+            </article>
+            <hr>
+          </div>
+        {% endfor %}
+
         <!-- twig_objects_template -->
       </twig:block>
 
