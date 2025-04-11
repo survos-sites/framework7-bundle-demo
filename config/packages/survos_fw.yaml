@@ -58,3 +58,15 @@ survos_fw:
         # Prototype
         - email: tacman@gmail.com
           role: PROJECT_ADMIN
+
+    cmas: # configuration code for database, etc.
+      code: cmas
+      name: CMAS
+      tabs:
+        - sacros
+        - info
+      database: cmas
+      stores:
+        - name: sacros
+          schema: id
+          url: https://pgsc.wip/{locale}/api/sacros
