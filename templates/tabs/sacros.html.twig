@@ -1,0 +1,46 @@
+<div class="block">
+    <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
+        {% set store = t %}
+        {% set globals = {
+            locale: app.locale
+        } %}
+
+        <twig:dexie
+                refreshEvent="tab-{{ t }}-show"
+                :store="store"
+                :globals="globals"
+                :caller="_self">
+
+            <twig:block name="title">
+                there are {{ rows|length }} rows
+            </twig:block>
+
+            <twig:block name="twig_template" id="hack_to_get_raw_data">
+                {% set locale = globals.locale %}
+                <div class="list">
+                    <ul>
+                    {% for row in rows %}
+                        <li>
+                            <a href="/pages/sacro/{{row.code}}" class="item-link">
+                                <div class="item-content">
+                                    <div class="item-inner
+                                    ">
+                                        <div class="item-title">
+{#                                            {{ row|json_encode }}#}
+                                           <b>{{ row.label }}</b>
+                                        </div>
+                                        <div class="item-after">
+                                            {{ row.extras.epoca }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <!-- hack_to_get_raw_data -->
+            </twig:block>
+
+        </twig:dexie>
+</div>
