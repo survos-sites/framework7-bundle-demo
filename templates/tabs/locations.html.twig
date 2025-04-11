@@ -1,3 +1,32 @@
+<style>
+.custom-list-content ul {
+    display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background-color: var(--f7-bars-bg-color);
+        border-radius: 0.25rem;
+        padding: 5px;
+}
+.custom-list-content .item-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-list-content .item-title span {
+    line-height: 0;
+ }
+
+.custom-list-content .item-title svg {
+    width: 20px;
+}
+
+/* .custom-list-content li { 
+    border: 1px solid var(--f7-text-editor-button-divider-color);
+    border-radius: 0.25rem;
+} */
+</style>
+
 <div class="block">
     <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
         {% set store = t %}
@@ -22,7 +51,7 @@
             </twig:block>
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
-                <div class="list">
+                <div class="list custom-list-content">
                     <ul>
                     {% for row in rows %}
                         <li>
