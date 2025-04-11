@@ -68,5 +68,5 @@ survos_fw:
       database: cmas
       stores:
         - name: sacros
-          schema: id
-          url: https://pgsc.wip/{locale}/api/sacros
+          schema: code
+          url: https://pgsc.survos.com/{locale}/api/sacros
