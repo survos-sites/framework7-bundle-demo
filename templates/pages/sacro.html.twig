@@ -65,6 +65,15 @@
         <!-- hack_to_get_raw_data -->
       </twig:block>
 
+      <twig:block name="title" id="title_template">
+        <sup>
+          {{ data.code }}
+        </sup>
+        {% set locale = globals.locale %}
+        {{ data.title}}
+        <!-- title_template -->
+      </twig:block>
+
     </twig:dexie>
   </twig:block>
 </twig:SurvosFw:Framework7Page>
