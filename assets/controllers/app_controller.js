@@ -88,48 +88,78 @@ export default class extends MobileController {
                 },
                 init: function () {
                     //bind to dbready event
+                    var that = this;
                     document.addEventListener('dbready', function (event) {
                         let pageContent = document.querySelector('.page-content');
                         pageContent.remove();
-                        let tabLink = document.querySelector('.tab-link');
-                        tabLink.click();
+                        var tabId = window.location.hash.replace('#', '');
+                        if (tabId) {
+                            if (typeof that.tabShown === 'undefined' || !that.tabShown) {
+                                that.tabShown = true;
+                                setTimeout(() => {
+                                    // Handle tab navigation based on tabId
+                                    var navElement = document.querySelector('a[href="#' + tabId + '"]');
+                                    that.tab.show('#' + tabId, navElement);
+
+                                    // Extract current query params as object
+                                    var queryParams = app.views.main.router.currentRoute.query;
+                                    console.log('queryParams', queryParams);
+
+                                    //url pattern /?{object}Id={objectId}#tab-{object}s
+                                    let entitiesRoutes = Object.keys(queryParams).filter(key => key.endsWith('Id'));
+
+                                    entitiesRoutes.forEach(entityId => {
+                                        let entity = entityId.replace('Id', '');
+                                        let tabEntity = `tab-${entity}s`;
+
+                                        if (queryParams[entityId] && tabId === tabEntity) {
+                                            app.views.main.router.navigate(`/pages/${entity}/${queryParams[entityId]}`);
+                                        }
+                                    });
+
+                                }, 800);
+                            }
+                        } else {
+                            let tabLink = document.querySelector('.tab-link');
+                            tabLink.click();
+                        }
                     });
+
                     let dbUtils = new DbUtilities(appController.configValue.projects[appController.configCodeValue],appController.localeValue);
                 },
                 pageInit: function (event) {
                     //console.log('Page initialized');
-
                 },
                 pageAfterIn: function (event) {
-                    console.log('Page after in',event);
-                    var tabId = window.location.hash.replace('#', '');
-                    if (tabId) {
-                        if (!this.tabShown) {
-                            this.tabShown = true;
-                            setTimeout(() => {
-                                // Handle tab navigation based on tabId
-                                var navElement = document.querySelector('a[href="#' + tabId + '"]');
-                                this.tab.show('#' + tabId, navElement);
+                    // console.log('Page after in',event);
+                    // var tabId = window.location.hash.replace('#', '');
+                    // if (tabId) {
+                    //     if (!this.tabShown) {
+                    //         this.tabShown = true;
+                    //         setTimeout(() => {
+                    //             // Handle tab navigation based on tabId
+                    //             var navElement = document.querySelector('a[href="#' + tabId + '"]');
+                    //             this.tab.show('#' + tabId, navElement);
 
-                                // Extract current query params as object
-                                var queryParams = app.views.main.router.currentRoute.query;
-                                console.log('queryParams', queryParams);
+                    //             // Extract current query params as object
+                    //             var queryParams = app.views.main.router.currentRoute.query;
+                    //             console.log('queryParams', queryParams);
 
-                                //url pattern /?{object}Id={objectId}#tab-{object}s
-                                let entitiesRoutes = Object.keys(queryParams).filter(key => key.endsWith('Id'));
+                    //             //url pattern /?{object}Id={objectId}#tab-{object}s
+                    //             let entitiesRoutes = Object.keys(queryParams).filter(key => key.endsWith('Id'));
 
-                                entitiesRoutes.forEach(entityId => {
-                                    let entity = entityId.replace('Id', '');
-                                    let tabEntity = `tab-${entity}s`;
+                    //             entitiesRoutes.forEach(entityId => {
+                    //                 let entity = entityId.replace('Id', '');
+                    //                 let tabEntity = `tab-${entity}s`;
 
-                                    if (queryParams[entityId] && tabId === tabEntity) {
-                                        app.views.main.router.navigate(`/pages/${entity}/${queryParams[entityId]}`);
-                                    }
-                                });
+                    //                 if (queryParams[entityId] && tabId === tabEntity) {
+                    //                     app.views.main.router.navigate(`/pages/${entity}/${queryParams[entityId]}`);
+                    //                 }
+                    //             });
 
-                            }, 800);
-                        }
-                    }
+                    //         }, 800);
+                    //     }
+                    // }
                 },
             }
         });
