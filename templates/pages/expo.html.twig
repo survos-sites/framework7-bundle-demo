@@ -12,42 +12,62 @@
       locale: app.locale
 
     } %}
+
+    {% set queries = {
+      expo: {store: 'expos', type: 'find' , id : '{{event.details.id}}' , templateName: 'expo'}
+    }%}
+
+
     <twig:dexie
             refreshEvent="expo.refresh"
             :store="store"
+            :queries="queries"
             :globals="globals"
             :caller="_self">
-      {# this is really the page title, not the app title #}
+
+      <twig:block name="expo" id="twig_expo_template">
+       {% set locale = globals.locale %}
+        <h1>Expo</h1>
+        <sup>
+          <div class="expo-detail">
+            <h1>{{ data.title|title }}</h1>
+            {% set description = data.content[locale] %}
+            <article>
+              <p>
+              {{data.content}}
+              </p>
+            </article>
+          </div>
+        </sup>
+        <!-- twig_expo_template -->
+      </twig:block>
+
       <twig:block name="title" id="title_template">
         <sup>
-          {{ data.id }}
+          {{ data.code }}
         </sup>
-        {{ data.title }}
+        {% set locale = globals.locale %}
+        {{ data.title}}
         <!-- title_template -->
       </twig:block>
+
+
       <twig:block name="twig_template" id="hack_to_get_raw_data">
-        {% for i in 1..3 %}
-          <img style="max-width: 120px"
-                  src="https://elmodo.mx/wp-content/uploads/2025/03/LRdJ_CarruselWeb_{{ i }}.jpg" />
-        {% endfor %}
         {% set locale = globals.locale %}
-        {{ data.id }}, {{ data.objCount }} objects on tour
-        <div class="location-detail">
-          <h1>{{ data.title[locale] }}</h1>
-          {% set description = data.content %}
+        <div class="expo-detail">
+          <h1>{{ data.name|title }}</h1>
+          {% set description = data.content[locale] %}
           <article>
             <p>
-              {#              better would be something like https://github.com/markedjs/marked or  https://github.com/showdownjs/showdown and registering it in the stimulus controller#}
-              {{ description|replace({"\n\n": "</p><p>"}) }}
+              <p>{{ data.description }}</p>
             </p>
             <div>
-              <p>{{ data.objCount }} Objects</p>
-            <ol>
-              {% for obj in data.objs %}
-                <li>{{ obj }}</li>
-              {% endfor %}
-            </ol>
+              <p>Code: {{ data.code }}</p>
+              <p>Start Date: {{ data.startDate }}</p>
+              <p>End Date: {{ data.endDate }}</p>
             </div>
+            <p>
+          </p>
           </article>
         </div>
         <!-- hack_to_get_raw_data -->
