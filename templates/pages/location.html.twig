@@ -12,19 +12,38 @@
       locale: app.locale
     } %}
 
+    {% set queries = {
+      location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'}
+    }%}
+
 
     <twig:dexie
             refreshEvent="location.refresh"
             :store="store"
+            :queries="queries"
             :globals="globals"
             :caller="_self">
+
+      <twig:block name="location" id="twig_location_template">
+       {% set locale = globals.locale %}
+        <h1>Locations</h1>
+        <sup>
+          <div class="location-detail"> 
+            <h1>{{ data.label }}</h1>
+            <p>{{ data.address }}</p>
+            <p>Code: {{ data.code }}</p>
+    
+          </div>
+        </sup>
+        <!-- twig_location_template -->
+      </twig:block>
 
       <twig:block name="title" id="title_template">
         <sup>
           {{ data.code }}
         </sup>
         {% set locale = globals.locale %}
-        {{ data.name}}
+        {{ data.label}}
         <!-- title_template -->
       </twig:block>
 
