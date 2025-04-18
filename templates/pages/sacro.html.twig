@@ -27,7 +27,9 @@
         <h1>Sacro</h1>
         <sup>
           <div class="obra-detail">
-          {{ data|json_encode }}
+            <img src="{{ data.imageSizes.medium }}" />
+
+{#            {{ data|json_encode }}#}
           <h1>{{ data.label }}</h1>
           <p>{{ data.description }}</p>
           <p>Code: {{ data.code }}</p>

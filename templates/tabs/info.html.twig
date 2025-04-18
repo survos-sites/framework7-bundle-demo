@@ -27,7 +27,8 @@
 
 
     <article>
-        {{ 'modo.description'|trans|markdown_to_html }}
+        {{ config.code }}
+        {{ (config.code ~ '.description')|trans|markdown_to_html }}
 
         {# this really isn't dexie, but right now dexie is passing window, so it works. #}
         {% if false %}
