@@ -1,7 +1,7 @@
 
 {#@todo: title icon?#}
 <twig:SurvosFw:Framework7Page :caller="_self"
-             :title="'sacro'|trans"
+             :title="'tab.sacro'|trans"
 >
   <twig:block name="title">
     @@title@@
@@ -33,7 +33,9 @@
           <h1>{{ data.label }}</h1>
           <p>{{ data.description }}</p>
           <p>Code: {{ data.code }}</p>
+            {% if data.location.code %}
           <p>Location: {{ data.location.code }}</p>
+            {% endif %}
         </div>
         </div>
         </sup>

@@ -3,11 +3,13 @@ tab:
   locations: locations
   expos: expos
   expo: expo
+  sacros: art
 
 
   artists: artists
   obras: artwork
   info: info
+  sacro: arte
 
 modo:
   description: |

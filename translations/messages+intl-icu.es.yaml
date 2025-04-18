@@ -4,10 +4,12 @@ tab:
   artists: artistas
   artist: artista
   obras: obras
+  sacros: arte
 
 
   expos: expos
   expo: expo
+  sacro: arte
 
 modo:
   description: |
