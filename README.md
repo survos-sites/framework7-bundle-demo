@@ -52,3 +52,45 @@ MOBILE_BASE_URL=https://fw.wip
 
 ```
 MOBILE_BASE_URL=https://fw.wip
+
+## Creating details views using automated queries :
+(let's do an Artist details for example and show his related objects)
+
+1. Create a new (Artist) view : templates/pages/artist.html.twig
+2. the openning tag should be : <twig:SurvosFw:Framework7Page .... >
+3. add a title placeholder : 
+```html
+    <twig:block name="title">
+        @@title@@
+    </twig:block*>
+```
+4. Reference the queries :
+```html
+    {% set queries = {
+      artist: {store: 'artists', type: 'find' , id : '{{event.details.id}}' , templateName: 'artist'},
+      objects: {store: 'objects', filters : {artistCode: '{{artist.code}}' }, filterType: 'where' , templateName: 'objects'},
+    }%}
+```
+5. Pass the queries to the Dexie component :
+```html
+    <twig:dexie
+            ...
+            ...
+            :queries="queries"
+            ...
+        >
+```
+6. Add the templates (reference by the name="..." attribute ) foreach block :
+```html
+    <twig:block name="artist" id="twig_artist_template">
+       {% set locale = globals.locale %}
+        <h1>Artist</h1>
+        <sup>
+          <div class="artist-detail">
+          <h1>{{ data.name|title }}</h1>
+        </div>
+        </sup>
+        <!-- twig_artist_template -->
+      </twig:block>
+```
+
