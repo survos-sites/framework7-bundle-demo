@@ -442,9 +442,6 @@
     "symfonycasts/verify-email-bundle": {
         "version": "v1.17.3"
     },
-    "tacman/dictionary-bundle": {
-        "version": "4.0.9"
-    },
     "twig/extra-bundle": {
         "version": "v3.20.0"
     },

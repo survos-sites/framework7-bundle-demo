@@ -1,0 +1,148 @@
+{
+    "|https://fw.wip/": {
+        "/": {
+            "path": "/",
+            "seen": true,
+            "depth": 0,
+            "linkStatus": null,
+            "username": null,
+            "route": "app_index",
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": null,
+            "memory": null
+        },
+        "/screenshots": {
+            "path": "/screenshots",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": "app_screenshots",
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": "/",
+            "memory": null
+        },
+        "/login": {
+            "path": "/login",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": "app_login",
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": "/",
+            "memory": null
+        },
+        "en/batsi": {
+            "path": "en/batsi",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": null,
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": "/",
+            "memory": null
+        },
+        "es/batsi": {
+            "path": "es/batsi",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": null,
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": "/",
+            "memory": null
+        },
+        "/en/batsi": {
+            "path": "/en/batsi",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": "project_start",
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": "/",
+            "memory": null
+        },
+        "en/modo": {
+            "path": "en/modo",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": null,
+            "rp": null,
+            "statusCode": null,
+            "foundOn": "/",
+            "memory": null
+        },
+        "es/modo": {
+            "path": "es/modo",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": null,
+            "rp": null,
+            "statusCode": null,
+            "foundOn": "/",
+            "memory": null
+        },
+        "/en/modo": {
+            "path": "/en/modo",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": "project_start",
+            "rp": null,
+            "statusCode": 200,
+            "foundOn": "/",
+            "memory": null
+        },
+        "en/cmas": {
+            "path": "en/cmas",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": null,
+            "rp": null,
+            "statusCode": null,
+            "foundOn": "/",
+            "memory": null
+        },
+        "es/cmas": {
+            "path": "es/cmas",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": null,
+            "rp": null,
+            "statusCode": null,
+            "foundOn": "/",
+            "memory": null
+        },
+        "/en/cmas": {
+            "path": "/en/cmas",
+            "seen": true,
+            "depth": 1,
+            "linkStatus": null,
+            "username": null,
+            "route": "project_start",
+            "rp": null,
+            "statusCode": null,
+            "foundOn": "/",
+            "memory": null
+        }
+    }
+}

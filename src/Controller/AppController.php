@@ -30,21 +30,6 @@ final class AppController extends AbstractController
         return [];
     }
 
-    #[Route('/home', name: 'app_homepage')]
-    public function homepage(): Response
-    {
-        return $this->render('app/index.html.twig', [
-            'controller_name' => 'AppController',
-        ]);
-    }
-
-//    #[Route('/about', name: 'app_about')]
-//    #[Template('app/about.html.twig')]
-//    public function about(): Response|array
-//    {
-//        return [];
-//    }
-
     #[Route('/', name: 'app_index', options: ['expose' => true], methods: ['GET'])]
     #[Template('app/index.html.twig')]
     public function mobile(Request $request): Response|array

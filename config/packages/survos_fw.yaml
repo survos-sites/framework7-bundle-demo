@@ -6,10 +6,10 @@ survos_fw:
   projects:
 
     # Prototype
-    omar:
-      code: omar
-      logo: logo/omar.png
-      name: OmarExpo
+#    omar:
+#      code: omar
+#      logo: logo/omar.png
+#      name: OmarExpo
 
     batsi: # previously pgsc
       code: batsi
