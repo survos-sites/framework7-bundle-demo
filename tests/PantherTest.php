@@ -9,13 +9,6 @@ class PantherTest extends PantherTestCase
 {
     use HasBrowser;
 
-//    public function testSomething(): void
-//    {
-//        $client = static::createPantherClient();
-//        $crawler = $client->request('GET', '/');
-//        $this->assertSelectorTextContains('h1', 'Hello World');
-//    }
-
     public function testBatsi(): void
     {
 
