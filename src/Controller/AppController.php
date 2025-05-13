@@ -23,14 +23,9 @@ final class AppController extends AbstractController
     {
 
     }
-    #[Route('/basic', name: 'app_basic')]
-    #[Template('examples/basic.html.twig')]
-    public function basic(): Response|array
-    {
-        return [];
-    }
-
+    
     #[Route('/', name: 'app_index', options: ['expose' => true], methods: ['GET'])]
+    #[Route('/', name: 'app_homepage', options: ['expose' => true], methods: ['GET'])]
     #[Template('app/index.html.twig')]
     public function mobile(Request $request): Response|array
     {
@@ -39,6 +34,9 @@ final class AppController extends AbstractController
             'configs' => $configs,
         ];
     }
+
+    
+   
 
     #[Route('/{_locale}/{configCode}', name: 'project_start', options: ['expose' => true], methods: ['GET'])]
     public function project(Request $request, string $configCode): Response
@@ -61,6 +59,8 @@ final class AppController extends AbstractController
             foreach ($menu->getChildren() as $route=>$child) {
                     $template = "pages/$route.html.twig";
                     $params = [
+                        'configCode' => $configCode,
+                        'config' => $this->fwService->getConfigs()[strtolower($configCode)],
                         'type' => $type,
                         'route' => $route,
                         'template' => $template,
@@ -113,6 +113,7 @@ final class AppController extends AbstractController
         ]);
     }
 
+    
 //    #[Route('/catalog', name: 'app_catalog')]
 //    public function catalog(): Response
 //    {
