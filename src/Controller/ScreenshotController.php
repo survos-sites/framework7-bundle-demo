@@ -40,6 +40,7 @@ final class ScreenshotController extends AbstractController
                 ];
             }
         }
+        
         return [
             'methods' => $methods,
         ];

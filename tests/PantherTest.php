@@ -18,44 +18,62 @@ class PantherTest extends PantherTestCase
 
     public function testBatsi(): void
     {
-        $this->markTestSkipped();
-        // the home page that browses projects (not fw7)
+
+        //fw apps listing / home page
         $browser = $this->pantherBrowser()
             ->visit('/')
             ->assertOn('/')
             ->takeScreenshot('home.png');
 
+        //go to batsi en (defaults to locations tab)
         $browser
             ->visit('/en/batsi#tab-locations')
-            ->takeScreenshot('basti-locations.png');
+            ->waitUntilVisible("#tab-locations")
+            ->waitUntilNotVisible(".gauge")
+            ->waitUntilVisible(".custom-list-content")
+            ->assertOn('/en/batsi#tab-locations')
+            ->takeScreenshot('en.basti.locations.png');
 
+        // click on the 'artists' tab
         $browser
-//            ->waitUntilSeeIn('body', '#tab-artists')
             ->click('#tab-artists') // click on the artists
-            ->takeScreenshot('artists.png');
+            ->waitUntilVisible("#tab-artists")
+            ->wait(1200)
+            ->takeScreenshot('en.basti.artists.png');
 
+        // click on the 'artwork' tab
         $browser->click('Artwork')
-            ->wait(200) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
-            ->takeScreenshot('artwork.png')
+            ->waitUntilNotVisible("#tab-artists")
+            ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
+            ->wait(1200)
+            ->takeScreenshot('en.basti.artwork.png')
         ;
 
     }
 
     public function testBatsiEs(): void
     {
-        $waitTime = 1500; // actually, we should wait for an element to appear, after the db is synced.
-        // the home page that browses projects (not fw7)
+        //go to batsi es (defaults to locations tab)
         $browser = $this->pantherBrowser()
             ->visit('/es/batsi')
-            ->wait($waitTime)
+            ->waitUntilVisible(".custom-list-content")
             ->assertOn('/es/batsi')
-//            ->assertSee('Batsi')
-            ->takeScreenshot('es.batsi.png');
+            ->takeScreenshot('es.batsi.locations.png');
 
 
-//        $browser->click('Obras')
-////            ->wait($waitTime) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
-//            ->takeScreenshot('artwork.png');
+        // click on the 'artists' tab
+        $browser
+            ->click('#tab-artists') // click on the artists
+            ->waitUntilVisible("#tab-artists")
+            ->wait(1200)
+            ->takeScreenshot('es.basti.artists.png');
+
+        // click on the 'artwork' tab
+        $browser->click('Obras')
+            ->waitUntilNotVisible("#tab-artists")
+            ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
+            ->wait(1200)
+            ->takeScreenshot('es.basti.artwork.png');
     }
 
 }
