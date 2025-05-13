@@ -46,9 +46,7 @@ class PantherTest extends PantherTestCase
             ->waitUntilNotVisible("#tab-artists")
             ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
             ->wait(1200)
-            ->takeScreenshot('en.basti.artwork.png')
-        ;
-
+            ->takeScreenshot('en.basti.artwork.png');
     }
 
     public function testBatsiEs(): void
