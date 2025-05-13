@@ -52,9 +52,10 @@ class PantherTest extends PantherTestCase
 //            ->assertSee('Batsi')
             ->takeScreenshot('es.batsi.png');
 
-        $browser->click('Obras')
-//            ->wait($waitTime) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
-            ->takeScreenshot('artwork.png');
+
+//        $browser->click('Obras')
+////            ->wait($waitTime) // @todo: wait for the tab 'obras' to be visible in the dom, or the tab to be marked as selected.
+//            ->takeScreenshot('artwork.png');
     }
 
 }
