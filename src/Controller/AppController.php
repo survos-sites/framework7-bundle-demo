@@ -23,7 +23,7 @@ final class AppController extends AbstractController
     {
 
     }
-    
+
     #[Route('/', name: 'app_index', options: ['expose' => true], methods: ['GET'])]
     #[Route('/', name: 'app_homepage', options: ['expose' => true], methods: ['GET'])]
     #[Template('app/index.html.twig')]
@@ -35,8 +35,8 @@ final class AppController extends AbstractController
         ];
     }
 
-    
-   
+
+
 
     #[Route('/{_locale}/{configCode}', name: 'project_start', options: ['expose' => true], methods: ['GET'])]
     public function project(Request $request, string $configCode): Response
@@ -97,7 +97,7 @@ final class AppController extends AbstractController
 //        ]);
 //    }
 
-    #[Route('/{_locale}/pages/{page}', name: 'app_page', priority: 400)]
+    #[Route('/{_locale}/pages/{page}', name: 'app_page', priority: 400, defaults: ['_locale' => 'en'])]
     public function page(string $page): Response
     {
         return $this->render("pages/$page.html.twig", [
@@ -113,7 +113,7 @@ final class AppController extends AbstractController
         ]);
     }
 
-    
+
 //    #[Route('/catalog', name: 'app_catalog')]
 //    public function catalog(): Response
 //    {

@@ -18,7 +18,7 @@ class PantherTest extends PantherTestCase
 
     public function testBatsi(): void
     {
-        return;
+        $this->markTestSkipped();
         // the home page that browses projects (not fw7)
         $browser = $this->pantherBrowser()
             ->visit('/')
@@ -43,7 +43,6 @@ class PantherTest extends PantherTestCase
 
     public function testBatsiEs(): void
     {
-        return;
         $waitTime = 1500; // actually, we should wait for an element to appear, after the db is synced.
         // the home page that browses projects (not fw7)
         $browser = $this->pantherBrowser()
