@@ -9,13 +9,6 @@ class PantherTest extends PantherTestCase
 {
     use HasBrowser;
 
-//    public function testSomething(): void
-//    {
-//        $client = static::createPantherClient();
-//        $crawler = $client->request('GET', '/');
-//        $this->assertSelectorTextContains('h1', 'Hello World');
-//    }
-
     public function testBatsi(): void
     {
 
@@ -46,9 +39,7 @@ class PantherTest extends PantherTestCase
             ->waitUntilNotVisible("#tab-artists")
             ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
             ->wait(1200)
-            ->takeScreenshot('en.basti.artwork.png')
-        ;
-
+            ->takeScreenshot('en.basti.artwork.png');
     }
 
     public function testBatsiEs(): void
@@ -56,10 +47,8 @@ class PantherTest extends PantherTestCase
         //go to batsi es (defaults to locations tab)
         $browser = $this->pantherBrowser()
             ->visit('/es/batsi')
-
             ->waitUntilVisible(".custom-list-content")
             ->assertOn('/es/batsi')
-
             ->takeScreenshot('es.batsi.locations.png');
 
 
@@ -75,8 +64,7 @@ class PantherTest extends PantherTestCase
             ->waitUntilNotVisible("#tab-artists")
             ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
             ->wait(1200)
-            ->takeScreenshot('es.basti.artwork.png')
-        ;
+            ->takeScreenshot('es.basti.artwork.png');
     }
 
 }

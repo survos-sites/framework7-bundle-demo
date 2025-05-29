@@ -18,17 +18,23 @@ final class ScreenshotController extends AbstractController
     public function index(): array
     {
         $reflection = new \ReflectionClass(PantherTest::class);
+
         $methods = [];
         $classInfo = (new BetterReflection())
             ->reflector()
             ->reflectClass(PantherTest::class);
+
+
         foreach ($classInfo->getMethods() as $method) {
             if (!str_starts_with($method->getName(), 'test')) {
                 continue;
             }
-            $source = explode("\n", $method->getLocatedSource()->getSource());
-            $content = join("\n", array_slice($source, $method->getStartLine() + 1, $method->getEndLine() - $method->getStartLine()));
-            $php = array_slice($source, $method->getStartLine() - 1, $method->getEndLine() - $method->getStartLine());
+            $source = $method->getLocatedSource()->getSource();
+
+            $statements = $this->astWalker($source);
+
+            $content = join("\n", array_slice($statements, $method->getStartLine() + 1, $method->getEndLine() - $method->getStartLine()));
+            $php = array_slice($statements, $method->getStartLine() - 1, $method->getEndLine() - $method->getStartLine());
             foreach (explode("\n\n", $content) as $statement) {
                 $url = null;
                 if (preg_match("/Screenshot\('(.*?)\'\)/", $statement, $matches)) {
@@ -40,19 +46,23 @@ final class ScreenshotController extends AbstractController
                 ];
             }
         }
-        
+
         return [
             'methods' => $methods,
         ];
     }
 
     /**
-     * the better way is to parse the PHP into an AST, maybe someday.
+     * the better way is to parse the PHP into an AST,
      *
-     * @return JsonResponse
      */
-    private function astWalker()
+    private function astWalker(string $code): array
     {
+        // hacky way:
+        // this is hacky and depends on formatting.
+        return explode("\n", $code);
+
+        // better is an actual AST parser: https://github.com/nikic/PHP-Parser/blob/master/doc/component/Walking_the_AST.markdown
         $parser = (new ParserFactory())->createForHostVersion();
 
         try {
@@ -65,10 +75,5 @@ final class ScreenshotController extends AbstractController
             dd($e);
             echo 'Parse Error: ', $e->getMessage(), "\n";
         }
-        dd();
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ScreenshotController.php',
-        ]);
     }
 }
