@@ -13,7 +13,8 @@
     } %}
 
     {% set queries = {
-      location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'}
+      location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'},
+      objects: {store: 'objects', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},
     }%}
 
     <h1>{{ 'tab.location'|trans }}</h1>
@@ -39,6 +40,26 @@
           </div>
         </sup>
         <!-- twig_location_template -->
+      </twig:block>
+
+      <twig:block name="objects" id="twig_objects_template">
+        <h1>Objects</h1>
+        <!-- loop through data array having the objects -->
+        {% for object in data %}
+          <div class="object-detail">
+            <h1>{{ object.name|title }}</h1>
+            <p>Code: {{ object.code }}</p>
+            {% set description = object.description|default('no description') %}
+            <article>
+              <p>
+                {{ object.description|replace({"\n\n": "</p><p>"}) }}
+              </p>
+            </article>
+            <hr>
+          </div>
+        {% endfor %}
+
+        <!-- twig_objects_template -->
       </twig:block>
 
       <twig:block name="title" id="title_template">
