@@ -29,8 +29,8 @@ survos_fw:
         - name: locations
           schema: code
           url: https://pgsc.survos.com/{locale}/api/locations
-        - name: objects
-          schema: code,artistCode,location.id
+        - name: obras
+          schema: code,artistCode,locationCode,location.id
           url: https://pgsc.survos.com/{locale}/api/obras
 
     modo: # configuration code for database, etc.
