@@ -112,7 +112,7 @@ export default (
             }
 
             resolve({
-                url: './pages/404.html'
+                // url: './pages/404.html'
             });
         }
     },

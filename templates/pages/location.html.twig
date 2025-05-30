@@ -16,6 +16,7 @@
       location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'}
     }%}
 
+    <h1>{{ 'tab.location'|trans }}</h1>
 
     <twig:dexie
             refreshEvent="location.refresh"
@@ -26,13 +27,15 @@
 
       <twig:block name="location" id="twig_location_template">
        {% set locale = globals.locale %}
-        <h1>Locations</h1>
         <sup>
-          <div class="location-detail"> 
+{#          {{ data|json_encode }}#}
+          <div class="location-detail">
             <h1>{{ data.label }}</h1>
             <p>{{ data.address }}</p>
             <p>Code: {{ data.code }}</p>
-    
+
+            @todo: map {{ data.lat }} {{ data.lng }}
+
           </div>
         </sup>
         <!-- twig_location_template -->

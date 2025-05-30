@@ -11,8 +11,8 @@ survos_fw:
 #      logo: logo/omar.png
 #      name: OmarExpo
 
-    batsi: # previously pgsc
-      code: batsi
+    chijal: # previously pgsc
+      code: chijal
       logo: /logos/batsi_logo.jpeg
       name: Batsi
       tabs:
@@ -21,7 +21,7 @@ survos_fw:
         - obras
       #          - share
       #          - scan
-      database: Batsi
+      database: chijal
       stores:
         - name: artists
           schema: code
