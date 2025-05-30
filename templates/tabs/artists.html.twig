@@ -15,39 +15,33 @@
 
         <twig:block name="twig_template" id="hack_to_get_raw_data">
             {#                <h1>@{{ storeName }}</h1> <!-- passed in from dexie --> #}
-            <div class="list">
+            <div class="list media-list">
                 <ul>
                     {% for row in rows %}
 
                         <li>
 
 
-                            <a  href="/pages/artist/{{ row.code }}" class="item-link">
 
-                                <div class="item-content">
-                                    <div class="item-media">
-                                        {% if row.images.small %}
-                                            <img style="max-width: 80px" src="{{ row.images.small }}"/>
-                                        {% else %}
-                                            <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
-                                        {% endif %}
+                            <a  href="/pages/artist/{{ row.code }}" class="item-link item-content">
+                                <div class="item-media">
+                                    {% if row.images.small %}
+                                        <img style="max-width: 80px" src="{{ row.images.small }}"/>
+                                    {% else %}
+                                        <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
+                                    {% endif %}
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{ row.name }}</div>
+                                        <div class="item-after">{{row.obras.length}} Obras</div>
                                     </div>
-                                    <div class="item-inner">
-                                        <div class="item-title">
-                                            {{ row.name }}
-                                            <br />
-                                            {{ row.slogan }}
-                                        </div>
-{#                                        <div class="item-text">#}
-{#                                            {{ row.slogan }}#}
-{#                                        </div>#}
-                                        <div class="item-after">
-                                            {{ row.birthYear }}
-                                            {#                                        <br />@ {{ row.email }} #}
-                                        </div>
-                                    </div>
+                                <div class="item-subtitle">{{ row.birthYear }}</div>
+                                <div class="item-text">{{ row.slogan }}</div>
                                 </div>
                             </a>
+
+                                
                         </li>
                     {% endfor %}
                 </ul>
