@@ -4155,12 +4155,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/fw-bundle.git",
-                "reference": "2e2a20d95829a7daa0deb16c9b199da940ec195a"
+                "reference": "21dbfef19a964b903cc5c8e574b1238189886f31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/2e2a20d95829a7daa0deb16c9b199da940ec195a",
-                "reference": "2e2a20d95829a7daa0deb16c9b199da940ec195a",
+                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/21dbfef19a964b903cc5c8e574b1238189886f31",
+                "reference": "21dbfef19a964b903cc5c8e574b1238189886f31",
                 "shasum": ""
             },
             "require": {
@@ -4168,13 +4168,13 @@
                 "php": "^8.3",
                 "survos/core-bundle": "^1.5",
                 "symfony/config": "^6.4 || ^7.1",
+                "symfony/console": "^7.3-BETA2",
                 "symfony/dependency-injection": "^6.4 || ^7.1",
                 "symfony/event-dispatcher": "^6.4 || ^7.1",
                 "symfony/http-kernel": "^6.4 || ^7.1",
                 "symfony/options-resolver": "^7.2",
                 "symfony/ux-twig-component": "^2.22",
-                "twig/twig": "^3.4",
-                "zenstruck/console-extra": "^1.4"
+                "twig/twig": "^3.4"
             },
             "require-dev": {
                 "phpstan/phpstan": "^2.0",
@@ -4213,7 +4213,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-10T12:00:58+00:00"
+            "time": "2025-05-30T17:45:39+00:00"
         },
         {
             "name": "survos/installer",
