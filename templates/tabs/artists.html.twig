@@ -22,11 +22,15 @@
                         <li>
 
 
-                            <a href="/pages/artist/{{ row.code }}" class="item-link">
+                            <a  href="/pages/artist/{{ row.code }}" class="item-link">
 
                                 <div class="item-content">
                                     <div class="item-media">
-                                        <img style="max-width: 80px" src="{{ row.images.small }}"/>
+                                        {% if row.images.small %}
+                                            <img style="max-width: 80px" src="{{ row.images.small }}"/>
+                                        {% else %}
+                                            <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
+                                        {% endif %}
                                     </div>
                                     <div class="item-inner">
                                         <div class="item-title">
