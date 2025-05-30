@@ -32,6 +32,9 @@
           <h1>{{ data.name|title }}</h1>
           {% set description = data.content[locale] %}
           <article>
+            {% if data.images is defined and data.images.large is defined %}
+              <img src="{{ data.images.large }}" alt="{{ data.name|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
+            {% endif %}
             <p>
               <p>{{ data.bio }}</p>
             </p>
@@ -43,7 +46,7 @@
               <p>Code: {{ data.code }}</p>
             </div>
             <p>
-        </p>
+            </p>
           </article>
         </div>
         </sup>
