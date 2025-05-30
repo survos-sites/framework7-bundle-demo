@@ -13,8 +13,8 @@ survos_fw:
 
     chijal: # previously pgsc
       code: chijal
-      logo: /logos/batsi_logo.jpeg
-      name: Batsi
+      logo: /logos/chijal_logo.jpg
+      name: Chijal
       tabs:
         - locations
         - artists
