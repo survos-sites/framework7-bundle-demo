@@ -14,7 +14,7 @@
     } %}
     {% set queries = {
       artist: {store: 'artists', type: 'find' , id : '{{event.details.id}}' , templateName: 'artist'},
-      objects: {store: 'objects', filters : {artistCode: '{{artist.code}}' }, filterType: 'where' , templateName: 'objects'},
+      objects: {store: 'obras', filters : {artistCode: '{{artist.code}}' }, filterType: 'where' , templateName: 'objects'},
     }%}
     <twig:dexie
             refreshEvent="artist.refresh"
