@@ -14,7 +14,7 @@
 
     {% set queries = {
       location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'},
-      objects: {store: 'objects', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},
+      objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},
     }%}
 
     <h1>{{ 'tab.location'|trans }}</h1>
