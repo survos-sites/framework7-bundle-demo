@@ -57,20 +57,28 @@
 
       <twig:block name="objects" id="twig_objects_template">
         <h1>{{ globals.objectsTitle }}</h1>
+
         <!-- loop through data array having the objects -->
+        <div class="list media-list">
         {% for object in data %}
           <div class="object-detail">
             <article>
+              <a  href="/pages/obra/{{ object.code }}" class="item-link item-content">
+
               {% if object.images is defined and object.images.small is defined %}
                 <img src="{{ object.images.small }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
               {% endif %}
               <h3>{{ object.title }}</h3>
+              </a>
               <p>
+                <div>{{ object.materials }}</div>
+                {{ object.year }}
                 {{ object.description|replace({"\n\n": "</p><p>"}) }}
               </p>
             </article>
           </div>
         {% endfor %}
+        </div>
 
         <!-- twig_objects_template -->
       </twig:block>

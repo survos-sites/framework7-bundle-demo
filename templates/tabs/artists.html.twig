@@ -34,19 +34,20 @@
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">{{ row.name }}</div>
-                                        <div class="item-after">{{row.obras.length}} Obras</div>
+                                        <div class="item-after">
+                                            {{  row.obras.length ? row.obras.length }}
+                                        </div>
                                     </div>
                                 <div class="item-subtitle">{{ row.birthYear }}</div>
                                 <div class="item-text">{{ row.slogan }}</div>
                                 </div>
                             </a>
 
-                                
+
                         </li>
                     {% endfor %}
                 </ul>
             </div>
-            there are {{ rows|length }} rows
             <!-- hack_to_get_raw_data -->
         </twig:block>
 
