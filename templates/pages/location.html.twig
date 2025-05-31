@@ -51,12 +51,11 @@
             <p>Code: {{ object.code }}</p>
             {% set description = object.description|default('no description') %}
             <article>
-              <p>
                 {% if object.images is defined and object.images.small is defined %}
                   <img src="{{ object.images.small }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
                 {% endif %}
                 <h3>{{ object.title }}</h3>
-
+              <p>
                 {{ object.description|replace({"\n\n": "</p><p>"}) }}
               </p>
             </article>

@@ -8,14 +8,17 @@
   </twig:block>
   <twig:block name="content">
     {% set store = 'artists' %}
+    {% set objectsTitle = 'tab.obras'|trans|title %}
     {% set globals = {
-      locale: app.locale
+      locale: app.locale,
+      objectTitle: objectsTitle
 
     } %}
     {% set queries = {
       artist: {store: 'artists', type: 'find' , id : '{{event.details.id}}' , templateName: 'artist'},
       objects: {store: 'obras', filters : {artistCode: '{{artist.code}}' }, filterType: 'where' , templateName: 'objects'},
     }%}
+    <h1>{{ 'tab.artist'|trans|title }}</h1>
     <twig:dexie
             refreshEvent="artist.refresh"
             :store="store"
@@ -26,7 +29,6 @@
 
        <twig:block name="artist" id="twig_artist_template">
        {% set locale = globals.locale %}
-        <h1>Artist</h1>
         <sup>
           <div class="artist-detail">
           <h1>{{ data.name|title }}</h1>
@@ -54,19 +56,19 @@
       </twig:block>
 
       <twig:block name="objects" id="twig_objects_template">
-        <h1>Objects</h1>
+        <h1>{{ globals.objectsTitle }}</h1>
         <!-- loop through data array having the objects -->
         {% for object in data %}
           <div class="object-detail">
-            <h1>{{ object.name|title }}</h1>
-            <p>Code: {{ object.code }}</p>
-            {% set description = object.description|default('no description') %}
             <article>
+              {% if object.images is defined and object.images.small is defined %}
+                <img src="{{ object.images.small }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
+              {% endif %}
+              <h3>{{ object.title }}</h3>
               <p>
                 {{ object.description|replace({"\n\n": "</p><p>"}) }}
               </p>
             </article>
-            <hr>
           </div>
         {% endfor %}
 
