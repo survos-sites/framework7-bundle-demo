@@ -21,7 +21,7 @@
     width: 20px;
 }
 
-/* .custom-list-content li { 
+/* .custom-list-content li {
     border: 1px solid var(--f7-text-editor-button-divider-color);
     border-radius: 0.25rem;
 } */
@@ -39,7 +39,18 @@
             }
         } %}
 
-        <twig:dexie
+    INSTALL
+    <button
+            hidden
+            data-controller="pwa--install"
+            data-action="click->pwa--install#install"
+    >
+        Install this app
+    </button>
+
+
+
+    <twig:dexie
                 refreshEvent="tab-{{ t }}-show"
                 :store="store"
                 :globals="globals"

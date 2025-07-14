@@ -117,4 +117,7 @@ return [
     '@symfony/ux-leaflet-map' => [
         'path' => './vendor/symfony/ux-leaflet-map/assets/dist/map_controller.js',
     ],
+    'idb' => [
+        'version' => '8.0.3',
+    ],
 ];
