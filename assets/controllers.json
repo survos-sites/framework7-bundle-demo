@@ -73,13 +73,13 @@
                 "enabled": false,
                 "fetch": "eager"
             },
-            "share": {
-                "enabled": false,
-                "fetch": "eager"
-            },
             "capture": {
                 "enabled": false,
                 "fetch": "eager"
+            },
+            "service-worker": {
+                "enabled": false,
+                "fetch": "false"
             },
             "speech-synthesis": {
                 "enabled": true,
@@ -98,6 +98,10 @@
                 "fetch": "eager"
             },
             "web-push": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "web-share": {
                 "enabled": false,
                 "fetch": "eager"
             }
