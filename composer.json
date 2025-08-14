@@ -6,7 +6,8 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
+        "ext-imagick": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
@@ -122,7 +123,7 @@
     },
     "require-dev": {
         "dbrekelmans/bdi": "^1.4",
-        "nikic/php-parser": "^5.6",
+        "nikic/php-parser": "^5.6.1",
         "phpunit/phpunit": "^12.3.4",
         "survos/deployment-bundle": "^1.6.44",
         "survos/maker-bundle": "^1.6.44",
