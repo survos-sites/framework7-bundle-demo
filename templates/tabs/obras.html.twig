@@ -1,37 +1,42 @@
 <div class="block">
-        {% set store = t %}
-        {% set globals = {} %}
+    {% set store = t %}
+    {% set globals = {} %}
 
-        <twig:dexie
-                refreshEvent="tab-{{ t }}-show"
-                :store="store"
-                :globals="globals"
-                :filter="{}"
-                :caller="_self">
+    <twig:dexie
+            refreshEvent="tab-{{ t }}-show"
+            :store="store"
+            :globals="globals"
+            :filter="{}"
+            :caller="_self">
 
-            <twig:block name="title">
-                there are {{ rows|length }} rows
-            </twig:block>
+        <twig:block name="title">
+            there are {{ rows|length }} rows
+        </twig:block>
 
-            <twig:block name="twig_template" id="hack_to_get_raw_data">
-                {# <h1>{{ storeName }}</h1> <!-- passed in from dexie --> #}
-                <div class="list media-list">
+        <twig:block name="twig_template" id="hack_to_get_raw_data">
+            {# <h1>{{ storeName }}</h1> <!-- passed in from dexie --> #}
+            <div class="list media-list">
 
                 <ul>
                     {% for row in rows %}
+                        {#                        {{ row.imageCodes|json_encode }} #}
                         <li>
-                            <a  href="/pages/obra/{{ row.code }}" class="item-link item-content">
+                            <a href="/pages/obra/{{ row.code }}" class="item-link item-content">
                                 <div class="item-media">
-                                    {% if row.images.small %}
-                                        <img style="max-width: 80px" src="{{ row.images.small }}"/>
-                                    {% else %}
-                                        <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
-                                    {% endif %}
+                                    {% for i in row.images|slice(0,1) %}
+                                        {% if i.thumbnailUrl %}
+                                            <img style="max-width: 80px" src="{{ i.thumbnailUrl }}"/>
+                                        {% else %}
+                                            <img style="max-width: 80px" src="{{ baseurl }}/images/80.png"
+                                                 alt="No image available"/>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">
-                                         <b>{{ row.title|title }}</b>
+                                            <b>{{ row.title|title }}</b>
+                                            <i>{{ row.location }}</i>
                                         </div>
                                         <div class="item-after">
                                             {{ row.size }}
@@ -44,11 +49,11 @@
                     {% endfor %}
                 </ul>
 
-                </div>
+            </div>
 
-                there are {{ rows|length }} rows
-                <!-- hack_to_get_raw_data -->
-            </twig:block>
+            there are {{ rows|length }} rows
+            <!-- hack_to_get_raw_data -->
+        </twig:block>
 
-        </twig:dexie>
+    </twig:dexie>
 </div>

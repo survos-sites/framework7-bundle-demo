@@ -51,6 +51,9 @@
             <p>Code: {{ object.code }}</p>
             {% set description = object.description|default('no description') %}
             <article>
+              {% if object.images|length %}
+              {{ object.images[0].small }}
+              {% endif %}
                 {% if object.images is defined and object.images.small is defined %}
                   <img src="{{ object.images.small }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
                 {% endif %}

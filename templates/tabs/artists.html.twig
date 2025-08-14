@@ -22,16 +22,18 @@
 
                         <li>
 
-
-
                             <a  href="/pages/artist/{{ row.code }}" class="item-link item-content">
-                                <div class="item-media">
-                                    {% if row.images.small %}
-                                        <img style="max-width: 80px" src="{{ row.images.small }}"/>
-                                    {% else %}
-                                        <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
-                                    {% endif %}
-                                </div>
+                                {% for i in row.images|slice(0,1) %}
+                                    <div class="item-media">
+                                        {% if i.thumbnailUrl %}
+                                            <a href="{{ i.thumbnailUrl }}">
+                                                <img style="max-width: 80px" src="{{ i.thumbnailUrl }}" title="{{ i.thumbnailUrl }}"/>
+                                            </a>
+                                        {% else %}
+                                            <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">{{ row.name }}</div>

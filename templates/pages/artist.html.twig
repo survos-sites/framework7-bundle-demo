@@ -64,16 +64,19 @@
           <div class="object-detail">
             <article>
               <a href="/pages/obra/{{ object.code }}" class="item-link item-content">
-
-              {% if object.images is defined and object.images.small is defined %}
-                <img src="{{ object.images.small }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
-              {% endif %}
+                {% for i in object.images|slice(0,1) %}
+                  <li>
+                    <img src="{{ i.thumbnailUrl  }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
+                  </li>
+                {% endfor %}
               <h3>{{ object.title }}</h3>
               </a>
+
               <p>
-                <div>{{ object.materials }}</div>
+                <div>{{ object.materials }}
                 {{ object.year }}
                 {{ object.description|replace({"\n\n": "</p><p>"}) }}
+                </div>
               </p>
             </article>
           </div>
