@@ -2,7 +2,10 @@
     {% set store = t %}
     {% set globals = {
         icons: {
-            calendar: ux_icon('mdi:calendar')
+            calendar: ux_icon('mdi:calendar',{style: 'height: 1em;'}),
+            artist:ux_icon('mdi:user-star-outline',{style: 'height: 1em;'}),
+            headphones: ux_icon('mdi:headphones',{style: 'height: 1em;'}),
+            location: ux_icon('mdi:location-on-outline',{style: 'height: 1em;'})
         }
     } %}
 
@@ -20,7 +23,6 @@
 
         <twig:block name="twig_template" id="hack_to_get_raw_data">
             {# <h1>{{ storeName }}</h1> <!-- passed in from dexie --> #}
-            {{ globals.icons.calendar }}
             <div class="list media-list inset">
                 <ul>
                     {% for row in rows %}
@@ -66,10 +68,10 @@
                                         </div>
                                         <div class="item-after" style="display:flex;gap:.25rem;align-items:center;flex-wrap:nowrap;">
                                             {% if hasAudio %}
-                                                A!
-                                                <i class="f7-icons" aria-label="Audio available" title="Audio">
-{#                                                    headphones#}
-                                                </i>
+                                
+
+                                                    {{ globals.icons.headphones }}
+                                                
                                             {% endif %}
                                             {% if row.price %}
                                                 <span class="badge color-blue" title="Price">{{ row.price }}</span>
@@ -80,8 +82,8 @@
                                     <!-- Row 2: Artist (prominent but compact) -->
                                     {% if row.artist and row.artist.name %}
                                         <div class="item-subtitle" style="display:flex;align-items:center;gap:.35rem;line-height:1.1;">
-                                            artista
-{#                                            <i class="f7-icons" aria-hidden="true">person_fill</i>#}
+                                            {# artista #}
+                                           {{ globals.icons.artist }}
                                             <span style="font-weight:600;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
         {{ row.artist.name }}
       </span>
@@ -95,7 +97,7 @@
 
                                     {% if row.location and row.location.label %}
                                         <div class="item-subtitle" style="display:flex;align-items:center;gap:.35rem;line-height:1.1;">
-                                            ubi
+                                            {{ globals.icons.location }}
                                             <span style="font-weight:400;letter-spacing:.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
         {{ row.location.label }}
       </span>
