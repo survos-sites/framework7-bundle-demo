@@ -23,7 +23,7 @@
 
         <twig:block name="twig_template" id="hack_to_get_raw_data">
             {# <h1>{{ storeName }}</h1> <!-- passed in from dexie --> #}
-            <div class="list media-list inset">
+            <div class="list media-list inset" style="padding: 0px;margin: 0px;">
                 <ul>
                     {% for row in rows %}
                         {# Robust "has audio" check #}
@@ -60,10 +60,7 @@
                                             {% if row.size %}
                                                 <span class="badge color-gray" title="Size">{{ row.size }}</span>
                                             {% endif %}
-                                            {% if hasAudio %}
-                                                audio
-                                                <i class="f7-icons" aria-label="Audio available" title="Audio">headphones</i>
-                                            {% endif %}
+                                            
 
                                         </div>
                                         <div class="item-after" style="display:flex;gap:.25rem;align-items:center;flex-wrap:nowrap;">
