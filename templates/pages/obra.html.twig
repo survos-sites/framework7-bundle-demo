@@ -76,18 +76,6 @@
                   </div>
                 {% endif %}
                 {% if audioUrl %}
-                  <!-- Backward 5s button -->
-                  <button type="button"
-                          class="button button-fill"
-                          style="position:absolute; left:calc(50% - 60px); top:50%; transform:translate(-50%, -50%);
-                     border-radius:50%; width:45px; height:45px; padding:0; background:rgba(0,0,0,0.6); box-shadow:0 4px 12px rgba(0,0,0,.2);"
-                          onclick="
-                            var audio = document.getElementById('obra-audio');
-                            audio.currentTime = Math.max(0, audio.currentTime - 5);
-                          ">
-                    <span style="color:white; font-size:0.9em; margin-top: 9px;">{{ globals.icons.fastRewind }}</span>
-                  </button>
-
                   <!-- Big center Play/Pause button -->
                   <button type="button"
                           id="obra-hero-toggle"
@@ -114,17 +102,7 @@
                     <span id="obra-pause-icon" class="pause-icon" style="display: none; margin: 0; margin-left: 0 !important;">{{ globals.icons.pause }}⏸</span>
                   </button>
 
-                  <!-- Forward 5s button -->
-                  <button type="button"
-                          class="button button-fill"
-                          style="position:absolute; left:calc(50% + 60px); top:50%; transform:translate(-50%, -50%);
-                     border-radius:50%; width:45px; height:45px; padding:0; background:rgba(0,0,0,0.6); box-shadow:0 4px 12px rgba(0,0,0,.2);"
-                          onclick="
-                            var audio = document.getElementById('obra-audio');
-                            audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
-                          ">
-                    <span style="color:white; font-size:0.9em; margin-top: 9px;">{{ globals.icons.fastForward }}</span>
-                  </button>
+                  
                 {% endif %}
               </div>
             {% endif %}
