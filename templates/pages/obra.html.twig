@@ -9,7 +9,18 @@
   <twig:block name="content">
     {% set store = 'obras' %}
     {% set globals = {
-      locale: app.locale
+      locale: app.locale,
+      icons: {
+            calendar: ux_icon('mdi:calendar',{style: 'height: 1em;'}),
+            artist:ux_icon('mdi:user-star-outline',{style: 'height: 1em;'}),
+            headphones: ux_icon('mdi:headphones',{style: 'height: 1em;'}),
+            location: ux_icon('mdi:location-on-outline',{style: 'height: 1em;'}),
+            play: ux_icon('mdi:play-circle',{style: 'font-size: 1.5em;'}),
+            pause: ux_icon('mdi:pause-circle',{style: 'font-size: 1.5em;'}),
+            fastRewind: ux_icon('mdi:rewind-5',{style: 'font-size: 1.2em;'}),
+            fastForward: ux_icon('mdi:fast-forward-5',{style: 'font-size: 1.2em;'})
+        }
+
 
     } %}
 
@@ -54,18 +65,65 @@
               {% set heroSrc = data.thumbnailUrl %}
             {% endif %}
 
-            {% if heroSrc %}
+            {% if heroSrc or audioUrl %}
               <div class="obra-image-container" style="position:relative; text-align:center; margin-bottom:16px;">
-                <img src="{{ heroSrc }}" alt="{{ data.title|e }}"
-                     style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15);">
+                {% if heroSrc %}
+                  <img src="{{ heroSrc }}" alt="{{ data.title|e }}"
+                       style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15);">
+                {% else %}
+                  <!-- Placeholder for audio-only obras -->
+                  <div style="width:100%; height:300px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15); display:flex; align-items:center; justify-content:center; color:white; font-size:1.2em; font-weight:500;">
+                  </div>
+                {% endif %}
                 {% if audioUrl %}
+                  <!-- Backward 5s button -->
+                  <button type="button"
+                          class="button button-fill"
+                          style="position:absolute; left:calc(50% - 60px); top:50%; transform:translate(-50%, -50%);
+                     border-radius:50%; width:45px; height:45px; padding:0; background:rgba(0,0,0,0.6); box-shadow:0 4px 12px rgba(0,0,0,.2);"
+                          onclick="
+                            var audio = document.getElementById('obra-audio');
+                            audio.currentTime = Math.max(0, audio.currentTime - 5);
+                          ">
+                    <span style="color:white; font-size:0.9em; margin-top: 9px;">{{ globals.icons.fastRewind }}</span>
+                  </button>
+
                   <!-- Big center Play/Pause button -->
                   <button type="button"
                           id="obra-hero-toggle"
                           class="button button-large button-fill"
                           style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);
-                     border-radius:9999px; padding:18px 22px; line-height:1; box-shadow:0 6px 16px rgba(0,0,0,.25);">
-                    <i class="f7-icons" id="obra-hero-icon">play_fill</i>
+                     border-radius:50%; width:70px; height:70px; padding:0; line-height:1; box-shadow:0 6px 16px rgba(0,0,0,.25);"
+                          onclick="
+                            var audio = document.getElementById('obra-audio');
+                            var playIcon = document.getElementById('obra-play-icon');
+                            var pauseIcon = document.getElementById('obra-pause-icon');
+                            if (audio.paused) {
+                              audio.play();
+                              playIcon.style.display = 'none';
+                              pauseIcon.style.display = 'inline-block';
+                              this.style.background = 'var(--f7-theme-color, #007aff)';
+                            } else {
+                              audio.pause();
+                              playIcon.style.display = 'inline-block';
+                              pauseIcon.style.display = 'none';
+                              this.style.background = 'rgba(0, 0, 0, 0.7)';
+                            }
+                          ">
+                    <span id="obra-play-icon" class="play-icon" style="margin: 0;">{{ globals.icons.play }}▶</span>
+                    <span id="obra-pause-icon" class="pause-icon" style="display: none; margin: 0; margin-left: 0 !important;">{{ globals.icons.pause }}⏸</span>
+                  </button>
+
+                  <!-- Forward 5s button -->
+                  <button type="button"
+                          class="button button-fill"
+                          style="position:absolute; left:calc(50% + 60px); top:50%; transform:translate(-50%, -50%);
+                     border-radius:50%; width:45px; height:45px; padding:0; background:rgba(0,0,0,0.6); box-shadow:0 4px 12px rgba(0,0,0,.2);"
+                          onclick="
+                            var audio = document.getElementById('obra-audio');
+                            audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+                          ">
+                    <span style="color:white; font-size:0.9em; margin-top: 9px;">{{ globals.icons.fastForward }}</span>
                   </button>
                 {% endif %}
               </div>
@@ -160,10 +218,10 @@
           </div>
 
           <!-- Audio Card (if available) -->
-          {% if data.audio is defined and data.audio.resized is defined and data.audio.resized.large is defined %}
+          {% if audioUrl %}
             <div class="card-footer">
               <div class="audio-container">
-                <audio controls style="width: 100%; margin-top: 8px;" src="{{ data.audio.resized.large|e }}">
+                <audio id="obra-audio" style="display: none;" src="{{ audioUrl|e }}">
                   Your browser does not support the audio element.
                 </audio>
               </div>
@@ -198,15 +256,36 @@
           </div>
         {% endif %}
         <!-- twig_obra_template -->
+        
+        <!-- Simple sync with audio controls -->
+        {% if audioUrl %}
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('obra-audio');
+            var button = document.getElementById('obra-hero-toggle');
+            var playIcon = document.getElementById('obra-play-icon');
+            var pauseIcon = document.getElementById('obra-pause-icon');
+            
+            if (audio && button && playIcon && pauseIcon) {
+                audio.addEventListener('ended', function() {
+                    playIcon.style.display = 'inline-block';
+                    pauseIcon.style.display = 'none';
+                    button.style.background = 'rgba(0, 0, 0, 0.7)';
+                });
+            }
+        });
+        </script>
+        {% endif %}
+        
       </twig:block>
 
 
 
 
       <twig:block name="title" id="title_template">
-        <sup>
+        {# <sup>
           {{ data.code }}
-        </sup>
+        </sup> #}
         {% set locale = globals.locale %}
         {{ data.title|title }}
         <!-- title_template -->
