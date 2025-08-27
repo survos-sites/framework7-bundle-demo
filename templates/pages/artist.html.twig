@@ -1,24 +1,21 @@
-
-{#@todo: title icon?#}
-<twig:SurvosFw:Framework7Page :caller="_self"
-             :title="'artist'|trans"
->
+{# Artist Detail (Twig.js + Framework7) #}
+<twig:SurvosFw:Framework7Page :caller="_self" :title="'artist'|trans">
+  {# Navbar title #}
   <twig:block name="title">
-    @@title@@
+    <div class="display-flex align-items-center">
+      <span class="text-color-gray">@{{ data.code }}</span>
+      <span class="margin-left-half">{{ data.name }}</span>
+    </div>
   </twig:block>
+
   <twig:block name="content">
     {% set store = 'artists' %}
-    {% set objectsTitle = 'tab.obras'|trans|title %}
-    {% set globals = {
-      locale: app.locale,
-      objectTitle: objectsTitle
-
-    } %}
+    {% set globals = { locale: app.locale } %}
     {% set queries = {
-      artist: {store: 'artists', type: 'find' , id : '{{event.details.id}}' , templateName: 'artist'},
-      objects: {store: 'obras', filters : {artistCode: '{{artist.code}}' }, filterType: 'where' , templateName: 'objects'},
-    }%}
-    <h1>{{ 'tab.artist'|trans|title }}</h1>
+      artist:  { store: 'artists', type: 'find', id: '{{event.details.id}}', templateName: 'artist' },
+      objects: { store: 'objects', filters: { artistCode: '{{artist.code}}' }, filterType: 'where', templateName: 'objects' }
+    } %}
+
     <twig:dexie
             refreshEvent="artist.refresh"
             :store="store"
@@ -26,100 +23,138 @@
             :globals="globals"
             :caller="_self">
 
+      {# ---------- ARTIST ---------- #}
+      <twig:block name="artist" id="twig_artist_template">
+        {% set locale = globals.locale %}
+        {% set hasEmail = data.email is defined and data.email %}
+        {% set hasBio = data.bio is defined and data.bio %}
+        {% set hasSlogan = data.slogan is defined and data.slogan %}
+        {% set birth = data.birthYear is defined ? data.birthYear : null %}
+        {% set initials = (data.name|default(''))|slice(0,1)|upper %}
 
-       <twig:block name="artist" id="twig_artist_template">
-       {% set locale = globals.locale %}
-        <sup>
-          <div class="artist-detail">
-          <h1>{{ data.name|title }}</h1>
-          {% set description = data.content[locale] %}
-          <article>
-            {% if data.images is defined and data.images.large is defined %}
-              <img src="{{ data.images.large }}" alt="{{ data.name|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
-            {% endif %}
-            <p>
-              <p>{{ data.bio }}</p>
-            </p>
-            <div>
-              <div>{{ data.bio }}</div>
-              <div>{{ data.slogan }}</div>
-              <p>Birth Year: {{ data.birthYear }}</p>
-              <p>Email: {{ data.email }}</p>
-              <p>Code: {{ data.code }}</p>
-            </div>
-            <p>
-            </p>
-          </article>
-        </div>
-        </sup>
-        <!-- twig_artist_template -->
-      </twig:block>
-
-      <twig:block name="objects" id="twig_objects_template">
-        <h1>{{ globals.objectsTitle }}</h1>
-
-        <!-- loop through data array having the objects -->
-        <div class="list media-list">
-        {% for object in data %}
-          <div class="object-detail">
-            <article>
-              <a href="/pages/obra/{{ object.code }}" class="item-link item-content">
-                {% for i in object.images|slice(0,1) %}
-                  <li>
-                    <img src="{{ i.thumbnailUrl  }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
-                  </li>
-                {% endfor %}
-              <h3>{{ object.title }}</h3>
-              </a>
-
-              <p>
-                <div>{{ object.materials }}
-                {{ object.year }}
-                {{ object.description|replace({"\n\n": "</p><p>"}) }}
+        <div class="block no-padding">
+          {# Hero #}
+          <div class="card no-shadow no-border radius-0" style="background: var(--f7-theme-color-tint);">
+            <div class="card-content padding">
+              <div class="display-flex align-items-center justify-content-space-between">
+                <div style="min-width:0;">
+                  <div class="text-color-black text-opacity-70 small">@{{ data.code }}</div>
+                  <div class="text-color-black text-xxlarge text-semibold" style="word-break:break-word;">
+                    {{ data.name }}
+                  </div>
+                  {% if hasSlogan %}
+                    <div class="text-color-black text-opacity-80 margin-top-half" style="word-break:break-word;">
+                      {{ data.slogan }}
+                    </div>
+                  {% endif %}
                 </div>
-              </p>
-            </article>
-          </div>
-        {% endfor %}
-        </div>
+                <div class="bg-color-white text-color-black text-bold"
+                     style="width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.1);">
+                  {{ initials }}
+                </div>
+              </div>
 
-        <!-- twig_objects_template -->
-      </twig:block>
-
-
-      <twig:block name="title" id="title_template">
-        <sup>
-          {{ data.code }}
-        </sup>
-        {% set locale = globals.locale %}
-        {{ data.name}}
-        <!-- title_template -->
-      </twig:block>
-      <twig:block name="twig_template" id="hack_to_get_raw_data">
-        {% set locale = globals.locale %}
-        <div class="artist-detail">
-          <h1>{{ data.name|title }}</h1>
-          {% set description = data.content[locale] %}
-          <article>
-            <p>
-              <p>{{ data.bio }}</p>
-              <p>{{ data.slogan }}</p>
-            </p>
-            <div>
-              <p>Birth Year: {{ data.birthYear }}</p>
-              <p>Email: {{ data.email }}</p>
-              <p>Code: {{ data.code }}</p>
+              {# Chips #}
+              <div class="chips margin-top">
+                {% if birth %}
+                  <div class="chip">
+                    <div class="chip-media"><i class="icon f7-icons">calendar</i></div>
+                    <div class="chip-label">{{ 'Born'|trans }}: {{ birth }}</div>
+                  </div>
+                {% endif %}
+                {% if hasEmail %}
+                  <a class="chip external" href="mailto:{{ data.email }}">
+                    <div class="chip-media"><i class="icon f7-icons">envelope</i></div>
+                    <div class="chip-label">{{ data.email }}</div>
+                  </a>
+                {% endif %}
+                <div class="chip">
+                  <div class="chip-media"><i class="icon f7-icons">number</i></div>
+                  <div class="chip-label">{{ data.code }}</div>
+                </div>
+              </div>
             </div>
-            <p>
-            {% for i in 1..3 %}
-              <img style="max-width: 120px"
-                      src="https://elmodo.mx/wp-content/uploads/2025/03/LRdJ_CarruselWeb_{{ i }}.jpg" />
-            {% endfor %}
-        </p>
-          </article>
+          </div>
+
+          {# Bio #}
+          {% if hasBio %}
+            <div class="card card-outline">
+              <div class="card-header">{{ 'Biography'|trans }}</div>
+              <div class="card-content card-content-padding">
+                {# Twig.js-safe newline handling: split-ish with replace into <br> #}
+                <div class="text-color-black text-opacity-80" style="white-space:pre-line;">
+                  {{ data.bio }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+          {# Localized content (optional) #}
+          {% set localized = (data.content is defined and data.content[locale] is defined) ? data.content[locale] : null %}
+          {% if localized %}
+            <div class="card card-outline">
+              <div class="card-header">{{ 'About'|trans }} ({{ locale|upper }})</div>
+              <div class="card-content card-content-padding">
+                <div style="white-space:pre-line;">
+                  {{ localized }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
         </div>
-        <!-- hack_to_get_raw_data -->
       </twig:block>
+
+      {# ---------- OBJECTS ---------- #}
+      <twig:block name="objects" id="twig_objects_template">
+        <div class="block-title">{{ 'Works'|trans }}</div>
+
+        {% if data and data|length > 0 %}
+          <div class="list media-list">
+            <ul>
+              {% for object in data %}
+                {% set otitle = object.name|default(object.title|default('Untitled'|trans)) %}
+                {% set ocode  = object.code|default('—') %}
+                {% set odesc  = object.description|default('') %}
+                {% set excerpt = (odesc|length > 180) ? (odesc|slice(0,180) ~ '…') : odesc %}
+
+                <li>
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="icon f7-icons">photo_on_rectangle</i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title" style="max-width:calc(100% - 72px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                          {{ otitle }}
+                        </div>
+                        <div class="item-after">
+                          <span class="badge">{{ ocode }}</span>
+                        </div>
+                      </div>
+                      {% if excerpt %}
+                        <div class="item-subtitle" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                          {{ excerpt }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% else %}
+          <div class="block strong text-align-center text-color-gray">
+            {{ 'No works to display'|trans }}
+          </div>
+        {% endif %}
+      </twig:block>
+
+      {# (optional) raw debug #}
+      {# Keep only if you want to inspect data quickly in-app #}
+      {# <twig:block name="twig_template" id="hack_to_get_raw_data">
+        <div class="block block-strong"><pre class="text-small">{{ data|json_encode(2) }}</pre></div>
+      </twig:block> #}
+
     </twig:dexie>
   </twig:block>
 </twig:SurvosFw:Framework7Page>
