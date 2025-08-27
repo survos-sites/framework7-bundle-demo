@@ -9,9 +9,23 @@
   <twig:block name="content">
     {% set store = 'obras' %}
     {% set globals = {
-      locale: app.locale
+      locale: app.locale,
+      icons: {
+            calendar: ux_icon('mdi:calendar',{style: 'height: 1em;'}),
+            artist:ux_icon('mdi:user-star-outline',{style: 'height: 1em;'}),
+            headphones: ux_icon('mdi:headphones',{style: 'height: 1em;'}),
+            location: ux_icon('mdi:location-on-outline',{style: 'height: 1em;'}),
+            play: ux_icon('mdi:play-circle',{style: 'font-size: 1.5em;'}),
+            pause: ux_icon('mdi:pause-circle',{style: 'font-size: 1.5em;'}),
+            fastRewind: ux_icon('mdi:rewind-5',{style: 'font-size: 1.2em;'}),
+            fastForward: ux_icon('mdi:fast-forward-5',{style: 'font-size: 1.2em;'})
+        }
+
 
     } %}
+
+
+
     {% set queries = {
       obra: {store: 'obras', type: 'find' , id : '{{event.details.id}}' , templateName: 'obra'}
     }%}
@@ -25,47 +39,231 @@
 
        <twig:block name="obra" id="twig_obra_template">
        {% set locale = globals.locale %}
-        <h1>{{ data.title }}</h1>
-          <div class="obra-detail">
-          <h1>{{ data.name|title }}</h1>
-          {% set description = data.content[locale] %}
-          <article>
-            {% if data.images is defined and data.images.large is defined %}
-              <img src="{{ data.images.large }}" alt="{{ data.name|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
-            {% endif %}
-          </article>
+         {% set audioUrl = (data.audioUrl ?? (data.audio and data.audio.resized and data.audio.resized.large ? data.audio.resized.large : null)) %}
+         {% set youtubeUrl = data.youtubeUrl ?? null %}
 
-            <audio controls src="/output.mp3">
-
-            </audio>
-
-            {% if data.youtubeUrl %}
-            <div class="video-container">
-              <iframe
-                      width="100%"
-                      height="100"
-                      src="{{ data.youtubeUrl }}"
-                      title="YouTube"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen>
-              </iframe>
+        <!-- Main Obra Card -->
+        <div class="card" style="margin: 0;">
+          <!-- Card Header with Title -->
+          <div class="card-header">
+            <div class="card-header-inner">
+              <h1 class="card-title">{{ data.title }}</h1>
+              <h2 class="card-subtitle">{{ data.artistName|title }}</h2>
             </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="card-content card-content-padding">
+
+            <!-- Artwork Image -->
+
+            <!-- Artwork Image + Big Overlay Play -->
+            {% set heroSrc = null %}
+            {% if data.images is defined and data.images[0] is defined and data.images[0].resized is defined and data.images[0].resized.large is defined %}
+              {% set heroSrc = data.images[0].resized.large %}
+            {% elseif data.thumbnailUrl is defined %}
+              {% set heroSrc = data.thumbnailUrl %}
+            {% endif %}
+
+            {% if heroSrc or audioUrl %}
+              <div class="obra-image-container" style="position:relative; text-align:center; margin-bottom:16px;">
+                {% if heroSrc %}
+                  <img src="{{ heroSrc }}" alt="{{ data.title|e }}"
+                       style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15);">
+                {% else %}
+                  <!-- Placeholder for audio-only obras -->
+                  <div style="width:100%; height:300px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15); display:flex; align-items:center; justify-content:center; color:white; font-size:1.2em; font-weight:500;">
+                  </div>
+                {% endif %}
+                {% if audioUrl %}
+                  <!-- Big center Play/Pause button -->
+                  <button type="button"
+                          id="obra-hero-toggle"
+                          class="button button-large button-fill"
+                          style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);
+                     border-radius:50%; width:70px; height:70px; padding:0; line-height:1; box-shadow:0 6px 16px rgba(0,0,0,.25);"
+                          onclick="
+                            var audio = document.getElementById('obra-audio');
+                            var playIcon = document.getElementById('obra-play-icon');
+                            var pauseIcon = document.getElementById('obra-pause-icon');
+                            if (audio.paused) {
+                              audio.play();
+                              playIcon.style.display = 'none';
+                              pauseIcon.style.display = 'inline-block';
+                              this.style.background = 'var(--f7-theme-color, #007aff)';
+                            } else {
+                              audio.pause();
+                              playIcon.style.display = 'inline-block';
+                              pauseIcon.style.display = 'none';
+                              this.style.background = 'rgba(0, 0, 0, 0.7)';
+                            }
+                          ">
+                    <span id="obra-play-icon" class="play-icon" style="margin: 0;">{{ globals.icons.play }}▶</span>
+                    <span id="obra-pause-icon" class="pause-icon" style="display: none; margin: 0; margin-left: 0 !important;">{{ globals.icons.pause }}⏸</span>
+                  </button>
+
+                  
+                {% endif %}
+              </div>
             {% endif %}
 
 
 
+{#            {% if data.images is defined and data.images[0] is defined and data.images[0].resized is defined and data.images[0].resized.large is defined %}#}
+{#              <div class="obra-image-container" style="text-align: center; margin-bottom: 16px;">#}
+{#                <img src="{{ data.images[0].resized.large }}" alt="{{ data.title|e }}"#}
+{#                     style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">#}
+{#              </div>#}
+{#            {% elseif data.thumbnailUrl is defined %}#}
+{#              <div class="obra-image-container" style="text-align: center; margin-bottom: 16px;">#}
+{#                <img src="{{ data.thumbnailUrl }}" alt="{{ data.title|e }}"#}
+{#                     style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">#}
+{#              </div>#}
+{#            {% endif %}#}
+
+            <!-- Details List -->
+            <div class="list list-strong list-dividers list-outline">
+              <ul>
+                <!-- Materials -->
+                {% if data.materials %}
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">Materiales</div>
+                        <div class="item-after">{{ data.materials }}</div>
+                      </div>
+                    </div>
+                  </li>
+                {% endif %}
+
+                <!-- Location -->
+                {% if data.location %}
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">Ubicación</div>
+                        <div class="item-after">
+                          {% if data.location.label %}
+                            {{ data.location.label }}
+                          {% else %}
+                            {{ data.location.code }}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                {% endif %}
+
+                <!-- Dimensions -->
+                {% if data.size %}
+                  <li>
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">Dimensiones</div>
+                        <div class="item-after">{{ data.size }}</div>
+                      </div>
+                    </div>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+
+            {% set description = data.content[locale] %}
+            {% if description %}
+              <div class="block block-strong">
+                <h4>Descripción</h4>
+                <p>{{ description }}</p>
+              </div>
+            {% endif %}
+
+            <!-- Image Gallery -->
+            {% if data.images is defined and data.images|length > 1 %}
+              <div class="block block-strong">
+                <h4>Galería de Imágenes</h4>
+                <div class="row" style="gap: 8px;">
+                  {% for image in data.images %}
+                    {% if image.resized is defined and image.resized.medium is defined %}
+                      <div class="col-50" style="margin-bottom: 8px;">
+                        <img src="{{ image.resized.medium }}" alt="{{ data.title|e }}"
+                             style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer;"
+                             onclick="app.photoBrowser.create({photos: [{{ image.resized.large ? '\'' ~ image.resized.large ~ '\'' : '\'' ~ image.resized.medium ~ '\'' }}], theme: 'dark'}).open();">
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
           </div>
+
+          <!-- Audio Card (if available) -->
+          {% if audioUrl %}
+            <div class="card-footer">
+              <div class="audio-container">
+                <audio id="obra-audio" style="display: none;" src="{{ audioUrl|e }}">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- YouTube Video Card (if available) -->
+        {% if data.youtubeUrl %}
+          <div class="card" style="margin: 0; margin-top: 16px;">
+            <div class="card-header">
+              <div class="card-header-inner">
+                <h3 class="card-title">
+                  Video
+                </h3>
+              </div>
+            </div>
+            <div class="card-content card-content-padding">
+              <div class="video-container">
+                <iframe
+                        width="100%"
+                        height="200"
+                        src="{{ data.youtubeUrl }}"
+                        title="YouTube"
+                        frameborder="0"
+                        style="border-radius: 8px;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          </div>
+        {% endif %}
         <!-- twig_obra_template -->
+        
+        <!-- Simple sync with audio controls -->
+        {% if audioUrl %}
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('obra-audio');
+            var button = document.getElementById('obra-hero-toggle');
+            var playIcon = document.getElementById('obra-play-icon');
+            var pauseIcon = document.getElementById('obra-pause-icon');
+            
+            if (audio && button && playIcon && pauseIcon) {
+                audio.addEventListener('ended', function() {
+                    playIcon.style.display = 'inline-block';
+                    pauseIcon.style.display = 'none';
+                    button.style.background = 'rgba(0, 0, 0, 0.7)';
+                });
+            }
+        });
+        </script>
+        {% endif %}
+        
       </twig:block>
 
 
 
 
       <twig:block name="title" id="title_template">
-        <sup>
+        {# <sup>
           {{ data.code }}
-        </sup>
+        </sup> #}
         {% set locale = globals.locale %}
         {{ data.title|title }}
         <!-- title_template -->
@@ -75,7 +273,7 @@
       <twig:block name="twig_template" id="hack_to_get_raw_data">
         {% set locale = globals.locale %}
         <div class="artist-detail">
-          <h1>{{ data.name|title }}</h1>
+          <h1>{{ data.artistName|title }}</h1>
           {% set description = data.content[locale] %}
           <article>
             <p>

@@ -123,4 +123,11 @@ return [
     'idb-keyval' => [
         'version' => '6.2.2',
     ],
+    'framework7-icons' => [
+        'version' => '5.0.5',
+    ],
+    'framework7-icons/css/framework7-icons.min.css' => [
+        'version' => '5.0.5',
+        'type' => 'css',
+    ],
 ];

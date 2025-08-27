@@ -15,3 +15,57 @@
     width: 100%;
     height: 100%;
 }
+
+/* Audio control button styles */
+#obra-hero-toggle {
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+}
+
+#obra-hero-toggle:hover {
+    background: rgba(0, 0, 0, 0.85);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+#obra-hero-toggle.button-active {
+    background: var(--f7-theme-color, #007aff);
+    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4);
+}
+
+#obra-hero-toggle.button-active:hover {
+    background: var(--f7-theme-color-shade, #0056d3);
+}
+
+/* Icon visibility classes */
+.play-icon, .pause-icon {
+    display: inline-block;
+    line-height: 1;
+    font-size: 1.5em;
+}
+
+.play-icon.hidden, .pause-icon.hidden {
+    display: none !important;
+}
+
+/* Ensure icons are visible in button */
+#obra-hero-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#obra-hero-toggle .play-icon,
+#obra-hero-toggle .pause-icon {
+    color: white;
+}
+
+/* Specific centering for pause icon */
+#obra-hero-toggle .pause-icon {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+}
