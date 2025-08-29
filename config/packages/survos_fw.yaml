@@ -32,8 +32,8 @@ survos_fw:
           url: https://chijal.org/api/locations
         - name: obras
           schema: code,artistCode,locationCode,location.id
-#          url: https://chijal.org/api/obras
-          url: https://pgsc.wip/api/obras
+          url: https://chijal.org/api/obras
+#          url: https://pgsc.wip/api/obras
 
     modo: # configuration code for database, etc.
       code: modo
