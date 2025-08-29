@@ -13,7 +13,7 @@ survos_fw:
 
     chijal: # previously pgsc
       code: chijal
-      logo: /logos/chijal_logo.jpg
+      logo: /logos/chijal-  logo.jpg
       name: Chijal
       tabs:
         - locations
