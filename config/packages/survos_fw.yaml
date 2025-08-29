@@ -26,12 +26,14 @@ survos_fw:
         - name: artists
           schema: code
           url: https://chijal.org/api/artists
+#          url: https://pgsc.wip/api/artists
         - name: locations
           schema: code
           url: https://chijal.org/api/locations
         - name: obras
           schema: code,artistCode,locationCode,location.id
-          url: https://chijal.org/api/obras
+#          url: https://chijal.org/api/obras
+          url: https://pgsc.wip/api/obras
 
     modo: # configuration code for database, etc.
       code: modo
@@ -69,4 +71,4 @@ survos_fw:
       stores:
         - name: sacros
           schema: code
-          url: https://pgsc.survos.com/{locale}/api/sacros
+          url: https://chijal.org/api/sacros

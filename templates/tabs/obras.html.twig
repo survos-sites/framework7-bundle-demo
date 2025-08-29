@@ -9,7 +9,7 @@
         }
     } %}
 
-
+{{ _self }}
     <twig:dexie
             refreshEvent="tab-{{ t }}-show"
             :store="store"
@@ -27,20 +27,26 @@
                 <ul>
                     {% for row in rows %}
                         {# Robust "has audio" check #}
-                        {% set hasAudio =
-                            (row.hasAudio ?? false)
-                            or ((row.audioCodes ?? [])|length > 0)
-                            or (row.audio ?? false) %}
+{#                        {% set hasAudio =#}
+{#                            (row.hasAudio ?? false)#}
+{#                            or ((row.audioCodes ?? [])|length > 0)#}
+{#                            or (row.audio ?? false) %}#}
 
                         <li class="swipeout">
                             <a href="/pages/obra/{{ row.code }}" class="item-link item-content">
                                 <div class="item-media">
 
                                     {% set thumb = row.thumbnailUrl %}
+                                    {% if row.image %}
+                                    {% set thumb = row.image.resized.small %}
+{#                                        {{ thumb }}#}
+                                    {% endif %}
                                     {#                                    {% for i in row.images|slice(0,1) %} #}
                                     {#                                        {% if i.thumbnailUrl %}{% set thumb = i.thumbnailUrl %}{% endif %} #}
                                     {#                                    {% endfor %} #}
-                                    <img src="{{ thumb ?: baseurl ~ '/images/80.png' }}" width="80" height="80"
+
+                                    <img src="{{ thumb ?: baseurl ~ '/images/80.png' }}"
+                                         width="80" height="80"
                                          style="border-radius: 8px; object-fit: cover;"
                                     />
 
@@ -64,8 +70,9 @@
 
                                         </div>
                                         <div class="item-after" style="display:flex;gap:.25rem;align-items:center;flex-wrap:nowrap;">
+                                            {% set hasAudio = row.audioUrl %}
                                             {% if hasAudio %}
-                                
+                                AUDIO
 
                                                     {{ globals.icons.headphones }}
                                                 
