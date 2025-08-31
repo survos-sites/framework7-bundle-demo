@@ -41,7 +41,7 @@
        <twig:block name="obra" id="twig_obra_template">
        {% set locale = globals.locale %}
          {% set audioUrl = (data.audioUrl ?? (data.audio and data.audio.resized and data.audio.resized.large ? data.audio.resized.large : null)) %}
-         {% set youtubeUrl = data.youtubeUrl ?? null %}
+{#         {% set youtubeUrl = data.youtubeUrl ?? null %}#}
 
         <!-- Main Obra Card -->
         <div class="card" style="margin: 0;">
@@ -211,7 +211,7 @@
         </div>
 
         <!-- YouTube Video Card (if available) -->
-        {% if data.youtubeUrl %}
+        {% if data.youtubeId %}
           <div class="card" style="margin: 0; margin-top: 16px;">
             <div class="card-header">
               <div class="card-header-inner">
@@ -221,17 +221,54 @@
               </div>
             </div>
             <div class="card-content card-content-padding">
-              <div class="video-container">
+
+                <template>
+                    <div class="page" data-name="video">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="title">YouTube Video</div>
+                            </div>
+                        </div>
+                        <div class="page-content">
+                            <div class="video-container">
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <style>
+                    /* Make it responsive */
+                    .video-container {
+                        position: relative;
+                        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                        padding-top: 25px;
+                        height: 0;
+                    }
+                    .video-container iframe {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                </style>
+
+                <div class="video-container">
+                    {% set youtubeUrl = 'https://www.youtube.com/embed/' ~data.youtubeId %}
                 <iframe
                         width="100%"
                         height="200"
-                        src="{{ data.youtubeUrl }}"
+                        src="{{ youtubeUrl }}"
                         title="YouTube"
                         frameborder="0"
                         style="border-radius: 8px;"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                 </iframe>
+                    <a href="{{ youtubeUrl }}">
+                        {{ youtubeUrl }}
+
+                    </a>
               </div>
             </div>
           </div>

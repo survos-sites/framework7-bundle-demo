@@ -1,0 +1,40 @@
+<div class="block">
+    <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
+        {% set store = 'locations' %}
+        {% set globals = {
+            icons: {
+                REST: ux_icon('material-symbols:restaurant'),
+                CC: ux_icon('icon-park-outline:building-four'),
+                GALLERIA: ux_icon('grommet-icons:gallery'),
+                MUSEO: ux_icon('material-symbols:museum')
+            }
+        } %}
+
+    MAP GOES HERE!
+
+    <twig:dexie
+                refreshEvent="tab-{{ t }}-show"
+                :store="store"
+                :globals="globals"
+                :filter="{locale: 'en'}"
+                :caller="_self">
+
+            <twig:block name="title">
+                there are {{ rows|length }} rows
+            </twig:block>
+
+            <twig:block name="twig_template" id="hack_to_get_raw_data">
+                <div class="list custom-list-content">
+                    <ul>
+                    {% for row in rows %}
+                        <li>
+                            <b>{{ row.name|default(row.label)|title }}</b>
+                            {{ row.lat }},{{ row.lng }}
+                    {% endfor %}
+                    </ul>
+                </div>
+                <!-- hack_to_get_raw_data -->
+            </twig:block>
+
+        </twig:dexie>
+</div>

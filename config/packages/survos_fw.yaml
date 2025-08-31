@@ -13,10 +13,11 @@ survos_fw:
 
     chijal: # previously pgsc
       code: chijal
-      logo: /logos/chijal-  logo.jpg
+      logo: /logos/chijal-logo.jpg
       name: Chijal
       tabs:
         - locations
+        - map
         - artists
         - obras
       #          - share
@@ -32,8 +33,8 @@ survos_fw:
           url: https://chijal.org/api/locations
         - name: obras
           schema: code,artistCode,locationCode,location.id
-          url: https://chijal.org/api/obras
-#          url: https://pgsc.wip/api/obras
+#          url: https://chijal.org/api/obras
+          url: https://pgsc.wip/api/obras
 
     modo: # configuration code for database, etc.
       code: modo
