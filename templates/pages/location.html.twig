@@ -17,7 +17,7 @@
       objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},
     }%}
 
-    <h1>{{ 'tab.location'|trans }}</h1>
+    <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.location'|trans }}</h1>
 
     <twig:dexie
             refreshEvent="location.refresh"
@@ -26,21 +26,17 @@
             :globals="globals"
             :caller="_self">
 
-      <twig:block name="location" id="twig_location_template">
-       {% set locale = globals.locale %}
-        <sup>
-{#          {{ data|json_encode }}#}
-          <div class="location-detail">
-            <h1>{{ data.label }}</h1>
-            <p>{{ data.address }}</p>
-            <p>Code: {{ data.code }}</p>
-
-            @todo: map {{ data.lat }} {{ data.lng }}
-
-          </div>
-        </sup>
+        <twig:block name="location" id="twig_location_template">
+        {% set locale = globals.locale %}
+        <div class="block block-outline block-strong inset no-margin-horizontal">
+            <h1 class="block-title block-title-large font-serif font-weight-900 margin-bottom-half" style="color: var(--f7-block-text-color);">{{ data.label }}</h1>
+            <address class="font-style-normal">
+                <div>{{ data.address }}</div>
+            </address>
+            <div class="margin-top-half">Code: {{ data.code }}</div>
+        </div>
         <!-- twig_location_template -->
-      </twig:block>
+        </twig:block>
 
       <twig:block name="objects" id="twig_objects_template">
         <h1>Objects</h1>
