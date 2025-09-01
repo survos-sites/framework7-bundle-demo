@@ -35,7 +35,9 @@
             <p>{{ data.address }}</p>
             <p>Code: {{ data.code }}</p>
 
-            @todo: map {{ data.lat }} {{ data.lng }}
+            @todo: map {{ data.lat }} {{ data.lng }}?
+
+
 
           </div>
         </sup>
@@ -45,6 +47,7 @@
       <twig:block name="objects" id="twig_objects_template">
         <h1>Objects</h1>
         <!-- loop through data array having the objects -->
+          {{ data|json_encode }}
         {% for object in data %}
           <div class="object-detail">
             <h1>{{ object.name|title }}</h1>

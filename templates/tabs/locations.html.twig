@@ -58,13 +58,13 @@
                 :caller="_self">
 
             <twig:block name="title">
-                there are {{ rows|length }} rows
+                 {{ rows|length }} Ubis
             </twig:block>
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
                 <div class="list custom-list-content">
                     <ul>
-                    {% for row in rows %}
+                    {% for idx, row in rows %}
                         <li>
                             <a href="/pages/location/{{row.code}}" class="item-link">
                                 <div class="item-content">
@@ -73,10 +73,13 @@
                                         <div class="item-title
                                         ">
                                             <span title=" {{ row.typeString }}">
+                                                {{ idx+1 }}
                                             {{ globals.icons[row.typeString]|default('') }}
                                             </span>
 
                                            <b>{{ row.name|default(row.label)|title }}</b>
+                                            <br/>
+                                            {{ row.barrio|default('') }}
                                         </div>
                                         <div class="item-after">
                                             {{ row.obraCount|default(row.objCount) }}

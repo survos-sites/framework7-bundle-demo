@@ -24,13 +24,14 @@
             :caller="_self">
 
       {# ---------- ARTIST ---------- #}
-      <twig:block name="artist" id="twig_artist_template">
+      <twig:block name="twig_template" id="twig_artist_template">
         {% set locale = globals.locale %}
         {% set hasEmail = data.email is defined and data.email %}
         {% set hasBio = data.bio is defined and data.bio %}
         {% set hasSlogan = data.slogan is defined and data.slogan %}
         {% set birth = data.birthYear is defined ? data.birthYear : null %}
         {% set initials = (data.name|default(''))|slice(0,1)|upper %}
+          {{ data|json_encode }}
 
         <div class="block no-padding">
           {# Hero #}
@@ -102,6 +103,7 @@
             </div>
           {% endif %}
         </div>
+          <!-- twig_artist_template -->
       </twig:block>
 
       {# ---------- OBJECTS ---------- #}
@@ -149,12 +151,8 @@
         {% endif %}
       </twig:block>
 
-      {# (optional) raw debug #}
-      {# Keep only if you want to inspect data quickly in-app #}
-      {# <twig:block name="twig_template" id="hack_to_get_raw_data">
-        <div class="block block-strong"><pre class="text-small">{{ data|json_encode(2) }}</pre></div>
-      </twig:block> #}
-
     </twig:dexie>
+      <!-- twig_objects_template -->
+
   </twig:block>
 </twig:SurvosFw:Framework7Page>
