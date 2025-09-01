@@ -130,4 +130,7 @@ return [
         'version' => '5.0.5',
         'type' => 'css',
     ],
+    '@spomky-labs/pwa/helpers' => [
+        'path' => './vendor/spomky-labs/pwa-bundle/assets/src/helpers.js',
+    ],
 ];

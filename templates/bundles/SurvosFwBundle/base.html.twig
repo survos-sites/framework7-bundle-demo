@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale|split('_')[0] }}">
 <head>
+    <!-- top of head -->
+    {% block pwa %}
+        {{ pwa(locale='es')  }}
+        {#    {{ app.request.get('pwa', false) ? pwa(locale='es') }}#}
+    {% endblock %}
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <!-- applied to all survos-mobile -->
 
-    <title>{% block title 'SurvosFw'%}</title>
+    <title>{% block title %}SurvosFw{% endblock %}</title>
 
     {#        <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">#}
     {% block stylesheets %}
@@ -17,15 +23,10 @@
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 
-    PWA!
-
-        {{ pwa(locale='es') }}
-    {% block pwa %}
-    {% endblock %}
 
 </head>
 
-<body>
+<body id="html-body">
 {#<div id="app" {{ stimulus_controller(_app_sc) }} >#}
 {% block body %}{% endblock %}
 {#</div>#}

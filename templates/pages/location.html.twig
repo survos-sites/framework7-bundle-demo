@@ -19,6 +19,7 @@
 
     <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.location'|trans }}</h1>
 
+      {{ queries|json_pretty }}
     <twig:dexie
             refreshEvent="location.refresh"
             :store="store"
@@ -27,6 +28,8 @@
             :caller="_self">
         <twig:block name="location" id="twig_location_template">
         {% set locale = globals.locale %}
+
+            {{ data|json_encode }}
         <div class="block block-outline block-strong inset no-margin-horizontal">
             <h1 class="block-title block-title-large font-serif font-weight-900 margin-bottom-half" style="color: var(--f7-block-text-color);">{{ data.label }}</h1>
             <address class="font-style-normal">
