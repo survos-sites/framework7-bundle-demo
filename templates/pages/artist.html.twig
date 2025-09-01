@@ -1,5 +1,5 @@
 {# Artist Detail (Twig.js + Framework7) #}
-<twig:SurvosFw:Framework7Page :caller="_self" :title="'artist'|trans">
+<twig:SurvosFw:Framework7Page :caller="_self" :title="'artist'">
   {# Navbar title #}
   <twig:block name="title">
     <div class="display-flex align-items-center">
@@ -12,8 +12,8 @@
     {% set store = 'artists' %}
     {% set globals = { locale: app.locale } %}
     {% set queries = {
-      artist:  { store: 'artists', type: 'find', id: '{{event.details.id}}', templateName: 'artist' },
-      objects: { store: 'objects', filters: { artistCode: '{{artist.code}}' }, filterType: 'where', templateName: 'objects' }
+      artist:  { store: 'artists', type: 'find', id: '{{event.details.code}}', templateName: 'artist' },
+      objects: { store: 'obras', filters: { artistCode: '{{artist.code}}' }, filterType: 'where', templateName: 'objects' }
     } %}
 
     <twig:dexie
@@ -60,7 +60,7 @@
                 {% if birth %}
                   <div class="chip">
                     <div class="chip-media"><i class="icon f7-icons">calendar</i></div>
-                    <div class="chip-label">{{ 'Born'|trans }}: {{ birth }}</div>
+                    <div class="chip-label">{{ 'Born' }}: {{ birth }}</div>
                   </div>
                 {% endif %}
                 {% if hasEmail %}
@@ -80,7 +80,7 @@
           {# Bio #}
           {% if hasBio %}
             <div class="card card-outline">
-              <div class="card-header">{{ 'Biography'|trans }}</div>
+              <div class="card-header">{{ 'Biography' }}</div>
               <div class="card-content card-content-padding">
                 {# Twig.js-safe newline handling: split-ish with replace into <br> #}
                 <div class="text-color-black text-opacity-80" style="white-space:pre-line;">
@@ -94,7 +94,7 @@
           {% set localized = (data.content is defined and data.content[locale] is defined) ? data.content[locale] : null %}
           {% if localized %}
             <div class="card card-outline">
-              <div class="card-header">{{ 'About'|trans }} ({{ locale|upper }})</div>
+              <div class="card-header">{{ 'About' }} ({{ locale|upper }})</div>
               <div class="card-content card-content-padding">
                 <div style="white-space:pre-line;">
                   {{ localized }}
@@ -108,13 +108,13 @@
 
       {# ---------- OBJECTS ---------- #}
       <twig:block name="objects" id="twig_objects_template">
-        <div class="block-title">{{ 'Works'|trans }}</div>
+        <div class="block-title">{{ 'Works' }}</div>
 
         {% if data and data|length > 0 %}
           <div class="list media-list">
             <ul>
               {% for object in data %}
-                {% set otitle = object.name|default(object.title|default('Untitled'|trans)) %}
+                {% set otitle = object.name|default(object.title|default('Untitled')) %}
                 {% set ocode  = object.code|default('—') %}
                 {% set odesc  = object.description|default('') %}
                 {% set excerpt = (odesc|length > 180) ? (odesc|slice(0,180) ~ '…') : odesc %}
@@ -146,7 +146,7 @@
           </div>
         {% else %}
           <div class="block strong text-align-center text-color-gray">
-            {{ 'No works to display'|trans }}
+            {{ 'No works to display' }}
           </div>
         {% endif %}
       </twig:block>
