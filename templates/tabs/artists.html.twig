@@ -1,4 +1,4 @@
-<div class="block">
+<div>
     {% set store = t %}
     {% set globals = {} %}
 
@@ -16,41 +16,37 @@
 
         <twig:block name="twig_template" id="hack_to_get_raw_data">
             {#                <h1>@{{ storeName }}</h1> <!-- passed in from dexie --> #}
-            <div class="list media-list">
+            <div class="list media-list list-dividers list-outline list-strong inset margin-vertical">
                 <ul>
                     {% for row in rows %}
-
-                        <li>
-
-                            <a  href="/pages/artist/{{ row.code }}" class="item-link item-content">
+                    <li>
+                        <a href="/pages/artist/{{ row.code }}" class="item-link">
+                            <div class="item-content">
                                 {% set i = row.image %}
                                 <div class="item-media">
-                                        {% if i %}
-                                            {% set thumb = i.resized.small %}
-                                            <a href="{{ thumb }}">
-                                                <img style="max-width: 80px" src="{{ thumb }}" title="{{ thumb }}"/>
-                                            </a>
-                                        {% else %}
-                                            <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
-                                        {% endif %}
-                                    </div>
+                                    {% if i %}
+                                        {% set thumb = i.resized.small %}
+                                        <img class="size-64 mask mask-squircle object-fit-cover" src="{{ thumb }}" title="{{ thumb }}" />
+                                    {% else %}
+                                        <img class="size-64 mask mask-squircle" src="{{ baseurl }}/images/80.png" alt="No image available" />
+                                    {% endif %}
+                                </div>
                                 <div class="item-inner">
                                     <div class="item-title-row">
-                                        <div class="item-title">{{ row.name }}</div>
-                                        <div class="item-subtitle">{{ row.slogan_backing}}
-                                        {{ row.bio_backing }}
-                                        </div>
+                                        <div class="item-title font-serif font-weight-600">{{ row.name }}</div>
                                         <div class="item-after">
-                                            {{  row.obras.length ? row.obras.length }}
+                                            {{ row.obras.length ? '<span class="badge color-primary">' ~ row.obras.length ~ '</span>' }}
                                         </div>
                                     </div>
-                                <div class="item-subtitle">{{ row.birthYear }}</div>
-                                <div class="item-text">{{ row.slogan }}</div>
+                                    <div class="item-subtitle">{{ row.birthYear }}</div>
+                                    <div class="item-text">{{ row.slogan_backing }}
+
+                                        {{ row.bio_backing }}
+                                    </div>
                                 </div>
-                            </a>
-
-
-                        </li>
+                            </div>
+                        </a>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>

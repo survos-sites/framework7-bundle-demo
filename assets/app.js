@@ -8,7 +8,7 @@ import './bootstrap.js';
 import './styles/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
-import './debug-overlay.js';
+//import './debug-overlay.js';
 
 // import Framework7 from 'framework7/framework7-bundle'
 // import 'framework7/framework7-bundle.min.css';
