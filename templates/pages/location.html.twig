@@ -13,29 +13,44 @@
     } %}
 
     {% set queries = {
-      location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'},
-      objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},
+        location: {store: 'locations', type: 'find' , id : '{{event.detail.route.params.id}}' , templateName: 'location'},
     }%}
+{#      objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},#}
 
     <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.location'|trans }}</h1>
 
-      {{ queries|json_pretty }}
+{#      {{ queries|json_pretty }}#}
+      :queries="queries"
     <twig:dexie
             refreshEvent="location.refresh"
             :store="store"
             :queries="queries"
             :globals="globals"
             :caller="_self">
+
         <twig:block name="location" id="twig_location_template">
         {% set locale = globals.locale %}
 
-            {{ data|json_encode }}
         <div class="block block-outline block-strong inset no-margin-horizontal">
             <h1 class="block-title block-title-large font-serif font-weight-900 margin-bottom-half" style="color: var(--f7-block-text-color);">{{ data.label }}</h1>
             <address class="font-style-normal">
                 <div>{{ data.address }}</div>
             </address>
-            <div class="margin-top-half">Code: {{ data.code }}</div>
+            <div class="margin-top-half">Location Code: {{ data.code }}</div>
+
+            <h3>Obras</h3>
+            {% for obra in data.obras %}
+                <li>
+                    {{ obra.code }}
+                    {{ obra.year }}
+                    {{ obra|json_encode }}
+                    {{ obra.artist.name }}
+                    <img src="{{ obra.thumbnailUrl }}" />
+
+                </li>
+            {% endfor %}
+
+
         </div>
         <!-- twig_location_template -->
         </twig:block>
@@ -44,12 +59,15 @@
         <h1>Objects</h1>
         <!-- loop through data array having the objects -->
           {{ data|json_encode }}
-        {% for object in data %}
+
+          {% for object in data %}
           <div class="object-detail">
             <h1>{{ object.name|title }}</h1>
-            <p>Code: {{ object.code }}</p>
+            <p>Object Code: {{ object.code }}</p>
             {% set description = object.description|default('no description') %}
-            <article>
+
+
+              <article>
               {% if object.images|length %}
               {{ object.images[0].small }}
               {% endif %}
@@ -78,11 +96,12 @@
       </twig:block>
 
       <twig:block name="twig_template" id="hack_to_get_raw_data">
+          {{ data|json_encode }}
 
         This is the detail page for some specific location {{ data.code }}
         <div class="location-detail">
           <h1>{{ data.name|title }}</h1>
-          <p>Code: {{ data.code }}</p>
+          <p>CodeXX: {{ data.code }}</p>
           {% set description = data.description|default('no description') %}
 
           <article>
