@@ -113,11 +113,12 @@ export default class extends MobileController {
                                         let tabEntity = `tab-${entity}s`;
 
                                         if (queryParams[entityId] && tabId === tabEntity) {
-                                            app.views.main.router.navigate(`/pages/${entity}/${queryParams[entityId]}`);
+                                            app.views.main.router.navigate(`/pages/${entity}/${queryParams[entityId]}`,
+                                                {animate: true});
                                         }
                                     });
 
-                                }, 100);
+                                }, 800);
                             }
                         } else {
                             let tabLink = document.querySelector('.tab-link');

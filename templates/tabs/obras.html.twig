@@ -66,17 +66,14 @@
                                         </div>
                                         <div class="item-after" style="display:flex;gap:.25rem;align-items:center;flex-wrap:nowrap;">
                                             {% if row.youtubeId %}
-                                            YOUTUBE row.youtubeId
+                                                {# icon? #}
                                             {% endif %}
                                             {% set hasAudio = row.audioUrl %}
                                             {% if hasAudio %}
-                                AUDIO
-
                                                     {{ globals.icons.headphones }}
-
                                             {% endif %}
                                             {% if row.price %}
-                                                <span class="badge color-blue" title="Price">{{ row.price }}</span>
+                                                <span class="badge color-blue" title="Price">{{ row.price|number_format }}</span>
                                             {% endif %}
                                         </div>
                                     </div>
