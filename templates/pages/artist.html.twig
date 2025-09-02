@@ -9,12 +9,51 @@
   </twig:block>
 
   <twig:block name="content">
-    {% set store = 'artists' %}
-    {% set globals = { locale: app.locale } %}
-    {% set queries = {
-      artist:  { store: 'artists', type: 'find', id: '{{event.details.code}}', templateName: 'artist' },
-      objects: { store: 'obras', filters: { artistCode: '{{artist.code}}' }, filterType: 'where', templateName: 'objects' }
-    } %}
+
+      {# Updated queries to work with Framework7 page object structure #}
+
+      {% set store = 'artists' %}
+      {% set globals = { locale: app.locale } %}
+      {% set queries = {
+          artist:  {
+              store: 'artists',
+              type: 'find',
+              id: '{{event.detail.route.params.id}}',
+              templateName: 'artist'
+          }
+      } %}
+{#      ,#}
+{#      objects: {#}
+{#      store: 'obras',#}
+{#      filters: { artistCode: '{{artist.code}}' },#}
+{#      filterType: 'where',#}
+{#      templateName: 'objects'#}
+{#      }#}
+
+          {# Alternative approach - you could also use a fallback chain: #}
+          {#
+          {% set entityId = event.detail.route.params.id|default(event.detail.id|default(event.detail.code)) %}
+          {% set queries = {
+            artist:  {
+              store: 'artists',
+              type: 'find',
+              id: '{{entityId}}',
+              templateName: 'artist'
+            },
+            objects: {
+              store: 'obras',
+              filters: { artistCode: '{{artist.code}}' },
+              filterType: 'where',
+              templateName: 'objects'
+            }
+          } %}
+          #}
+{#    {% set store = 'artists' %}#}
+{#    {% set globals = { locale: app.locale } %}#}
+{#    {% set queries = {#}
+{#      artist:  { store: 'artists', type: 'find', id: '{{event.details.code}}', templateName: 'artist' },#}
+{#      objects: { store: 'obras', filters: { artistCode: '{{artist.code}}' }, filterType: 'where', templateName: 'objects' }#}
+{#    } %}#}
 
     <twig:dexie
             refreshEvent="artist.refresh"
@@ -24,14 +63,30 @@
             :caller="_self">
 
       {# ---------- ARTIST ---------- #}
-      <twig:block name="twig_template" id="twig_artist_template">
+      <twig:block name="twig_template" id="hack">
+          <!-- hack -->
+          @twig_temlate!
+      </twig:block>
+
+      <twig:block name="artist" id="twig_artist_template">
         {% set locale = globals.locale %}
         {% set hasEmail = data.email is defined and data.email %}
         {% set hasBio = data.bio is defined and data.bio %}
         {% set hasSlogan = data.slogan is defined and data.slogan %}
         {% set birth = data.birthYear is defined ? data.birthYear : null %}
         {% set initials = (data.name|default(''))|slice(0,1)|upper %}
-          {{ data|json_encode }}
+          {{ data|keys|json_encode }}
+
+          <h3>Obras</h3>
+          {% for obra in data.obras %}
+              <li>
+                  {{ obra.code }}
+                  {{ obra.year }}
+                  {{ obra.artist.name }}
+                  <img src="{{ obra.thumbnailUrl }}" />
+
+              </li>
+          {% endfor %}
 
         <div class="block no-padding">
           {# Hero #}

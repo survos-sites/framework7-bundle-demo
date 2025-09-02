@@ -133,4 +133,10 @@ return [
     '@spomky-labs/pwa/helpers' => [
         'path' => './vendor/spomky-labs/pwa-bundle/assets/src/helpers.js',
     ],
+    'debug' => [
+        'version' => '4.4.1',
+    ],
+    'ms' => [
+        'version' => '2.1.3',
+    ],
 ];

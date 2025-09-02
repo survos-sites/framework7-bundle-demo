@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fca293fd2bb3fcb4e3be6a39f95dd19",
+    "content-hash": "4ed77f93b1912e91721fa76c488012e2",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4414,12 +4414,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/fw-bundle.git",
-                "reference": "6be94479c07d1a981c5608477c772026e4e439cb"
+                "reference": "c1a641c4c45d59535e26dfc0c7686a91ef7e4445"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/6be94479c07d1a981c5608477c772026e4e439cb",
-                "reference": "6be94479c07d1a981c5608477c772026e4e439cb",
+                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/c1a641c4c45d59535e26dfc0c7686a91ef7e4445",
+                "reference": "c1a641c4c45d59535e26dfc0c7686a91ef7e4445",
                 "shasum": ""
             },
             "require": {
@@ -4473,7 +4473,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-01T13:26:39+00:00"
+            "time": "2025-09-02T14:50:35+00:00"
         },
         {
             "name": "survos/installer",
@@ -13946,9 +13946,9 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^8.4",
-        "ext-imagick": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-imagick": "*",
         "ext-intl": "*"
     },
     "platform-dev": {},

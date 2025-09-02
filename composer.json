@@ -7,9 +7,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.4",
-        "ext-imagick": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-imagick": "*",
         "ext-intl": "*",
         "bizkit/versioning-bundle": "^1.2.1",
         "doctrine/dbal": "^4.3.2",
