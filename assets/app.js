@@ -11,7 +11,7 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 //import './debug-overlay.js';
 
 // Debug configuration
-const ENABLE_DEBUG = true; // Set to false in production
+const ENABLE_DEBUG = false; // Set to false in production
 
 if (ENABLE_DEBUG) {
     localStorage.debug = 'app:*,mobile:*,dexie:*';
