@@ -75,9 +75,78 @@
         {% set hasSlogan = data.slogan is defined and data.slogan %}
         {% set birth = data.birthYear is defined ? data.birthYear : null %}
         {% set initials = (data.name|default(''))|slice(0,1)|upper %}
-          {{ data|keys|json_encode }}
+          {# {{ data|keys|json_encode }} #}
 
-          <h3>Obras</h3>
+        <div class="block no-padding">
+          {# Hero #}
+          <div class="block block-strong inset margin-vertical bg-color-primary text-color-white no-margin-horizontal">
+              <div class="display-flex align-items-flex-start justify-content-flex-start" style="gap: 16px;">
+                <div class="media-container mask mask-squircle size-64 bg-color-white flex-shrink-0 text-color-primary font-weight-900 font-serif" style="font-size: 40px;">{{ initials }}</div>
+                <div>
+                  <div class="font-serif font-weight-900" style="font-size: 20px; word-break: break-word;">{{ data.name }}</div>
+                  {% if hasSlogan %}
+                    <div style="word-break: break-word;">{{ data.slogan }}</div>
+                  {% endif %}
+                </div>
+              </div>
+
+              {# Chips #}
+              <div class="chips margin-top">
+                {% if birth %}
+                  <div class="chip" title="Birth Year" style="border-radius: var(--f7-chip-height);">
+                    <div class="chip-media text-color-primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                        <g fill="none">
+                          <path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                          <path fill="currentColor" d="M17.707 15.707a.414.414 0 0 1 .586 0a2.415 2.415 0 0 0 2.707.491V20a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2v-3.802c.89.405 1.975.241 2.707-.49a.414.414 0 0 1 .586 0a2.414 2.414 0 0 0 3.414 0a.414.414 0 0 1 .586 0a2.414 2.414 0 0 0 3.414 0a.414.414 0 0 1 .586 0a2.414 2.414 0 0 0 3.414 0ZM16 6a1 1 0 0 1 1 1v2h1a3 3 0 0 1 3 3v1.586l-.707.707a.414.414 0 0 1-.586 0a2.414 2.414 0 0 0-3.414 0a.414.414 0 0 1-.586 0a2.414 2.414 0 0 0-3.414 0a.414.414 0 0 1-.586 0a2.414 2.414 0 0 0-3.414 0a.414.414 0 0 1-.586 0a2.414 2.414 0 0 0-3.414 0a.414.414 0 0 1-.586 0L3 13.586V12a3 3 0 0 1 3-3h1V7a1 1 0 0 1 2 0v2h2V7a1 1 0 1 1 2 0v2h2V7a1 1 0 0 1 1-1m-3.5-4c-.319.638-.028 1.05.225 1.41c.144.203.275.39.275.59a1 1 0 1 1-2 0c0-.552.5-1.5 1.5-2m-4 0c-.319.638-.028 1.05.225 1.41c.144.203.275.39.275.59a1 1 0 0 1-2 0c0-.552.5-1.5 1.5-2m8 0c-.319.638-.028 1.05.225 1.41c.144.203.275.39.275.59a1 1 0 1 1-2 0c0-.552.5-1.5 1.5-2" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="chip-label">{{ 'Born' }}: {{ birth }}</div>
+                  </div>
+                {% endif %}
+                {% if hasEmail %}
+                  <a class="chip external" href="mailto:{{ data.email }}" title="Email" style="border-radius: var(--f7-chip-height);">
+                    <div class="chip-media text-color-primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z" />
+                      </svg>
+                    </div>
+                    <div class="chip-label">{{ data.email }}</div>
+                  </a>
+                {% endif %}
+                <div class="chip" title="Code" style="border-radius: var(--f7-chip-height);">
+                  <div class="chip-media text-color-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+	                    <path fill="currentColor" d="M14.608 12.172c0 .84.239 1.175.864 1.175c1.393 0 2.28-1.775 2.28-4.727c0-4.512-3.288-6.672-7.393-6.672c-4.223 0-8.064 2.832-8.064 8.184c0 5.112 3.36 7.896 8.52 7.896c1.752 0 2.928-.192 4.727-.792l.386 1.607c-1.776.577-3.674.744-5.137.744c-6.768 0-10.393-3.72-10.393-9.456c0-5.784 4.201-9.72 9.985-9.72c6.024 0 9.215 3.6 9.215 8.016c0 3.744-1.175 6.6-4.871 6.6c-1.681 0-2.784-.672-2.928-2.161c-.432 1.656-1.584 2.161-3.145 2.161c-2.088 0-3.84-1.609-3.84-4.848c0-3.264 1.537-5.28 4.297-5.28c1.464 0 2.376.576 2.782 1.488l.697-1.272h2.016v7.057zm-2.951-3.168c0-1.319-.985-1.872-1.801-1.872c-.888 0-1.871.719-1.871 2.832c0 1.68.744 2.616 1.871 2.616c.792 0 1.801-.504 1.801-1.896z" />
+                    </svg>
+                  </div>
+                  <div class="chip-label">{{ data.code }}</div>
+                </div>
+              </div>
+          </div>
+
+          {# Bio #}
+          {% if hasBio %}
+            <h3 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">{{ 'Biography' }}</h3>
+            <div class="block block-strong block-outline inset margin-vertical no-margin-horizontal">
+              {# Twig.js-safe newline handling: split-ish with replace into <br> #}
+              <div style="white-space: pre-line;">{{ data.bio }}</div>
+            </div>
+          {% endif %}
+
+          {# Localized content (optional) #}
+          {% set localized = (data.content is defined and data.content[locale] is defined) ? data.content[locale] : null %}
+          {% if localized %}
+            <div class="block block-strong block-outline inset margin-vertical no-margin-horizontal">
+              <h3 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">{{ 'About' }} ({{ locale|upper }})</h3>
+              <div style="white-space:pre-line;">{{ localized }}</div>
+            </div>
+          {% endif %}
+        </div>
+
+        <!--
+        <h3>Obras</h3>
           {% for obra in data.obras %}
               <li>
                   {{ obra.code }}
@@ -87,77 +156,33 @@
 
               </li>
           {% endfor %}
+        -->
 
-        <div class="block no-padding">
-          {# Hero #}
-          <div class="card no-shadow no-border radius-0" style="background: var(--f7-theme-color-tint);">
-            <div class="card-content padding">
-              <div class="display-flex align-items-center justify-content-space-between">
-                <div style="min-width:0;">
-                  <div class="text-color-black text-opacity-70 small">@{{ data.code }}</div>
-                  <div class="text-color-black text-xxlarge text-semibold" style="word-break:break-word;">
-                    {{ data.name }}
+        <h3 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Obras</h3>
+        <div class="list media-list list-dividers list-outline list-strong inset margin-vertical no-margin-horizontal">
+          <ul>
+            {% for obra in data.obras %}
+            <li>
+              <a href="/pages/obra/{{ obra.code }}" class="item-link">
+                <div class="item-content">
+                  <div class="item-media">
+                    <img class="mask mask-squircle size-80 object-fit-cover" src="{{ obra.thumbnailUrl }}" />
                   </div>
-                  {% if hasSlogan %}
-                    <div class="text-color-black text-opacity-80 margin-top-half" style="word-break:break-word;">
-                      {{ data.slogan }}
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title font-serif font-weight-600">{{ obra.title}}</div>
                     </div>
-                  {% endif %}
-                </div>
-                <div class="bg-color-white text-color-black text-bold"
-                     style="width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.1);">
-                  {{ initials }}
-                </div>
-              </div>
-
-              {# Chips #}
-              <div class="chips margin-top">
-                {% if birth %}
-                  <div class="chip">
-                    <div class="chip-media"><i class="icon f7-icons">calendar</i></div>
-                    <div class="chip-label">{{ 'Born' }}: {{ birth }}</div>
+                    <div class="item-text">
+                      <span class="badge color-primary">{{ obra.year }}</span>
+                    </div>
                   </div>
-                {% endif %}
-                {% if hasEmail %}
-                  <a class="chip external" href="mailto:{{ data.email }}">
-                    <div class="chip-media"><i class="icon f7-icons">envelope</i></div>
-                    <div class="chip-label">{{ data.email }}</div>
-                  </a>
-                {% endif %}
-                <div class="chip">
-                  <div class="chip-media"><i class="icon f7-icons">number</i></div>
-                  <div class="chip-label">{{ data.code }}</div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {# Bio #}
-          {% if hasBio %}
-            <div class="card card-outline">
-              <div class="card-header">{{ 'Biography' }}</div>
-              <div class="card-content card-content-padding">
-                {# Twig.js-safe newline handling: split-ish with replace into <br> #}
-                <div class="text-color-black text-opacity-80" style="white-space:pre-line;">
-                  {{ data.bio }}
-                </div>
-              </div>
-            </div>
-          {% endif %}
-
-          {# Localized content (optional) #}
-          {% set localized = (data.content is defined and data.content[locale] is defined) ? data.content[locale] : null %}
-          {% if localized %}
-            <div class="card card-outline">
-              <div class="card-header">{{ 'About' }} ({{ locale|upper }})</div>
-              <div class="card-content card-content-padding">
-                <div style="white-space:pre-line;">
-                  {{ localized }}
-                </div>
-              </div>
-            </div>
-          {% endif %}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
+
           <!-- twig_artist_template -->
       </twig:block>
 

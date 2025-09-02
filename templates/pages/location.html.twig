@@ -1,8 +1,8 @@
-
 {#@todo: title icon?#}
 <twig:SurvosFw:Framework7Page :caller="_self"
              :title="'location'|trans"
 >
+
   <twig:block name="title">
     @@title@@
   </twig:block>
@@ -17,10 +17,10 @@
     }%}
 {#      objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},#}
 
-    <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.location'|trans }}</h1>
+        <!--<h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.location'|trans }}</h1>-->
 
 {#      {{ queries|json_pretty }}#}
-      :queries="queries"
+     {# :queries="queries" #}
     <twig:dexie
             refreshEvent="location.refresh"
             :store="store"
@@ -31,27 +31,39 @@
         <twig:block name="location" id="twig_location_template">
         {% set locale = globals.locale %}
 
-        <div class="block block-outline block-strong inset no-margin-horizontal">
-            <h1 class="block-title block-title-large font-serif font-weight-900 margin-bottom-half" style="color: var(--f7-block-text-color);">{{ data.label }}</h1>
+        <div class="block no-margin-horizontal no-padding-horizontal">
+            <h1 class="page-title font-serif font-weight-900 no-margin-bottom no-padding-horizontal white-space-normal" style="color: var(--f7-block-text-color);">{{ data.label }}</h1>
             <address class="font-style-normal">
                 <div>{{ data.address }}</div>
             </address>
-            <div class="margin-top-half">Location Code: {{ data.code }}</div>
-
-            <h3>Obras</h3>
-            {% for obra in data.obras %}
-                <li>
-                    {{ obra.code }}
-                    {{ obra.year }}
-                    {{ obra|json_encode }}
-                    {{ obra.artist.name }}
-                    <img src="{{ obra.thumbnailUrl }}" />
-
-                </li>
-            {% endfor %}
-
-
         </div>
+
+        <h3 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Obras</h3>
+        <div class="list media-list list-dividers list-outline list-strong inset margin-vertical no-margin-horizontal">
+          <ul>
+            {% for obra in data.obras %}
+            <li>
+              <a href="/pages/obra/{{ obra.code }}" class="item-link">
+                <div class="item-content">
+                  <div class="item-media">
+                    <img class="mask mask-squircle size-80 object-fit-cover" src="{{ obra.thumbnailUrl }}" />
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title font-serif font-weight-600">{{ obra.title}}</div>
+                    </div>
+                    <div class="item-subtitle">{{ obra.artist.name }}</div>
+                    <div class="item-text">
+                      <span class="badge color-primary">{{ obra.year }}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
         <!-- twig_location_template -->
         </twig:block>
 
