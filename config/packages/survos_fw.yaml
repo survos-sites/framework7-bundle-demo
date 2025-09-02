@@ -26,16 +26,16 @@ survos_fw:
       stores:
         - name: artists
           schema: code
-#          url: https://chijal.org/api/artists
-          url: https://pgsc.wip/api/artists
+          url: https://chijal.org/api/artists
+#          url: https://pgsc.wip/api/artists
         - name: locations
           schema: code
-#          url: https://chijal.org/api/locations
-          url: https://pgsc.wip/api/locations
+          url: https://chijal.org/api/locations
+#          url: https://pgsc.wip/api/locations
         - name: obras
           schema: code,artistCode,locationCode,location.id
-#          url: https://chijal.org/api/obras
-          url: https://pgsc.wip/api/obras
+          url: https://chijal.org/api/obras
+#          url: https://pgsc.wip/api/obras
 
     modo: # configuration code for database, etc.
       code: modo
