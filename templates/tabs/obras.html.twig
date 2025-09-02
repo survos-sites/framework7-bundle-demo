@@ -1,4 +1,4 @@
-<div class="block">
+<div>
     {% set store = t %}
     {% set globals = {
         icons: {
@@ -9,7 +9,7 @@
         }
     } %}
 
-{{ _self }}
+    {# {{ _self }} #}
     <twig:dexie
             refreshEvent="tab-{{ t }}-show"
             :store="store"
@@ -22,8 +22,8 @@
         </twig:block>
 
         <twig:block name="twig_template" id="hack_to_get_raw_data">
-            {# <h1>{{ storeName }}</h1> <!-- passed in from dexie --> #}
-            <div class="list media-list inset" style="padding: 0px;margin: 0px;">
+            {# <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ storeName }}</h1> <!-- passed in from dexie --> #}
+            <div class="list media-list list-dividers list-outline list-strong inset margin-vertical">
                 <ul>
                     {% for row in rows %}
                         {# Robust "has audio" check #}
@@ -32,8 +32,9 @@
 {#                            or ((row.audioCodes ?? [])|length > 0)#}
 {#                            or (row.audio ?? false) %}#}
 
-                        <li class="swipeout">
-                            <a href="/pages/obra/{{ row.code }}" class="item-link item-content">
+                    <li>
+                        <a href="/pages/obra/{{ row.code }}" class="item-link">
+                            <div class="item-content">
                                 <div class="item-media">
 
                                     {% set thumb = row.thumbnailUrl %}
@@ -45,29 +46,23 @@
                                     {#                                        {% if i.thumbnailUrl %}{% set thumb = i.thumbnailUrl %}{% endif %} #}
                                     {#                                    {% endfor %} #}
 
-                                    <img src="{{ thumb ?: baseurl ~ '/images/80.png' }}"
-                                         width="80" height="80"
-                                         style="border-radius: 8px; object-fit: cover;"
-                                    />
+                                    <img class="size-80 mask mask-squircle object-fit-cover" src="{{ thumb ?: baseurl ~ '/images/80.png' }}" loading="lazy" />
 
                                     {#                                    {% if thumb %} #}
-                                    {#                                        <img class="lazy" width="80" height="80" data-src="{{ thumb }}" style="border-radius: 8px; object-fit: cover;" /> #}
+                                    {#                                        <img class="size-80 mask mask-squircle object-fit-cover" src="{{ thumb }}" loading="lazy" /> #}
                                     {#                                    {% else %} #}
-                                    {#                                        <img class="lazy" width="80" height="80" data-src="{{ baseurl }}/images/80.png" alt="No image" style="border-radius: 8px; object-fit: cover;" /> #}
+                                    {#                                        <img class="size-80 mask mask-squircle object-fit-cover" src="{{ baseurl }}/images/80.png" loading="lazy" alt="No image" /> #}
                                     {#                                    {% endif %} #}
                                 </div>
 
-                                <div class="item-inner" style="row-gap:.15rem;">
+                                <div class="item-inner">
                                     <!-- Row 1: Title + compact meta (size/price/audio) -->
-                                    <div class="item-title-row" style="align-items:flex-start;">
-                                        <div class="item-title" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.1;">
-                                            <b>{{ row.title|title }}</b>
-
+                                    <div class="item-title-row">
+                                        <div class="item-title multi-line-text">
+                                            <span class="font-serif font-weight-600">{{ row.title|title }}</span>
                                             {% if row.size %}
-                                                <span class="badge color-gray" title="Size">{{ row.size }}</span>
+                                                <span class="badge color-primary" title="Size">{{ row.size }}</span>
                                             {% endif %}
-                                            
-
                                         </div>
                                         <div class="item-after" style="display:flex;gap:.25rem;align-items:center;flex-wrap:nowrap;">
                                             {% if row.youtubeId %}
@@ -78,7 +73,7 @@
                                 AUDIO
 
                                                     {{ globals.icons.headphones }}
-                                                
+
                                             {% endif %}
                                             {% if row.price %}
                                                 <span class="badge color-blue" title="Price">{{ row.price }}</span>
@@ -115,6 +110,7 @@
                                             #}
                                         </div>
                                     {% endif %}
+                                </div>
                                 </div>
                             </a>
                         </li>

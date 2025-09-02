@@ -1,5 +1,5 @@
-<div class="block">
-    <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
+<div>
+    <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.%s'|format(t)|trans }}</h1>
         {% set store = 'locations' %}
         {% set globals = {
             icons: {
@@ -10,9 +10,11 @@
             }
         } %}
 
-    MAP GOES HERE!
+            <div class="block block-outline block-strong inset margin-vertical">
+                <twig:ux:map :center="[0,0]" zoom="3" data-controller="mymap" id="my-map" style="aspect-ratio: 16/9; border-radius: var(--f7-block-inset-border-radius); width: 100%;" />
+            </div>
 
-    <twig:dexie
+            <twig:dexie
                 refreshEvent="tab-{{ t }}-show"
                 :store="store"
                 :globals="globals"
@@ -24,12 +26,21 @@
             </twig:block>
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
-                <div class="list custom-list-content">
+                <div class="list media-list list-dividers list-outline list-strong inset margin-vertical">
                     <ul>
                     {% for row in rows %}
                         <li>
-                            <b>{{ row.name|default(row.label)|title }}</b>
-                            {{ row.lat }},{{ row.lng }}
+                            <a href="/pages/location/{{ row.code }}" class="item-link">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title font-serif font-weight-600">{{ row.name|default(row.label)|title }}</div>
+                                        </div>
+                                        <div class="item-text">{{ row.address|default('') }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
                     {% endfor %}
                     </ul>
                 </div>
@@ -38,3 +49,9 @@
 
         </twig:dexie>
 </div>
+
+<script>
+
+</script>
+
+

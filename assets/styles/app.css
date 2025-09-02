@@ -141,3 +141,11 @@
 .white-space-normal {
     white-space: normal !important;
 }
+
+.multi-line-text {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+    word-break: break-word !important;
+}

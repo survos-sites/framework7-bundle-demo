@@ -1,11 +1,12 @@
-// assets/controllers/mymap_controller.js
-
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
     connect() {
+        this._boundOnConnect = this._onConnect.bind(this);
+        this._boundOnDbReady = this._onDbReady.bind(this);
+
         this.element.addEventListener('ux:map:pre-connect', this._onPreConnect);
-        this.element.addEventListener('ux:map:connect', this._onConnect);
+        this.element.addEventListener('ux:map:connect', this._boundOnConnect);
         this.element.addEventListener('ux:map:marker:before-create', this._onMarkerBeforeCreate);
         this.element.addEventListener('ux:map:marker:after-create', this._onMarkerAfterCreate);
         this.element.addEventListener('ux:map:info-window:before-create', this._onInfoWindowBeforeCreate);
@@ -14,12 +15,23 @@ export default class extends Controller {
         this.element.addEventListener('ux:map:polygon:after-create', this._onPolygonAfterCreate);
         this.element.addEventListener('ux:map:polyline:before-create', this._onPolylineBeforeCreate);
         this.element.addEventListener('ux:map:polyline:after-create', this._onPolylineAfterCreate);
+
+        this.mapReady = new Promise(resolve => {
+            this._resolveMapReady = resolve;
+        });
+        this.dbReady = new Promise(resolve => {
+            this._resolveDbReady = resolve;
+        });
+        Promise.all([this.mapReady, this.dbReady]).then(() => {
+            this._addMarkersFromDb();
+        });
+
+        document.addEventListener('dbready', this._boundOnDbReady);
     }
 
     disconnect() {
-        // You should always remove listeners when the controller is disconnected to avoid side effects
         this.element.removeEventListener('ux:map:pre-connect', this._onPreConnect);
-        this.element.removeEventListener('ux:map:connect', this._onConnect);
+        this.element.removeEventListener('ux:map:connect', this._boundOnConnect);
         this.element.removeEventListener('ux:map:marker:before-create', this._onMarkerBeforeCreate);
         this.element.removeEventListener('ux:map:marker:after-create', this._onMarkerAfterCreate);
         this.element.removeEventListener('ux:map:info-window:before-create', this._onInfoWindowBeforeCreate);
@@ -28,6 +40,38 @@ export default class extends Controller {
         this.element.removeEventListener('ux:map:polygon:after-create', this._onPolygonAfterCreate);
         this.element.removeEventListener('ux:map:polyline:before-create', this._onPolylineBeforeCreate);
         this.element.removeEventListener('ux:map:polyline:after-create', this._onPolylineAfterCreate);
+
+        document.removeEventListener('dbready', this._boundOnDbReady);
+    }
+
+    _onDbReady(event) {
+        console.log("Dexie DB ready");
+        this._resolveDbReady();
+    }
+
+    _addMarkersFromDb() {
+        console.log("Both map and DB are ready, adding markers...");
+        let bounds = [];
+        window.db.locations.toArray().then(locations => {
+            locations.forEach(location => {
+                if (location.lat && location.lng && location.lat !== 0 && location.lng !== 0) {
+                    bounds.push([location.lat, location.lng]);
+                    let content = `
+                        <div>
+                            <div class="font-serif font-weight-900" style="font-size: 18px;">${location.label}</div>
+                            <div class="margin-top-half">${location.address || ''}</div>
+                            <a href="/pages/location/${location.code}" class="button button-fill button-round margin-top-half color-primary text-color-white">View Details</a>
+                        </div>
+                    `;
+                    this.L.marker([location.lat, location.lng]).addTo(this.map).bindPopup(content);
+                }
+            });
+        })
+        .then(() => {
+            if (bounds.length > 0) {
+                this.map.fitBounds(bounds);
+            }
+        });
     }
 
     /**
@@ -35,7 +79,7 @@ export default class extends Controller {
      * You can use this event to configure the map before it is created
      */
     _onPreConnect(event) {
-        console.log(event.detail.options);
+        console.log(event.detail);
     }
 
     /**
@@ -43,28 +87,16 @@ export default class extends Controller {
      * The instances depend on the renderer you are using.
      */
     _onConnect(event) {
+        this.map = event.detail.map; // Leaflet Map Instance
+        this.L = event.detail.L; // Leaflet Library
+
+        this._resolveMapReady();
+
         // console.log(event.detail.map);
         // console.log(event.detail.markers);
         // console.log(event.detail.infoWindows);
         // console.log(event.detail.polygons);
         // console.log(event.detail.polylines);
-
-        //get locations from dexie db and add markers
-        var bounds = [];
-        window.db.expos.toArray().then(locations => {
-            locations.forEach(location => {
-            if (location.lat && location.lng && location.lat !== 0 && location.lng !== 0) {
-                bounds.push([location.lat, location.lng]);
-                //prepare popup content : must show location name and a button to show details using href
-                let content = `<div>${location.name}</div><a href="/pages/location/${location.id}" class="button">Details</a>`;
-                L.marker([location.lat, location.lng]).addTo(event.detail.map).bindPopup(content);
-            }
-            });
-        }).then(() => {
-            if (bounds.length > 0) {
-            event.detail.map.fitBounds(bounds);
-            }
-        });
     }
 
     /**
@@ -72,11 +104,33 @@ export default class extends Controller {
      * You can use this event to fine-tune it before its creation.
      */
     _onMarkerBeforeCreate(event) {
-        console.log(event.detail.definition);
+        //console.log(event.detail.definition);
         // { title: 'Paris', position: { lat: 48.8566, lng: 2.3522 }, ... }
 
         // Example: uppercase the marker title
-        event.detail.definition.title = event.detail.definition.title.toUpperCase();
+        //event.detail.definition.title = event.detail.definition.title.toUpperCase();
+
+        /*
+        console.log('_onMarkerBeforeCreate');
+
+        const { definition, L } = event.detail;
+
+        // Use a custom icon for the marker
+        const redIcon = L.icon({
+          // Note: instead of using a hardcoded URL, you can use the `extra` parameter from `new Marker()` (PHP) and access it here with `definition.extra`.
+          iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
+          shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+          iconSize: [38, 95], // size of the icon
+          shadowSize: [50, 64], // size of the shadow
+          iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        })
+
+        definition.bridgeOptions = {
+          icon: redIcon,
+        }
+        */
     }
 
     /**
@@ -153,4 +207,6 @@ export default class extends Controller {
         // The polyline instance
         console.log(event.detail.polyline);
     }
+
+
 }
