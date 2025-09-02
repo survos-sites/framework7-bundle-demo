@@ -20,6 +20,7 @@ survos_fw:
         - map
         - artists
         - obras
+        - info
       #          - share
       #          - scan
       database: chijal
