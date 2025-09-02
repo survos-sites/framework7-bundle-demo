@@ -13,7 +13,7 @@
         "ext-intl": "*",
         "bizkit/versioning-bundle": "^1.2.1",
         "doctrine/dbal": "^4.3.2",
-        "doctrine/doctrine-bundle": "^2.15.1",
+        "doctrine/doctrine-bundle": "^2.16.0",
         "doctrine/doctrine-migrations-bundle": "^3.4.2",
         "doctrine/orm": "^3.5.2",
         "endroid/qr-code-bundle": "^6.0",
