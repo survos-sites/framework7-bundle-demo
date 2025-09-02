@@ -19,6 +19,18 @@
     {% endblock %}
 
     {% block javascripts %}
+
+        <script>
+            if (location.search.includes('debug')) {
+                window.addEventListener('DOMContentLoaded', function () {
+                    var s = document.createElement('script');
+                    s.src = 'https://cdn.jsdelivr.net/npm/eruda';
+                    s.onload = function () { eruda.init(); };
+                    document.body.appendChild(s);
+                });
+            }
+        </script>
+
         {# perhaps the entry point should be configurable, since it might be mobile_app.  Also, configure if pwa is called #}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
