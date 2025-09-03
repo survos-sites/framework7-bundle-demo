@@ -64,8 +64,6 @@ export default class extends MobileController {
             on: {
                 tabShow: (el) => {
                     let eventName = el.id + '-show';
-                    console.error(eventName);
-                    // app.emit(eventName, el);
                     const event = new CustomEvent(eventName, { detail: el.dataset });
                     console.warn("Dispatching: " + eventName);
                     document.dispatchEvent(event);
@@ -83,8 +81,8 @@ export default class extends MobileController {
 
                 },
                 pageBeforeIn: (x) => {
-                    console.log('before ' + x.route.url);
-                    console.warn('pageInBefore: %o', x);
+                    // console.log('before ' + x.route.url);
+                    // console.warn('pageInBefore: %o', x);
                 },
                 init: function () {
                     //bind to dbready event
@@ -166,12 +164,12 @@ export default class extends MobileController {
         });
 
         app.on('pageInit', function (page) {
-            console.error('page', page);
+            // console.error('page', page);
             // do something on page init
         });
         app.on('pageAfterIn', function (page) {
-            console.log("Current url: ");
-            console.log(page.route.url);
+            // console.log("Current url: ");
+            // console.log(page.route.url);
         });
         window.app = app;
     }
