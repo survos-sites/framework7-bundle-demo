@@ -108,7 +108,12 @@
               </div>
             {% endif %}
 
+              {% for image in data.images %}
+                  {{ image|json_encode }}
+                  <img src="{{ data.images[0].resized.large }}" alt="{{ data.title|e }}"
+                       style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
 
+              {% endfor %}
 
 {#            {% if data.images is defined and data.images[0] is defined and data.images[0].resized is defined and data.images[0].resized.large is defined %}#}
 {#              <div class="obra-image-container" style="text-align: center; margin-bottom: 16px;">#}
