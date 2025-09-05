@@ -36,6 +36,12 @@
             <address class="font-style-normal">
                 <div>{{ data.address }}</div>
             </address>
+            <div data-controller="checkin" data-checkin-location-id-value="{{ data.code }}" class="margin-top">
+              <button data-checkin-target="button" data-action="click->checkin#checkIn" class="button button-fill button-large button-round">
+                <span data-checkin-target="buttonIcon" style="line-height: 1;"></span>
+                <span data-checkin-target="buttonLabel"></span>
+              </button>
+            </div>
         </div>
 
         <h3 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Obras</h3>
@@ -132,4 +138,5 @@
 
     </twig:dexie>
   </twig:block>
+
 </twig:SurvosFw:Framework7Page>

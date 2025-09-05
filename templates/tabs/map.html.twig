@@ -34,7 +34,10 @@
                                 <div class="item-content">
                                     <div class="item-inner">
                                         <div class="item-title-row">
-                                            <div class="item-title font-serif font-weight-600">{{ row.name|default(row.label)|title }}</div>
+                                            <div class="item-title font-serif font-weight-600 white-space-normal">{{ row.name|default(row.label)|title }}</div>
+                                            <div class="item-after">
+                                                <span data-controller="checkin" data-checkin-location-id-value="{{ row.code }}" data-checkin-target="statusLabel" class="badge color-green"></span>
+                                            </div>
                                         </div>
                                         <div class="item-text">{{ row.address|default('') }}</div>
                                     </div>

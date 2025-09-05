@@ -27,6 +27,11 @@ export default class extends Controller {
         });
 
         document.addEventListener('dbready', this._boundOnDbReady);
+
+        this._icons = {
+            mapPinNotCheckedIn: '/images/map-pin-chijal.svg',
+            mapPinCheckedIn: '/images/map-pin-chijal-checked-in.svg'
+        };
     }
 
     disconnect() {
@@ -49,37 +54,46 @@ export default class extends Controller {
         this._resolveDbReady();
     }
 
-    _addMarkersFromDb() {
+    async _addMarkersFromDb() {
         console.log("Both map and DB are ready, adding markers...");
         let bounds = [];
-        let customMarkerIcon = this.L.icon({
-            iconUrl: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIxLjIxOSIgeDI9IjEzLjIwMiIgeTE9Ii0yLjg1NyIgeTI9IjE2LjU0OSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxLjMzMzMzMzMgMCAwIDEuNDExNzIzMiAtMy45OTk5OTk5IC0yLjgyMzQ0NjQpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNmOTdkYmQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZDcyNTdkIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiIiB4MT0iOS43OSIgeDI9IjEyLjM5NCIgeTE9IjkuNzIxIiB5Mj0iMTIuNDI4IiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDEuMzMzMzMzIDAgMCAxLjMzMzQgLTMuOTk5OTk5IC0yLjI3NTE0OTgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNmZGZkZmQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmVjYmU2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNMTIgMEE5Ljk5OTk5OCAxMC41ODc5MjQgMCAwIDAgMiAxMC41ODc5MjRjMCAyLjcyNzQ0OSAxLjQxODY2NyA1LjM2NDU0OCAzLjAyNCA3LjUwNDcyMSAxLjYyNjY2NiAyLjE2OTgxIDMuNTcwNjY2IDMuOTkzNzY0IDQuODczMzMyIDUuMTEzMjYxIDEuMjM0NjY4IDEuMDU4NzkyIDIuOTcwNjY4IDEuMDU4NzkyIDQuMjA1MzMyIDAgMS4zMDI2NjctMS4xOTQ5NyAzLjI0NjY2Ny0yLjk0MzQ0MyA0Ljg3MzMzMy01LjExMzI2MSAxLjYwNTMzNC0yLjEzODc2MSAzLjAyNC00Ljc3NzI3MiAzLjAyNC03LjUwNDcyMUE5Ljk5OTk5OCAxMC41ODc5MjQgMCAwIDAgMTIgMCIvPgogIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0xNS4zMzMzMyAxMC4zOTIxNWEzLjMzMzMzNCAzLjMzMzUgMCAxIDEtNi42NjY2NjYgMCAzLjMzMzMzNCAzLjMzMzUgMCAwIDEgNi42NjY2NjYgMCIvPgo8L3N2Zz4=',
-            iconSize: [32, 32],
-            iconAnchor: [16, 32],
-            popupAnchor: [0, -32]
-        })
-        window.db.locations.toArray().then(locations => {
-            locations.forEach(location => {
-                if (location.lat && location.lng && location.lat !== 0 && location.lng !== 0) {
-                    bounds.push([location.lat, location.lng]);
-                    let content = `
-                        <div>
-                            <div class="font-serif font-weight-900" style="font-size: 18px;">${location.label}</div>
-                            <div class="margin-top-half">${location.address || ''}</div>
-                            <a href="/pages/location/${location.code}" class="button button-fill button-round margin-top-half color-primary text-color-white">View Details</a>
-                        </div>
-                    `;
-                    this.L.marker([location.lat, location.lng], {
-                        icon: customMarkerIcon
-                    }).addTo(this.map).bindPopup(content);
-                }
-            });
-        })
-        .then(() => {
-            if (bounds.length > 0) {
-                this.map.fitBounds(bounds);
+
+        const locations = await window.db.locations.toArray();
+
+        for (const location of locations) {
+            if (location.lat && location.lng && location.lat !== 0 && location.lng !== 0) {
+                bounds.push([location.lat, location.lng]);
+
+                let hasCheckedIn = await window.db.checkins
+                    .where('locationCode')
+                    .equals(location.code)
+                    .first();
+
+                let customMarkerIcon = this.L.icon({
+                    iconUrl: hasCheckedIn ? this._icons.mapPinCheckedIn : this._icons.mapPinNotCheckedIn,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32]
+                });
+
+                let content = `
+                    <div>
+                        <div class="font-serif font-weight-900" style="font-size: 18px;">${location.label}</div>
+                        <div class="margin-top-half">${location.address || ''}</div>
+                        <div class="margin-top-half" style="font-size: 12px; opacity: 0.5;">${hasCheckedIn ? `You have visited here on ${new Date(hasCheckedIn.timestamp).toLocaleString(undefined, { dateStyle: 'long', timeStyle: 'short' })}` : ''}</div>
+                        <a href="/pages/location/${location.code}" class="button button-fill button-round margin-top-half color-primary text-color-white">View Details</a>
+                    </div>
+                `;
+
+                this.L.marker([location.lat, location.lng], {
+                    icon: customMarkerIcon
+                }).addTo(this.map).bindPopup(content);
             }
-        });
+        }
+
+        if (bounds.length > 0) {
+            this.map.fitBounds(bounds);
+        }
     }
 
     /**
