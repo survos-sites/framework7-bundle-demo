@@ -40,6 +40,9 @@ survos_fw:
         - name: checkins
           schema: locationCode,timestamp
           url: null
+        - name: claps
+          schema: obraCode,clapsCount
+          url: null
 
     modo: # configuration code for database, etc.
       code: modo

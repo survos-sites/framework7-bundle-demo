@@ -101,6 +101,17 @@
           </div>
         </div>
 
+        <div class="block block-outline block-strong inset margin-vertical no-margin-horizontal">
+          <div class="display-flex justify-content-space-between align-items-center">
+            <span>Appreciate this artwork</span>
+            <clap-button data-controller="clap" data-action="clap->clap#addClap" data-clap-obra-id-value="{{ data.code }}" value="0" step="1" max="0">
+              <span slot="icon">👏</span>
+              <span slot="count"></span>
+              <span slot="label">Claps</span>
+            </clap-button>
+          </div>
+        </div>
+
         {% set description = data.content[locale] %}
         {% if description %}
         <h4 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Description</h4>
