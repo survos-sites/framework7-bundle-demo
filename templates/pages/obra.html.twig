@@ -45,6 +45,23 @@
         <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom no-padding-horizontal white-space-normal">{{ data.title }}</h1>
         <h2 class="block-title block-title-medium no-margin-horizontal no-margin-top text-color-black white-space-normal" style="opacity: 0.5;">{{ data.artist.name|title }}</h2>
 
+        <!-- YouTube Video Card (if available) -->
+        {% if data.youtubeId %}
+        <h4 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Video</h4>
+        <div class="block margin-vertical no-margin-horizontal no-padding">
+          {% set youtubeUrl = 'https://www.youtube.com/embed/' ~data.youtubeId %}
+          <iframe id="yt-iframe" src="{{ youtubeUrl }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="aspect-ratio: 16 / 9; border-radius: 16px;"></iframe>
+          <!--
+          <a id="yt-fallback" href="{{ youtubeUrl }}" target="_blank" class="button button-fill button-round color-black external">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="m10 15l5.19-3L10 9zm11.56-7.83c.13.47.22 1.1.28 1.9c.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83c-.25.9-.83 1.48-1.73 1.73c-.47.13-1.33.22-2.65.28c-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44c-.9-.25-1.48-.83-1.73-1.73c-.13-.47-.22-1.1-.28-1.9c-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83c.25-.9.83-1.48 1.73-1.73c.47-.13 1.33-.22 2.65-.28c1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44c.9.25 1.48.83 1.73 1.73" />
+            </svg>
+            <span style="margin-inline-start: 4px;">Watch on YouTube</span>
+          </a>
+          -->
+        </div>
+        {% endif %}
+
         <!-- Main Obra Card -->
         <div class="card card-outline no-margin-horizontal">
           <div class="card-content card-content-padding">
@@ -191,21 +208,6 @@
             </div>
           </div>
           {% endif %}
-
-        <!-- YouTube Video Card (if available) -->
-        {% if data.youtubeId %}
-        <h4 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Video</h4>
-        <div class="block margin-vertical no-margin-horizontal no-padding">
-          {% set youtubeUrl = 'https://www.youtube.com/embed/' ~data.youtubeId %}
-          <iframe id="yt-iframe" src="{{ youtubeUrl }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="aspect-ratio: 16 / 9; border-radius: 16px;"></iframe>
-          <a id="yt-fallback" href="{{ youtubeUrl }}" target="_blank" class="button button-fill button-round color-black external">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-              <path fill="currentColor" d="m10 15l5.19-3L10 9zm11.56-7.83c.13.47.22 1.1.28 1.9c.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83c-.25.9-.83 1.48-1.73 1.73c-.47.13-1.33.22-2.65.28c-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44c-.9-.25-1.48-.83-1.73-1.73c-.13-.47-.22-1.1-.28-1.9c-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83c.25-.9.83-1.48 1.73-1.73c.47-.13 1.33-.22 2.65-.28c1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44c.9.25 1.48.83 1.73 1.73" />
-            </svg>
-            <span style="margin-inline-start: 4px;">Watch on YouTube</span>
-          </a>
-        </div>
-        {% endif %}
         <!-- twig_obra_template -->
 
         <!-- Simple sync with audio controls -->
