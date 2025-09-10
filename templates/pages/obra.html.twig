@@ -47,7 +47,7 @@
 
         <!-- YouTube Video Card (if available) -->
         {% if data.youtubeId %}
-        <h4 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Video</h4>
+        <!--<h4 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Video</h4>-->
         <div class="block margin-vertical no-margin-horizontal no-padding">
           {% set youtubeUrl = 'https://www.youtube.com/embed/' ~data.youtubeId %}
           <iframe id="yt-iframe" src="{{ youtubeUrl }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="aspect-ratio: 16 / 9; border-radius: 16px;"></iframe>
@@ -60,6 +60,14 @@
           </a>
           -->
         </div>
+        {% endif %}
+
+        {% if audioUrl %}
+          <div class="audio-container">
+            <audio id="obra-audio" src="{{ audioUrl|e }}" controls preload="auto">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
         {% endif %}
 
         <!-- Main Obra Card -->
@@ -161,74 +169,13 @@
             {% set heroSrc = data.thumbnailUrl %}
           {% endif %}
 
-        {% if heroSrc or audioUrl %}
-          <h4 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Audio</h4>
-          <div class="block block-outline block-strong inset margin-vertical no-margin-horizontal no-padding">
-            <div class="obra-image-container" style="position:relative; text-align:center;">
-              {% if heroSrcc %}
-                <img src="{{ heroSrc }}" alt="{{ data.title|e }}"
-                      style="max-width:100%; height:auto; border-radius: 16px;">
-              {% else %}
-                <!-- Placeholder for audio-only obras -->
-                <div style="width:100%; height:300px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:16px; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2em; font-weight:500;">
-                </div>
-              {% endif %}
-              {% if audioUrl %}
-                <!-- Big center Play/Pause button -->
-                <button type="button"
-                        id="obra-hero-toggle"
-                        class="button button-large button-fill"
-                        style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);
-                    border-radius:50%; width:70px; height:70px; padding:0; line-height:1; box-shadow:0 6px 16px rgba(0,0,0,.25);"
-                        onclick="
-                          var audio = document.getElementById('obra-audio');
-                          var playIcon = document.getElementById('obra-play-icon');
-                          var pauseIcon = document.getElementById('obra-pause-icon');
-                          if (audio.paused) {
-                            audio.play();
-                            playIcon.style.display = 'none';
-                            pauseIcon.style.display = 'inline-block';
-                            this.style.background = 'rgba(0, 0, 0, 0.7)';
-                          } else {
-                            audio.pause();
-                            playIcon.style.display = 'inline-block';
-                            pauseIcon.style.display = 'none';
-                            this.style.background = 'rgba(0, 0, 0, 0.7)';
-                          }
-                        ">
-                  <span id="obra-play-icon" class="play-icon" style="margin: 0;">{{ globals.icons.play }}▶</span>
-                  <span id="obra-pause-icon" class="pause-icon" style="display: none; margin: 0; margin-left: 0 !important;">{{ globals.icons.pause }}⏸</span>
-                </button>
-                <div class="audio-container">
-                  <audio id="obra-audio" style="display: none;" src="{{ audioUrl|e }}">
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
-              {% endif %}
-            </div>
-          </div>
-          {% endif %}
+
+
+
+
         <!-- twig_obra_template -->
 
         <!-- Simple sync with audio controls -->
-        {% if audioUrl %}
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-              var audio = document.getElementById('obra-audio');
-              var button = document.getElementById('obra-hero-toggle');
-              var playIcon = document.getElementById('obra-play-icon');
-              var pauseIcon = document.getElementById('obra-pause-icon');
-
-              if (audio && button && playIcon && pauseIcon) {
-                  audio.addEventListener('ended', function() {
-                      playIcon.style.display = 'inline-block';
-                      pauseIcon.style.display = 'none';
-                      button.style.background = 'rgba(0, 0, 0, 0.7)';
-                  });
-              }
-          });
-        </script>
-        {% endif %}
 
         {% if data.youtubeId %}
         <script>

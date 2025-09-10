@@ -149,3 +149,38 @@
     overflow: hidden !important;
     word-break: break-word !important;
 }
+
+/* Native Audio Player */
+
+audio {
+    border: 1px solid var(--f7-block-outline-border-color);
+    border-radius: 999px;
+    display: block;
+    width: 100%;
+}
+
+audio::-webkit-media-controls-panel {
+    background: var(--f7-block-strong-bg-color);
+}
+
+audio::-webkit-media-controls-play-button {
+    border-radius: 50%;
+    background-color: var(--f7-md-surface-5);
+}
+
+audio::-webkit-media-controls-timeline {
+    background: var(--f7-md-surface-5);
+    border-radius: 999px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+audio::-webkit-media-controls-mute-button {
+    border-radius: 50%;
+    background-color: var(--f7-md-surface-5);
+}
+
+audio::-webkit-media-controls-volume-control-container {
+    background: var(--f7-md-surface-5);
+    border-radius: 999px;
+}
