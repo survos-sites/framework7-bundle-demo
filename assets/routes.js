@@ -29,6 +29,12 @@ export default (
         path: '/pages/:page/:id',
         url: './pages/{{page}}',
         // componentUrl: './pages/obra',
+        beforeEnter: function(ctx) {
+            if (ctx.from.params.page) {
+                app.views.main.router.removePage(ctx.router.currentPageEl);
+            }
+            ctx.resolve();
+        }
     },
     {
         path: '/pages/:page',
