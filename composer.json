@@ -27,7 +27,7 @@
         "survos/auth-bundle": ">=1.6.44",
         "survos/command-bundle": "^1.6.44",
         "survos/crawler-bundle": ">=1.6.44",
-        "survos/fw-bundle": "dev-main",
+        "survos/fw-bundle": "^2.0.5",
         "survos/js-twig-bundle": "dev-main",
         "symfony/asset": "^7.3",
         "symfony/asset-mapper": "^7.3.3",

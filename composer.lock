@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d44c7247c46c573b6f71eeb05141e6f",
+    "content-hash": "4fc141e6f946a689256e166dc1f1437c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4411,34 +4411,34 @@
         },
         {
             "name": "survos/fw-bundle",
-            "version": "dev-main",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/fw-bundle.git",
-                "reference": "0633b08cc23eeaf7c50d31a151e553cee9f242be"
+                "reference": "bb16b72c330b098e2dc8a7568d305901939c45f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/0633b08cc23eeaf7c50d31a151e553cee9f242be",
-                "reference": "0633b08cc23eeaf7c50d31a151e553cee9f242be",
+                "url": "https://api.github.com/repos/survos/fw-bundle/zipball/bb16b72c330b098e2dc8a7568d305901939c45f9",
+                "reference": "bb16b72c330b098e2dc8a7568d305901939c45f9",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu-bundle": "^3.2",
-                "php": "^8.3",
+                "php": "^8.4",
                 "survos/core-bundle": "^1.5",
                 "symfony/config": "^7.3",
-                "symfony/console": "^7.3-BETA2",
+                "symfony/console": "^7.3",
                 "symfony/dependency-injection": "^7.3",
                 "symfony/event-dispatcher": "^7.3",
                 "symfony/http-kernel": "^7.3",
-                "symfony/options-resolver": "^7.2",
-                "symfony/ux-twig-component": "^2.22",
+                "symfony/options-resolver": "^7.3",
+                "symfony/ux-twig-component": "^2.8",
                 "twig/twig": "^3.4"
             },
             "require-dev": {
                 "phpstan/phpstan": "^2.0",
-                "survos/auth-bundle": "^1.6",
+                "survos/auth-bundle": "^1.5",
                 "symfony/browser-kit": "^7.3",
                 "symfony/framework-bundle": "^7.3",
                 "symfony/phpunit-bridge": "^7.3",
@@ -4449,7 +4449,6 @@
             "suggest": {
                 "intl-extra": "For better performance, install the intl-extra package to use the IntlDateFormatter class."
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -4466,7 +4465,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/fw-bundle/issues",
-                "source": "https://github.com/survos/fw-bundle/tree/main"
+                "source": "https://github.com/survos/fw-bundle/tree/2.0.5"
             },
             "funding": [
                 {
@@ -4474,7 +4473,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-05T11:32:20+00:00"
+            "time": "2025-09-10T15:07:43+00:00"
         },
         {
             "name": "survos/installer",
@@ -11777,16 +11776,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "12.3.6",
+            "version": "12.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "da2cdaff87220fa641e7652364281b736e4347e0"
+                "reference": "bbede0f5593dad37af3be6a6f8e6ae1885e8a0a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/da2cdaff87220fa641e7652364281b736e4347e0",
-                "reference": "da2cdaff87220fa641e7652364281b736e4347e0",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/bbede0f5593dad37af3be6a6f8e6ae1885e8a0a9",
+                "reference": "bbede0f5593dad37af3be6a6f8e6ae1885e8a0a9",
                 "shasum": ""
             },
             "require": {
@@ -11842,7 +11841,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.3.6"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.3.7"
             },
             "funding": [
                 {
@@ -11862,7 +11861,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-02T05:23:14+00:00"
+            "time": "2025-09-10T09:59:06+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -13940,7 +13939,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "spomky-labs/pwa-bundle": 20,
-        "survos/fw-bundle": 20,
         "survos/js-twig-bundle": 20
     },
     "prefer-stable": true,
