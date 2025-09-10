@@ -23,13 +23,15 @@ export default class extends Controller {
         };
 
         this._updateUI();
+
+        document.addEventListener('page:afterin', this._updateUI);
     }
 
     disconnect() {
-
+        document.removeEventListener('page:afterin', this._updateUI);
     }
 
-    async _updateUI() {
+    _updateUI = async () => {
         try {
             const hasCheckedIn = await this._getCheckIn();
 

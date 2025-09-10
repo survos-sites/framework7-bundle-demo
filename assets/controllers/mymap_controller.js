@@ -32,6 +32,8 @@ export default class extends Controller {
             mapPinNotCheckedIn: '/images/map-pin-chijal.svg',
             mapPinCheckedIn: '/images/map-pin-chijal-checked-in.svg'
         };
+
+        document.addEventListener('page:afterin', this._addMarkersFromDb);
     }
 
     disconnect() {
@@ -47,6 +49,8 @@ export default class extends Controller {
         this.element.removeEventListener('ux:map:polyline:after-create', this._onPolylineAfterCreate);
 
         document.removeEventListener('dbready', this._boundOnDbReady);
+
+        document.removeEventListener('page:afterin', this._addMarkersFromDb);
     }
 
     _onDbReady(event) {
@@ -54,7 +58,7 @@ export default class extends Controller {
         this._resolveDbReady();
     }
 
-    async _addMarkersFromDb() {
+    _addMarkersFromDb = async () => {
         console.log("Both map and DB are ready, adding markers...");
         let bounds = [];
 
