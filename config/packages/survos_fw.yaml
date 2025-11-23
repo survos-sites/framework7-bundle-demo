@@ -13,25 +13,36 @@ survos_fw:
 
     chijal: # previously pgsc
       code: chijal
-      logo: /logos/chijal_logo.jpg
+      logo: /logos/chijal-logo.jpg
       name: Chijal
       tabs:
         - locations
+        - map
         - artists
         - obras
+        - info
       #          - share
       #          - scan
       database: chijal
       stores:
         - name: artists
           schema: code
-          url: https://pgsc.survos.com/{locale}/api/artists
+          url: https://chijal.org/api/artists
+#          url: https://pgsc.wip/api/artists
         - name: locations
           schema: code
-          url: https://pgsc.survos.com/{locale}/api/locations
+          url: https://chijal.org/api/locations
+#          url: https://pgsc.wip/api/locations
         - name: obras
           schema: code,artistCode,locationCode,location.id
-          url: https://pgsc.survos.com/{locale}/api/obras
+          url: https://chijal.org/api/obras
+#          url: https://pgsc.wip/api/obras
+        - name: checkins
+          schema: locationCode,timestamp
+          url: null
+        - name: claps
+          schema: obraCode,clapsCount
+          url: null
 
     modo: # configuration code for database, etc.
       code: modo
@@ -69,4 +80,4 @@ survos_fw:
       stores:
         - name: sacros
           schema: code
-          url: https://pgsc.survos.com/{locale}/api/sacros
+          url: https://chijal.org/api/sacros

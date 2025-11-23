@@ -59,8 +59,9 @@
                         <td>
                             <ol>
                                 {% for data in config.stores %}
-                                    <li><code>{{ data.name }}</code> => <a href="{{ data.url }}"
-                                                                            target="_blank">{{ data.url }}</a></li>
+                                    {% set url = data.url|replace({'{locale}': app.request.locale}) %}
+                                    <li><code>{{ data.name }}</code> => <a href="{{  url }}"
+                                                                            target="_blank">{{ url }}</a></li>
                                 {% endfor %}
                             </ol>
                         </td>

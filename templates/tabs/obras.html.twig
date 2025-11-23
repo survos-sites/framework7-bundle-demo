@@ -1,55 +1,121 @@
-<div class="block">
-        {% set store = t %}
-        {% set globals = {} %}
+<div>
+    {% set store = t %}
+    {% set globals = {
+        icons: {
+            calendar: ux_icon('mdi:calendar',{style: 'height: 1em;'}),
+            artist:ux_icon('mdi:user-star-outline',{style: 'height: 1em;'}),
+            headphones: ux_icon('mdi:headphones',{style: 'height: 1em;'}),
+            location: ux_icon('mdi:location-on-outline',{style: 'height: 1em;'})
+        }
+    } %}
 
-        <twig:dexie
-                refreshEvent="tab-{{ t }}-show"
-                :store="store"
-                :globals="globals"
-                :filter="{}"
-                :caller="_self">
+    {# {{ _self }} #}
+    <twig:dexie
+            refreshEvent="tab-{{ t }}-show"
+            :store="store"
+            :globals="globals"
+            :filter="{}"
+            :caller="_self">
 
-            <twig:block name="title">
-                there are {{ rows|length }} rows
-            </twig:block>
+        <twig:block name="title">
+            there are {{ rows|length }} rows
+        </twig:block>
 
-            <twig:block name="twig_template" id="hack_to_get_raw_data">
-                {# <h1>{{ storeName }}</h1> <!-- passed in from dexie --> #}
-                <div class="list media-list">
-
+        <twig:block name="twig_template" id="hack_to_get_raw_data">
+            {# <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ storeName }}</h1> <!-- passed in from dexie --> #}
+            <div class="list media-list list-dividers list-outline list-strong inset margin-vertical">
                 <ul>
                     {% for row in rows %}
+                        {# Robust "has audio" check #}
+{#                        {% set hasAudio =#}
+{#                            (row.hasAudio ?? false)#}
+{#                            or ((row.audioCodes ?? [])|length > 0)#}
+{#                            or (row.audio ?? false) %}#}
 
-                        <li>
-
-
-
-                            <a  href="/pages/obra/{{ row.code }}" class="item-link item-content">
+                    <li>
+                        <a href="/pages/obra/{{ row.code }}" class="item-link">
+                            <div class="item-content">
                                 <div class="item-media">
-                                    {% if row.images.small %}
-                                        <img style="max-width: 80px" src="{{ row.images.small }}"/>
-                                    {% else %}
-                                        <img style="max-width: 80px" src="{{ baseurl }}/images/80.png" alt="No image available"/>
+
+                                    {% set thumb = row.thumbnailUrl %}
+                                    {% if row.image %}
+                                    {% set thumb = row.image.resized.small %}
+{#                                        {{ thumb }}#}
                                     {% endif %}
+                                    {#                                    {% for i in row.images|slice(0,1) %} #}
+                                    {#                                        {% if i.thumbnailUrl %}{% set thumb = i.thumbnailUrl %}{% endif %} #}
+                                    {#                                    {% endfor %} #}
+
+                                    <img class="size-80 mask mask-squircle object-fit-cover" src="{{ thumb ?: baseurl ~ '/images/80.png' }}" loading="lazy" />
+
+                                    {#                                    {% if thumb %} #}
+                                    {#                                        <img class="size-80 mask mask-squircle object-fit-cover" src="{{ thumb }}" loading="lazy" /> #}
+                                    {#                                    {% else %} #}
+                                    {#                                        <img class="size-80 mask mask-squircle object-fit-cover" src="{{ baseurl }}/images/80.png" loading="lazy" alt="No image" /> #}
+                                    {#                                    {% endif %} #}
                                 </div>
+
                                 <div class="item-inner">
+                                    <!-- Row 1: Title + compact meta (size/price/audio) -->
                                     <div class="item-title-row">
-                                        <div class="item-title">
-                                         <b>{{ row.title|title }}</b>
+                                        <div class="item-title multi-line-text">
+                                            <span class="font-serif font-weight-600">{{ row.title|title }}</span>
+                                            {% if row.size %}
+                                                <span class="badge color-primary" title="Size">{{ row.size }}</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="item-after" style="display:flex;gap:.25rem;align-items:center;flex-wrap:nowrap;">
+                                            {% if row.youtubeId %}
+                                                {# icon? #}
+                                            {% endif %}
+                                            {% set hasAudio = row.audioUrl %}
+                                            {% if hasAudio %}
+                                                    {{ globals.icons.headphones }}
+                                            {% endif %}
+                                            {% if row.price %}
+                                                <span class="badge color-blue" title="Price">{{ row.price|number_format }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
+
+                                    <!-- Row 2: Artist (prominent but compact) -->
+                                    {% if row.artist and row.artist.name %}
+                                        <div class="item-subtitle" style="display:flex;align-items:center;gap:.35rem;line-height:1.1;">
+                                            {# artista #}
+                                           {{ globals.icons.artist }}
+                                            <span style="font-weight:600;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+        {{ row.artist.name }}
+      </span>
+                                            {# Optional tiny audio badge here instead of icon in meta (uncomment to use)
+      {% if hasAudio %}
+        <span class="badge color-green">{{ 'audio' }}</span>
+      {% endif %}
+                                            #}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if row.location and row.location.label %}
+                                        <div class="item-subtitle" style="display:flex;align-items:center;gap:.35rem;line-height:1.1;">
+                                            {{ globals.icons.location }}
+                                            <span style="font-weight:400;letter-spacing:.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+        {{ row.location.label }}
+      </span>
+                                            {# Optional tiny audio badge here instead of icon in meta (uncomment to use)
+      {% if hasAudio %}
+        <span class="badge color-green">{{ 'audio' }}</span>
+      {% endif %}
+                                            #}
+                                        </div>
+                                    {% endif %}
+                                </div>
                                 </div>
                             </a>
-
                         </li>
                     {% endfor %}
                 </ul>
+            </div>
+            <!-- hack_to_get_raw_data -->
+        </twig:block>
 
-                </div>
-
-                there are {{ rows|length }} rows
-                <!-- hack_to_get_raw_data -->
-            </twig:block>
-
-        </twig:dexie>
+    </twig:dexie>
 </div>

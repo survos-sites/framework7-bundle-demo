@@ -1,0 +1,111 @@
+pwa:
+    image_processor: 'pwa.image_processor.imagick'
+    #image_processor: 'pwa.image_processor.gd'
+    #logger: 'App\Service\PwaLogger'
+#    user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'
+    #native:
+    #    enabled: true
+    #    user_agent: 'Google Chrome'
+    #    header_name: 'sec-ch-ua'
+    favicons:
+        enabled: true
+        src: "images/pwabundlelogo.svg"
+        tile_color: "#FCFCFC"
+        use_start_image: true
+        use_silhouette: false
+        safari_pinned_tab_color: "#FCFCFC"
+        low_resolution: true
+        monochrome: true
+        potrace: "potrace"
+    manifest:
+        enabled: true
+        public_url: '/pwa/site.{locale}.webmanifest'
+        background_color: "#FCFCFC"
+        theme_color: "#BE202F"
+        name: 'app.name'
+        short_name: 'app.short_name'
+        description: 'app.description'
+        orientation: "any"
+        display: "standalone"
+        scope: "/"
+        display_override: ['fullscreen', 'minimal-ui', 'window-controls-overlay']
+        id: "pwa-bundle-today"
+        start_url: "app.start_url"
+        icons:
+            - src: "images/pwabundlelogo.svg"
+              format: 'png'
+              sizes: [48, 96, 128, 144, 192, 256, 384, 512]
+              purpose: 'any'
+            - src: "images/pwabundlelogo.svg"
+              format: 'png'
+              sizes: [48, 96, 128, 144, 192, 256, 384, 512]
+              image_scale: 50
+              background_color: "#c3d7f7"
+              purpose: 'maskable'
+        screenshots:
+            - src: "images/wide.png"
+              format: 'png'
+              label: "The homepage"
+            - src: "images/narrow.png"
+              format: 'png'
+              label: "The homepage"
+        categories:
+            - "education"
+            - "utilities"
+        shortcuts:
+            - name: "app.features.geolocation.name"
+              short_name: "app.features.geolocation.short_name"
+              description: "app.features.geolocation.description"
+              url: 'app_feature_geolocation'
+#              icons:
+#                  - src: "icons/location.svg"
+#                    sizes: [48, 96, 128, 144, 192, 256, 384, 512]
+#                    format: 'png'
+        edge_side_panel:
+            preferred_width: 280
+        widgets: []
+        related_applications: []
+        file_handlers:
+            - action: "app_feature_file_handling"
+              accept:
+                  "image/png": [".png"]
+                  "image/jpeg": [".jpg", ".jpeg"]
+                  "image/webm": [".webm"]
+        protocol_handlers:
+            - protocol: "web+pwabundle"
+              placeholder: 'type'
+              url:
+                  path: "app_protocol_handler"
+
+    serviceworker:
+        enabled: true
+        src: "sw.js"
+        skip_waiting: true
+        workbox:
+            enabled: true
+            offline_fallback:
+                page:
+                    path: 'app_homepage'
+                    params:
+                        _locale: 'en_US'
+            resource_caches:
+                - match_callback: 'startsWith: /videos/'
+                  cache_name: 'videos'
+                  strategy: 'CacheFirst'
+                - match_callback: 'navigate'
+                  cache_name: 'pages'
+                  strategy: 'NetworkFirst'
+                  network_timeout: 2
+#                  preload_urls:
+#                      - '@pages'
+            background_sync:
+                - queue_name: 'form'
+                  match_callback: 'startsWith: /form'
+                  method: POST
+                  max_retention_time: 7_200 # 5 days in minutes
+                  force_sync_fallback: true #Optional
+                  broadcast_channel: 'form-list'
+#        background_fetch:
+#            enabled: true
+#            success_message: 'Your download is ready!'
+#            failure_message: 'Your download failed! Please try again.'

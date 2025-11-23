@@ -1,8 +1,8 @@
-
 {#@todo: title icon?#}
 <twig:SurvosFw:Framework7Page :caller="_self"
              :title="'location'|trans"
 >
+
   <twig:block name="title">
     @@title@@
   </twig:block>
@@ -13,12 +13,14 @@
     } %}
 
     {% set queries = {
-      location: {store: 'locations', type: 'find' , id : '{{event.details.id}}' , templateName: 'location'},
-      objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},
+        location: {store: 'locations', type: 'find' , id : '{{event.detail.route.params.id}}' , templateName: 'location'},
     }%}
+{#      objects: {store: 'obras', filters : {locationCode: '{{location.code}}' }, filterType: 'where' , templateName: 'objects'},#}
 
-    <h1>{{ 'tab.location'|trans }}</h1>
+        <!--<h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.location'|trans }}</h1>-->
 
+{#      {{ queries|json_pretty }}#}
+     {# :queries="queries" #}
     <twig:dexie
             refreshEvent="location.refresh"
             :store="store"
@@ -26,31 +28,67 @@
             :globals="globals"
             :caller="_self">
 
-      <twig:block name="location" id="twig_location_template">
-       {% set locale = globals.locale %}
-        <sup>
-{#          {{ data|json_encode }}#}
-          <div class="location-detail">
-            <h1>{{ data.label }}</h1>
-            <p>{{ data.address }}</p>
-            <p>Code: {{ data.code }}</p>
+        <twig:block name="location" id="twig_location_template">
+        {% set locale = globals.locale %}
 
-            @todo: map {{ data.lat }} {{ data.lng }}
+        <div class="block no-margin-horizontal no-padding-horizontal">
+            <h1 class="page-title font-serif font-weight-900 no-margin-bottom no-padding-horizontal white-space-normal" style="color: var(--f7-block-text-color);">{{ data.label }}</h1>
+            <address class="font-style-normal">
+                <div>{{ data.address }}</div>
+            </address>
+            <div data-controller="checkin" data-checkin-location-id-value="{{ data.code }}" class="margin-top">
+              <button data-checkin-target="button" data-action="click->checkin#checkIn" class="button button-fill button-large button-round">
+                <span data-checkin-target="buttonIcon" style="line-height: 1;"></span>
+                <span data-checkin-target="buttonLabel"></span>
+              </button>
+            </div>
+        </div>
 
-          </div>
-        </sup>
+        <h3 class="block-title block-title-large font-serif font-weight-900 text-color-black no-margin-horizontal">Obras</h3>
+        <div class="list media-list list-dividers list-outline list-strong inset margin-vertical no-margin-horizontal">
+          <ul>
+            {% for obra in data.obras %}
+            <li>
+              <a href="/pages/obra/{{ obra.code }}" class="item-link">
+                <div class="item-content">
+                  <div class="item-media">
+                    <img class="mask mask-squircle size-80 object-fit-cover" src="{{ obra.thumbnailUrl }}" />
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title font-serif font-weight-600">{{ obra.title}}</div>
+                    </div>
+                    <div class="item-subtitle">{{ obra.artist.name }}</div>
+                    <div class="item-text">
+                      <span class="badge color-primary">{{ obra.year }}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
         <!-- twig_location_template -->
-      </twig:block>
+        </twig:block>
 
       <twig:block name="objects" id="twig_objects_template">
         <h1>Objects</h1>
         <!-- loop through data array having the objects -->
-        {% for object in data %}
+          {{ data|json_encode }}
+
+          {% for object in data %}
           <div class="object-detail">
             <h1>{{ object.name|title }}</h1>
-            <p>Code: {{ object.code }}</p>
+            <p>Object Code: {{ object.code }}</p>
             {% set description = object.description|default('no description') %}
-            <article>
+
+
+              <article>
+              {% if object.images|length %}
+              {{ object.images[0].small }}
+              {% endif %}
                 {% if object.images is defined and object.images.small is defined %}
                   <img src="{{ object.images.small }}" alt="{{ object.title|e }}" style="max-width: 300px; display: block; margin-bottom: 1em;max-height: 200px;">
                 {% endif %}
@@ -76,11 +114,12 @@
       </twig:block>
 
       <twig:block name="twig_template" id="hack_to_get_raw_data">
+          {{ data|json_encode }}
 
         This is the detail page for some specific location {{ data.code }}
         <div class="location-detail">
           <h1>{{ data.name|title }}</h1>
-          <p>Code: {{ data.code }}</p>
+          <p>CodeXX: {{ data.code }}</p>
           {% set description = data.description|default('no description') %}
 
           <article>
@@ -99,4 +138,5 @@
 
     </twig:dexie>
   </twig:block>
+
 </twig:SurvosFw:Framework7Page>

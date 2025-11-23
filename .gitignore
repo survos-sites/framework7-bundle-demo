@@ -28,4 +28,14 @@ coverage
 drivers
 public/screenshots
 
+.phpunit.cache
 
+###> spomky-labs/pwa-bundle ###
+/public/idb
+/public/pwa
+/public/workbox
+/public/favicon.ico
+/public/site.webmanifest
+/public/site.*.webmanifest
+/public/sw.js
+###< spomky-labs/pwa-bundle ###

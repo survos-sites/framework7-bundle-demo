@@ -21,14 +21,15 @@
     width: 20px;
 }
 
-/* .custom-list-content li { 
+/* .custom-list-content li {
     border: 1px solid var(--f7-text-editor-button-divider-color);
     border-radius: 0.25rem;
 } */
 </style>
 
-<div class="block">
-    <h1>{{ 'tab.%s'|format(t)|trans }}</h1>
+
+<div>
+    <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.%s'|format(t)|trans }}</h1>
         {% set store = t %}
         {% set globals = {
             icons: {
@@ -39,7 +40,7 @@
             }
         } %}
 
-        <twig:dexie
+    <twig:dexie
                 refreshEvent="tab-{{ t }}-show"
                 :store="store"
                 :globals="globals"
@@ -47,29 +48,32 @@
                 :caller="_self">
 
             <twig:block name="title">
-                there are {{ rows|length }} rows
+                 {{ rows|length }} Ubis
             </twig:block>
 
             <twig:block name="twig_template" id="hack_to_get_raw_data">
-                <div class="list custom-list-content">
+                <div class="list media-list list-dividers list-outline list-strong inset margin-vertical">
                     <ul>
-                    {% for row in rows %}
+                    {% for idx, row in rows %}
                         <li>
                             <a href="/pages/location/{{row.code}}" class="item-link">
                                 <div class="item-content">
-                                    <div class="item-inner
-                                    ">
-                                        <div class="item-title
-                                        ">
-                                            <span title=" {{ row.typeString }}">
-                                            {{ globals.icons[row.typeString]|default('') }}
-                                            </span>
-
-                                           <b>{{ row.name|default(row.label)|title }}</b>
+                                    <div class="item-media">
+                                        <span class="media-container size-40" title=" {{ row.type ?? '' }}">
+                                            {{ globals.icons[row.type|upper] ?? '' }}
+                                        </span>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title font-serif font-weight-600 white-space-normal">
+                                                <span>{{ row.name|default(row.label)|title }}</span>
+                                                <span data-controller="checkin" data-checkin-location-id-value="{{ row.code }}" data-checkin-target="statusLabel" data-checkin-status-label-value="✓" class="badge color-green" style="font-family: system-ui;"></span>
+                                            </div>
+                                            <div class="item-after">
+                                                <span class="badge color-primary">{{ row.obraCount|default(row.objCount) }}</span>
+                                            </div>
                                         </div>
-                                        <div class="item-after">
-                                            {{ row.obraCount|default(row.objCount) }}
-                                        </div>
+                                        <div class="item-text">{{ row.barrio ?? '' }}</div>
                                     </div>
                                 </div>
                             </a>

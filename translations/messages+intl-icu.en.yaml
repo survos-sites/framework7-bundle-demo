@@ -5,9 +5,10 @@ tab:
   expo: expo
   sacros: art
 
-
   artists: artists
+  artist: artist
   obras: artwork
+  obra: artwork
   info: info
   sacro: arte
 

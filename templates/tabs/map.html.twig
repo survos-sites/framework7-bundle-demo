@@ -1,0 +1,60 @@
+<div>
+    <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.%s'|format(t)|trans }}</h1>
+        {% set store = 'locations' %}
+        {% set globals = {
+            icons: {
+                REST: ux_icon('material-symbols:restaurant'),
+                CC: ux_icon('icon-park-outline:building-four'),
+                GALLERIA: ux_icon('grommet-icons:gallery'),
+                MUSEO: ux_icon('material-symbols:museum')
+            }
+        } %}
+
+            <div class="block block-outline block-strong inset margin-vertical">
+                <twig:ux:map :center="[0,0]" zoom="3" data-controller="mymap" id="my-map" style="aspect-ratio: 16/9; border-radius: var(--f7-block-inset-border-radius); width: 100%;" />
+            </div>
+
+            <twig:dexie
+                refreshEvent="tab-{{ t }}-show"
+                :store="store"
+                :globals="globals"
+                :filter="{locale: 'en'}"
+                :caller="_self">
+
+            <twig:block name="title">
+                there are {{ rows|length }} rows
+            </twig:block>
+
+            <twig:block name="twig_template" id="hack_to_get_raw_data">
+                <div class="list media-list list-dividers list-outline list-strong inset margin-vertical">
+                    <ul>
+                    {% for row in rows %}
+                        <li>
+                            <a href="/pages/location/{{ row.code }}" class="item-link">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title font-serif font-weight-600">{{ row.name|default(row.label)|title }}</div>
+                                            <div class="item-after">
+                                                <span data-controller="checkin" data-checkin-location-id-value="{{ row.code }}" data-checkin-target="statusLabel" data-checkin-status-label-value="✓" class="badge color-green"></span>
+                                            </div>
+                                        </div>
+                                        <div class="item-text">{{ row.address|default('') }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <!-- hack_to_get_raw_data -->
+            </twig:block>
+
+        </twig:dexie>
+</div>
+
+<script>
+
+</script>
+
+
