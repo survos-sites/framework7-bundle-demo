@@ -39,3 +39,5 @@ public/screenshots
 /public/site.*.webmanifest
 /public/sw.js
 ###< spomky-labs/pwa-bundle ###
+config.bat
+node_modules

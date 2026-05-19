@@ -115,6 +115,9 @@
             "config/packages/pwa.yaml"
         ]
     },
+    "survos/atlas-bundle": {
+        "version": "2.3.0"
+    },
     "survos/auth-bundle": {
         "version": "1.5.529"
     },
@@ -150,11 +153,17 @@
     "survos/deployment-bundle": {
         "version": "1.5.529"
     },
+    "survos/field-bundle": {
+        "version": "2.3.0"
+    },
     "survos/fw-bundle": {
         "version": "1.0"
     },
     "survos/js-twig-bundle": {
         "version": "1.5.529"
+    },
+    "survos/kit-bundle": {
+        "version": "2.0.1"
     },
     "survos/maker-bundle": {
         "version": "1.5.503"

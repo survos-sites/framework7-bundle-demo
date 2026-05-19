@@ -10,136 +10,66 @@
  *     be used as an "entrypoint" (and passed to the importmap() Twig function).
  *
  * The "importmap:require" command can be used to add new entries to this file.
+ *
+ * @return array<string, array{    // Import name as key, description of the imported file as value
+ *     path: string,               // Logical, relative or absolute path to the file
+ *     type?: 'js'|'css'|'json',   // Type of the file, defaults to 'js'
+ *     entrypoint?: bool,          // Whether the file is an entrypoint, for 'js' only
+ * }|array{
+ *     version: string,            // Version of the remote package
+ *     package_specifier?: string, // Remote "package-name/path" specifier, defaults to the import name
+ *     type?: 'js'|'css'|'json',
+ *     entrypoint?: bool,
+ * }>
  */
 return [
-    'app' => [
-        'path' => './assets/app.js',
-        'entrypoint' => true,
-    ],
-    '@symfony/stimulus-bundle' => [
-        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
-    ],
-    '@survos-mobile/mobile' => [
-        'path' => './vendor/survos/fw-bundle/assets/src/controllers/mobile_controller.js',
-    ],
-    '@survos-js-twig/locale' => [
-        'path' => './vendor/survos/js-twig-bundle/assets/src/lib/localeUtilities.js',
-    ],
-    '@survos-js-twig/database' => [
-        'path' => './vendor/survos/js-twig-bundle/assets/src/lib/dexieDatabase.js',
-    ],
-    '@symfony/ux-leaflet-map' => [
-        'path' => './vendor/symfony/ux-leaflet-map/assets/dist/map_controller.js',
-    ],
-    '@spomky-labs/pwa/helpers' => [
-        'path' => './vendor/spomky-labs/pwa-bundle/assets/src/helpers.js',
-    ],
-    '@hotwired/stimulus' => [
-        'version' => '3.2.2',
-    ],
-    'dom7' => [
-        'version' => '4.0.6',
-    ],
-    'ssr-window' => [
-        'version' => '5.0.1',
-    ],
-    'framework7' => [
-        'version' => '8.3.4',
-    ],
-    'path-to-regexp' => [
-        'version' => '8.3.0',
-    ],
-    'htm' => [
-        'version' => '3.1.1',
-    ],
-    'swiper' => [
-        'version' => '11.2.10',
-    ],
-    '@hotwired/turbo' => [
-        'version' => '8.0.13',
-    ],
-    'framework7/framework7-bundle' => [
-        'version' => '8.3.4',
-    ],
-    'framework7/framework7-bundle.min.css' => [
-        'version' => '8.3.4',
-        'type' => 'css',
-    ],
-    'unlazy' => [
-        'version' => '0.12.4',
-    ],
-    '@unlazy/core' => [
-        'version' => '0.12.4',
-    ],
-    'twig' => [
-        'version' => '1.17.1',
-    ],
-    'locutus/php/strings/sprintf' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/strings/vsprintf' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/math/round' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/math/max' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/math/min' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/strings/strip_tags' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/datetime/strtotime' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/datetime/date' => [
-        'version' => '2.0.32',
-    ],
-    'locutus/php/var/boolval' => [
-        'version' => '2.0.32',
-    ],
-    'dexie' => [
-        'version' => '4.2.0',
-    ],
-    'stimulus-attributes' => [
-        'version' => '1.0.2',
-    ],
-    'escape-html' => [
-        'version' => '1.0.3',
-    ],
-    'fos-routing' => [
-        'version' => '0.0.6',
-    ],
-    'leaflet' => [
-        'version' => '1.9.4',
-    ],
-    'leaflet/dist/leaflet.min.css' => [
-        'version' => '1.9.4',
-        'type' => 'css',
-    ],
-    'idb' => [
-        'version' => '8.0.3',
-    ],
-    'idb-keyval' => [
-        'version' => '6.2.2',
-    ],
-    'framework7-icons' => [
-        'version' => '5.0.5',
-    ],
-    'framework7-icons/css/framework7-icons.min.css' => [
-        'version' => '5.0.5',
-        'type' => 'css',
-    ],
-    'debug' => [
-        'version' => '4.4.1',
-    ],
-    'ms' => [
-        'version' => '2.1.3',
-    ],
-    'fingerprintjs' => [
-        'version' => '0.5.3',
-    ],
+    'app' => ['path' => './assets/app.js', 'entrypoint' => true],
+    '@symfony/stimulus-bundle' => ['path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js'],
+    '@survos-mobile/mobile' => ['path' => './vendor/survos/fw-bundle/assets/src/controllers/mobile_controller.js'],
+    '@survos-js-twig/locale' => ['path' => './vendor/survos/js-twig-bundle/assets/src/lib/localeUtilities.js'],
+    '@survos-js-twig/database' => ['path' => './vendor/survos/js-twig-bundle/assets/src/lib/dexieDatabase.js'],
+    '@symfony/ux-leaflet-map' => ['path' => './vendor/symfony/ux-leaflet-map/assets/dist/map_controller.js'],
+    '@spomky-labs/pwa/helpers' => ['path' => './vendor/spomky-labs/pwa-bundle/assets/src/helpers.js'],
+    '@hotwired/stimulus' => ['version' => '3.2.2'],
+    'dom7' => ['version' => '4.0.6'],
+    'ssr-window' => ['version' => '5.0.1'],
+    'framework7' => ['version' => '9.0.4'],
+    'path-to-regexp' => ['version' => '6.3.0'],
+    'htm' => ['version' => '3.1.1'],
+    'swiper' => ['version' => '11.2.10'],
+    '@hotwired/turbo' => ['version' => '8.0.13'],
+    'framework7/framework7-bundle' => ['version' => '8.3.4'],
+    'framework7/framework7-bundle.min.css' => ['version' => '8.3.4', 'type' => 'css'],
+    'unlazy' => ['version' => '0.12.4'],
+    '@unlazy/core' => ['version' => '0.12.4'],
+    'twig' => ['version' => '1.17.1'],
+    'locutus/php/strings/sprintf' => ['version' => '2.0.32'],
+    'locutus/php/strings/vsprintf' => ['version' => '2.0.32'],
+    'locutus/php/math/round' => ['version' => '2.0.32'],
+    'locutus/php/math/max' => ['version' => '2.0.32'],
+    'locutus/php/math/min' => ['version' => '2.0.32'],
+    'locutus/php/strings/strip_tags' => ['version' => '2.0.32'],
+    'locutus/php/datetime/strtotime' => ['version' => '2.0.32'],
+    'locutus/php/datetime/date' => ['version' => '2.0.32'],
+    'locutus/php/var/boolval' => ['version' => '2.0.32'],
+    'dexie' => ['version' => '4.4.2'],
+    'stimulus-attributes' => ['version' => '1.0.2'],
+    'escape-html' => ['version' => '1.0.3'],
+    'fos-routing' => ['version' => '0.0.6'],
+    'leaflet' => ['version' => '1.9.4'],
+    'leaflet/dist/leaflet.min.css' => ['version' => '1.9.4', 'type' => 'css'],
+    'idb' => ['version' => '8.0.3'],
+    'idb-keyval' => ['version' => '6.2.2'],
+    'framework7-icons' => ['version' => '5.0.5'],
+    'framework7-icons/css/framework7-icons.min.css' => ['version' => '5.0.5', 'type' => 'css'],
+    'debug' => ['version' => '4.4.3'],
+    'ms' => ['version' => '2.1.3'],
+    'fingerprintjs' => ['version' => '0.5.3'],
+    'framework7/bundle' => ['version' => '9.0.4'],
+    'swiper/bundle' => ['version' => '12.1.4'],
+    'swiper/element/bundle' => ['version' => '12.1.4'],
+    'framework7/css/bundle' => ['version' => '9.0.4'],
+    '@tacman1123/twig-browser' => ['version' => '0.4.18'],
+    '@tacman1123/twig-browser/src/compat/compileTwigBlocks.js' => ['version' => '0.4.18'],
+    '@tacman1123/twig-browser/adapters/symfony' => ['version' => '0.4.18'],
 ];

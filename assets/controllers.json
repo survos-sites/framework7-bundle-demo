@@ -114,7 +114,9 @@
             "mobile": {
                 "enabled": true,
                 "fetch": "eager",
-                "autoimport": []
+                "autoimport": {
+                    "framework7/css/bundle": true
+                }
             }
         },
         "@survos/js-twig-bundle": {
@@ -123,10 +125,20 @@
                 "fetch": "eager",
                 "autoimport": []
             },
-            "jstwig": {
+            "js_twig": {
                 "enabled": true,
-                "fetch": "eager",
+                "fetch": "lazy",
                 "autoimport": []
+            }
+        },
+        "@survos/tabler-bundle": {
+            "accordion": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "search": {
+                "enabled": true,
+                "fetch": "lazy"
             }
         },
         "@symfony/ux-leaflet-map": {
