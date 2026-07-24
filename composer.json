@@ -47,7 +47,7 @@
         "symfony/property-access": "^8.1",
         "symfony/property-info": "^8.1",
         "symfony/runtime": "^8.1",
-        "symfony/security-bundle": "^8.1@beta",
+        "symfony/security-bundle": "^8.1",
         "symfony/serializer": "^8.1",
         "symfony/stimulus-bundle": "^3.0",
         "symfony/string": "^8.1",

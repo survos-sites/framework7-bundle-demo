@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Tests\PantherTest;
-use Roave\BetterReflection\BetterReflection;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,19 +16,18 @@ final class ScreenshotController extends AbstractController
     #[Template('app/screenshots.html.twig')]
     public function index(): array
     {
-        $reflection = new \ReflectionClass(PantherTest::class);
-
         $methods = [];
-        $classInfo = (new BetterReflection())
-            ->reflector()
-            ->reflectClass(PantherTest::class);
+        $classInfo = new \ReflectionClass(PantherTest::class);
 
 
         foreach ($classInfo->getMethods() as $method) {
             if (!str_starts_with($method->getName(), 'test')) {
                 continue;
             }
-            $source = $method->getLocatedSource()->getSource();
+            $source = file_get_contents($method->getFileName());
+            if ($source === false) {
+                continue;
+            }
 
             $statements = $this->astWalker($source);
 

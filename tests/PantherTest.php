@@ -9,7 +9,7 @@ class PantherTest extends PantherTestCase
 {
     use HasBrowser;
 
-    public function testBatsi(): void
+    public function testChijal(): void
     {
 
         //fw apps listing / home page
@@ -18,38 +18,41 @@ class PantherTest extends PantherTestCase
             ->assertOn('/')
             ->takeScreenshot('home.png');
 
-        //go to batsi en (defaults to locations tab)
+        //go to Chijal in English (defaults to locations tab)
         $browser
-            ->visit('/en/batsi#tab-locations')
+            ->visit('/en/chijal#tab-locations')
             ->waitUntilVisible("#tab-locations")
             ->waitUntilNotVisible(".gauge")
             ->waitUntilVisible(".custom-list-content")
-            ->assertOn('/en/batsi#tab-locations')
-            ->takeScreenshot('en.basti.locations.png');
+            ->assertOn('/en/chijal#tab-locations')
+            ->takeScreenshot('en.chijal.locations.png');
 
         // click on the 'artists' tab
         $browser
             ->click('#tab-artists') // click on the artists
             ->waitUntilVisible("#tab-artists")
             ->wait(1200)
-            ->takeScreenshot('en.basti.artists.png');
+            ->takeScreenshot('en.chijal.artists.png');
 
         // click on the 'artwork' tab
-        $browser->click('Artwork')
+        $browser->client()->executeScript(
+            "document.querySelector(\"a.tab-link[href='#tab-obras']\").click();"
+        );
+        $browser
             ->waitUntilNotVisible("#tab-artists")
             ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
             ->wait(1200)
-            ->takeScreenshot('en.basti.artwork.png');
+            ->takeScreenshot('en.chijal.artwork.png');
     }
 
-    public function testBatsiEs(): void
+    public function testChijalEs(): void
     {
-        //go to batsi es (defaults to locations tab)
+        //go to Chijal in Spanish (defaults to locations tab)
         $browser = $this->pantherBrowser()
-            ->visit('/es/batsi')
+            ->visit('/es/chijal')
             ->waitUntilVisible(".custom-list-content")
-            ->assertOn('/es/batsi')
-            ->takeScreenshot('es.batsi.locations.png');
+            ->assertOn('/es/chijal')
+            ->takeScreenshot('es.chijal.locations.png');
 
 
         // click on the 'artists' tab
@@ -57,14 +60,17 @@ class PantherTest extends PantherTestCase
             ->click('#tab-artists') // click on the artists
             ->waitUntilVisible("#tab-artists")
             ->wait(1200)
-            ->takeScreenshot('es.basti.artists.png');
+            ->takeScreenshot('es.chijal.artists.png');
 
         // click on the 'artwork' tab
-        $browser->click('Obras')
+        $browser->client()->executeScript(
+            "document.querySelector(\"a.tab-link[href='#tab-obras']\").click();"
+        );
+        $browser
             ->waitUntilNotVisible("#tab-artists")
             ->waitUntilVisible("a.tab-link.tab-link-active[href='#tab-obras']")
             ->wait(1200)
-            ->takeScreenshot('es.basti.artwork.png');
+            ->takeScreenshot('es.chijal.artwork.png');
     }
 
 }

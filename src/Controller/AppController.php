@@ -64,7 +64,7 @@ final class AppController extends AbstractController
                         'type' => $type,
                         'route' => $route,
                         'template' => $template,
-                        'debug' => $request->get('debug', false),
+                        'debug' => $request->query->get('debug', false),
                     ];
 //                    $templates[$route]  = $this->twig->render($template, $params);
                     $templates[$route] = $this->renderView($template, $params);
@@ -83,7 +83,7 @@ final class AppController extends AbstractController
             'locale' => $request->getLocale(),
             'configCode' => $configCode,
             'tabs' => ['tabs']??['info'],
-            'playNow' => $request->get('playNow', true),
+            'playNow' => $request->query->get('playNow', true),
             ''
         ]);
     }

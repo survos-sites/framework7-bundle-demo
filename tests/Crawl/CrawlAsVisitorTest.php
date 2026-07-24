@@ -12,7 +12,7 @@ class CrawlAsVisitorTest extends BaseVisitLinksTest
 {
 	#[TestDox('/$method $url ($route)')]
 	#[TestWith(['', '/js/routing', 200])]
-	#[TestWith(['', '/admin/commands/', 200])]
+	#[TestWith(['', '/admin/commands/_command', 200])]
 	#[TestWith(['', '/crawler/crawlerdata', 200])]
 	#[TestWith(['', '/', 200])]
 	#[TestWith(['', '/screenshots', 200])]

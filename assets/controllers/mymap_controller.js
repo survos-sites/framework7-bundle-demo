@@ -4,6 +4,8 @@ export default class extends Controller {
     connect() {
         this._boundOnConnect = this._onConnect.bind(this);
         this._boundOnDbReady = this._onDbReady.bind(this);
+        this._boundOnTabShow = this._onTabShow.bind(this);
+        this._hasFittedVisibleBounds = false;
 
         this.element.addEventListener('ux:map:pre-connect', this._onPreConnect);
         this.element.addEventListener('ux:map:connect', this._boundOnConnect);
@@ -27,6 +29,7 @@ export default class extends Controller {
         });
 
         document.addEventListener('dbready', this._boundOnDbReady);
+        document.addEventListener('tab-map-show', this._boundOnTabShow);
 
         this._icons = {
             mapPinNotCheckedIn: '/images/map-pin-chijal.svg',
@@ -49,6 +52,7 @@ export default class extends Controller {
         this.element.removeEventListener('ux:map:polyline:after-create', this._onPolylineAfterCreate);
 
         document.removeEventListener('dbready', this._boundOnDbReady);
+        document.removeEventListener('tab-map-show', this._boundOnTabShow);
 
         document.removeEventListener('page:afterin', this._addMarkersFromDb);
     }
@@ -96,8 +100,26 @@ export default class extends Controller {
         }
 
         if (bounds.length > 0) {
+            this.bounds = bounds;
             this.map.fitBounds(bounds);
+            if (this.element.offsetWidth > 0 && this.element.offsetHeight > 0) {
+                this._hasFittedVisibleBounds = true;
+            }
         }
+    }
+
+    _onTabShow() {
+        if (!this.map) {
+            return;
+        }
+
+        requestAnimationFrame(() => {
+            this.map.invalidateSize();
+            if (!this._hasFittedVisibleBounds && this.bounds?.length) {
+                this.map.fitBounds(this.bounds);
+                this._hasFittedVisibleBounds = true;
+            }
+        });
     }
 
     /**

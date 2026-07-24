@@ -28,15 +28,19 @@
 </style>
 
 
-<div>
+<div class="custom-list-content">
     <h1 class="page-title font-serif font-weight-900 text-capitalize margin-top no-margin-bottom">{{ 'tab.%s'|format(t)|trans }}</h1>
         {% set store = t %}
         {% set globals = {
             icons: {
-                REST: ux_icon('material-symbols:restaurant'),
-                CC: ux_icon('icon-park-outline:building-four'),
-                GALLERIA: ux_icon('grommet-icons:gallery'),
-                MUSEO: ux_icon('material-symbols:museum')
+                Restaurant: ux_icon('material-symbols:restaurant'),
+                Cafeteria: ux_icon('material-symbols:restaurant'),
+                Bar: ux_icon('material-symbols:restaurant'),
+                Galeria: ux_icon('grommet-icons:gallery'),
+                Museo: ux_icon('material-symbols:museum'),
+                Instituto: ux_icon('icon-park-outline:building-four'),
+                Tienda: ux_icon('icon-park-outline:building-four'),
+                cc: ux_icon('icon-park-outline:building-four')
             }
         } %}
 
@@ -44,7 +48,7 @@
                 refreshEvent="tab-{{ t }}-show"
                 :store="store"
                 :globals="globals"
-                :filter="{locale: 'en'}"
+                :filter="{}"
                 :caller="_self">
 
             <twig:block name="title">
@@ -60,7 +64,7 @@
                                 <div class="item-content">
                                     <div class="item-media">
                                         <span class="media-container size-40" title=" {{ row.type ?? '' }}">
-                                            {{ globals.icons[row.type|upper] ?? '' }}
+                                            {{ globals.icons[row.type] ?? '' }}
                                         </span>
                                     </div>
                                     <div class="item-inner">
@@ -70,7 +74,7 @@
                                                 <span data-controller="checkin" data-checkin-location-id-value="{{ row.code }}" data-checkin-target="statusLabel" data-checkin-status-label-value="✓" class="badge color-green" style="font-family: system-ui;"></span>
                                             </div>
                                             <div class="item-after">
-                                                <span class="badge color-primary">{{ row.obraCount|default(row.objCount) }}</span>
+                                                <span class="badge color-primary">{{ row.obras.length }}</span>
                                             </div>
                                         </div>
                                         <div class="item-text">{{ row.barrio ?? '' }}</div>

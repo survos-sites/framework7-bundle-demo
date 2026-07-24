@@ -1,8 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
 import MobileController from '@survos-mobile/mobile';
 
-import Framework7 from 'framework7/framework7-bundle';
-import 'framework7/framework7-bundle.min.css';
+import Framework7 from 'framework7/bundle';
+import 'framework7/css/bundle';
 // import { DbUtilities } from "../lib/dexieDatabase.js";
 //@survos-js-twig/database
 import { DbUtilities } from "@survos-js-twig/database";
@@ -12,7 +12,6 @@ import routes from "./../routes.js";
 
 // are these needed?
 import Dexie from 'dexie';
-var $ = Dom7;
 
 
 /*

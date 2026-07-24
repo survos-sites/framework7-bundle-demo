@@ -1,8 +1,8 @@
 var $ = Dom7;
-import Framework7 from 'framework7/framework7-bundle';
+import Framework7 from 'framework7/bundle';
 // assets/app.js
 // I don't think this is enough
-import 'framework7-icons/css/framework7-icons.css';
+import 'framework7-icons/css/framework7-icons.min.css';
 
 // import './store.js';
 import Dexie from 'dexie';
