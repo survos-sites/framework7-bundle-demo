@@ -67,7 +67,9 @@ return [
     'swiper/bundle' => ['version' => '12.1.4'],
     'swiper/element/bundle' => ['version' => '12.1.4'],
     'framework7/css/bundle' => ['version' => '9.1.1'],
-    '@tacman1123/twig-browser' => ['version' => '0.4.18'],
-    '@tacman1123/twig-browser/src/compat/compileTwigBlocks.js' => ['version' => '0.4.18'],
-    '@tacman1123/twig-browser/adapters/symfony' => ['version' => '0.4.18'],
+    '@tacman1123/twig-browser' => ['version' => '1.0.0'],
+    '@tacman1123/twig-browser/src/compat/compileTwigBlocks.js' => ['version' => '1.0.0'],
+    '@tacman1123/twig-browser/adapters/symfony' => ['version' => '1.0.0'],
+    'flag-icons/css/flag-icons.min.css' => ['version' => '7.5.0', 'type' => 'css'],
+    'marked' => ['version' => '18.0.7'],
 ];

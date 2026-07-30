@@ -134,9 +134,6 @@
             "config/routes/survos_command.yaml"
         ]
     },
-    "survos/core-bundle": {
-        "version": "1.5.529"
-    },
     "survos/crawler-bundle": {
         "version": "1.5",
         "recipe": {
@@ -167,6 +164,9 @@
     },
     "survos/maker-bundle": {
         "version": "1.5.503"
+    },
+    "survos/tabler-bundle": {
+        "version": "2.15.17"
     },
     "symfony/asset-mapper": {
         "version": "7.2",
@@ -410,6 +410,15 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "symfony/uid": {
+        "version": "8.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.0",
+            "ref": "0df5844274d871b37fc3816c57a768ffc60a43a5"
+        }
     },
     "symfony/ux-icons": {
         "version": "2.23",

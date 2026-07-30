@@ -50,7 +50,7 @@
                 "fetch": "eager"
             },
             "geolocation": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "eager"
             },
             "install": {
@@ -98,7 +98,7 @@
                 "fetch": "eager"
             },
             "wake-lock": {
-                "enabled": false,
+                "enabled": true,
                 "fetch": "eager"
             },
             "web-push": {

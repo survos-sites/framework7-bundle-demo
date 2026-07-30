@@ -152,7 +152,7 @@
                 <img src="{{ image.resized.medium }}" alt="{{ data.title|e }}"
                   style="width: 100%; height: auto; border-radius: 16px; cursor: pointer;"
                   data-photo-url="{{ image.resized.large ?? image.resized.medium }}"
-                  onclick="app.photoBrowser.create({photos: [this.dataset.photoUrl], theme: 'dark'}).open();">
+                  onclick="app.photoBrowser.create({photos: [this.dataset.photoUrl]}).open();">
               </div>
               {% endif %}
             {% endfor %}
