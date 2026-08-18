@@ -1,4 +1,12 @@
-survos_command:
-    # expose app:my-command, etc.
-    namespaces: [fw]
+# SurvosCommandBundle is registered for dev+test only (config/bundles.php), so this
+# configuration must be scoped the same way. Unscoped, prod boot dies with
+# "There is no extension able to load the configuration for survos_command",
+# which fails `cache:clear` during composer post-install-cmd and aborts the build.
+when@dev:
+    survos_command:
+        # expose app:my-command, etc.
+        namespaces: [fw]
 
+when@test:
+    survos_command:
+        namespaces: [fw]

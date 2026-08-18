@@ -1,9 +1,17 @@
-survos_crawler:
-# if you've run symfony proxy:domain:attach my-project, then the error messages will be displayed with this prefix.  That way, you can simply click on a link to open the page.
-    base_url: 'https://fw.wip/'
-    user_class: App\Entity\User
-    users:
-#        - user@user.com
-    max_depth : 3
-    routes_to_ignore :
-        - 'app_logout'
+# SurvosCrawlerBundle is registered for dev+test only (config/bundles.php), so this
+# configuration must be scoped the same way. Unscoped, prod boot dies with
+# "There is no extension able to load the configuration for survos_crawler",
+# which fails `cache:clear` during composer post-install-cmd and aborts the build.
+when@dev: &crawler
+    survos_crawler:
+        # if you've run symfony proxy:domain:attach my-project, then the error messages will be
+        # displayed with this prefix. That way, you can simply click on a link to open the page.
+        base_url: 'https://fw.wip/'
+        user_class: App\Entity\User
+        users:
+        #        - user@user.com
+        max_depth: 3
+        routes_to_ignore:
+            - 'app_logout'
+
+when@test: *crawler
