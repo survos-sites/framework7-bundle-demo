@@ -24,19 +24,30 @@ survos_fw:
       #          - share
       #          - scan
       database: chijal
+      # Served by wp-chijal's Symfony kernel (/sf/api), reading the Grist document through
+      # survos/grist-bundle's API Platform provider. It replaces two predecessors: the old
+      # chijal.org/api, which published every venue including the 28 that are closed along
+      # with contact emails and phone numbers, and the WordPress REST proxy that fixed those
+      # with a hand-maintained field allow-list.
+      #
+      # Local while it settles. Production is https://wp-chijal.survos.com/sf/api, and the
+      # env vars are already set there -- the code is simply not deployed yet.
       stores:
         - name: artists
           schema: code
-          url: https://chijal.org/api/artists
-#          url: https://pgsc.wip/api/artists
+          url: https://wp-chijal.wip/sf/api/artists
+#          url: https://chijal.org/api/artists
         - name: locations
           schema: code
-          url: https://chijal.org/api/locations
-#          url: https://pgsc.wip/api/locations
+          url: https://wp-chijal.wip/sf/api/locations
+#          url: https://chijal.org/api/locations
         - name: obras
+          # location.id indexes nothing and did not on the old endpoint either -- it emitted
+          # a nested location with @id and code, never a plain id. Left as it was rather than
+          # quietly changed: whether the app wants that index is its own question.
           schema: code,artistCode,locationCode,location.id
-          url: https://chijal.org/api/obras
-#          url: https://pgsc.wip/api/obras
+          url: https://wp-chijal.wip/sf/api/obras
+#          url: https://chijal.org/api/obras
         - name: checkins
           schema: locationCode,timestamp
           url: null
