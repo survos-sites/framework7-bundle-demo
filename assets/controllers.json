@@ -117,6 +117,10 @@
                 "autoimport": {
                     "framework7/css/bundle": true
                 }
+            },
+            "ks_autocomplete": {
+                "enabled": true,
+                "fetch": "lazy"
             }
         },
         "@survos/js-twig-bundle": {
@@ -137,6 +141,18 @@
                 "fetch": "lazy"
             },
             "search": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "clipboard": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "closeable": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "tooltip": {
                 "enabled": true,
                 "fetch": "lazy"
             }

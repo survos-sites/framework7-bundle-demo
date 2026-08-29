@@ -72,4 +72,8 @@ return [
     '@tacman1123/twig-browser/adapters/symfony' => ['version' => '1.0.0'],
     'flag-icons/css/flag-icons.min.css' => ['version' => '7.5.0', 'type' => 'css'],
     'marked' => ['version' => '18.0.7'],
+    '@floating-ui/dom' => ['version' => '1.8.0'],
+    '@floating-ui/core' => ['version' => '1.8.0'],
+    '@floating-ui/utils' => ['version' => '0.2.12'],
+    '@floating-ui/utils/dom' => ['version' => '0.2.12'],
 ];
