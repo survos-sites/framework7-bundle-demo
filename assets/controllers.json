@@ -155,6 +155,10 @@
             "tooltip": {
                 "enabled": true,
                 "fetch": "lazy"
+            },
+            "conditional-fields": {
+                "enabled": true,
+                "fetch": "lazy"
             }
         },
         "@symfony/ux-leaflet-map": {
