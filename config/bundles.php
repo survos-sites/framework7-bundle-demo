@@ -19,7 +19,6 @@ return [
     Survos\FieldBundle\SurvosFieldBundle::class => ['all' => true],
     Survos\FwBundle\SurvosFwBundle::class => ['all' => true],
     Survos\JsTwigBundle\SurvosJsTwigBundle::class => ['all' => true],
-    FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
     Survos\CommandBundle\SurvosCommandBundle::class => ['dev' => true, 'test' => true],
     Symfony\UX\Map\UXMapBundle::class => ['all' => true],
     Endroid\QrCodeBundle\EndroidQrCodeBundle::class => ['all' => true],

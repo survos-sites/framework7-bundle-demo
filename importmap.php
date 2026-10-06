@@ -53,7 +53,6 @@ return [
     'dexie' => ['version' => '4.4.2'],
     'stimulus-attributes' => ['version' => '1.0.2'],
     'escape-html' => ['version' => '1.0.3'],
-    'fos-routing' => ['version' => '0.0.6'],
     'leaflet' => ['version' => '1.9.4'],
     'leaflet/dist/leaflet.min.css' => ['version' => '1.9.4', 'type' => 'css'],
     'idb' => ['version' => '8.0.3'],

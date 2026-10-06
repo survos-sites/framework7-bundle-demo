@@ -1645,19 +1645,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         response_key?: scalar|Param|null, // key if API returns an object response, e.g. dummyjson returns {'products': [...]}
  *     }>,
  * }
- * @psalm-type FosJsRoutingConfig = array{
- *     serializer?: scalar|Param|null,
- *     routes_to_expose?: list<scalar|Param|null>,
- *     router?: scalar|Param|null, // Default: "router"
- *     request_context_base_url?: scalar|Param|null, // Default: null
- *     cache_control?: array{
- *         public?: bool|Param, // Default: false
- *         expires?: scalar|Param|null, // Default: null
- *         maxage?: scalar|Param|null, // Default: null
- *         smaxage?: scalar|Param|null, // Default: null
- *         vary?: list<scalar|Param|null>,
- *     },
- * }
  * @psalm-type SurvosCommandConfig = array{
  *     routes_enabled?: bool|Param, // Set false to manage this bundle's routes manually in your app. Bundles exposing sensitive routes (e.g. running console commands) should default this off. // Default: false
  *     route_prefix?: scalar|Param|null, // URL prefix applied to all routes from this bundle. // Default: "/admin/commands"
@@ -2180,7 +2167,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     survos_field?: SurvosFieldConfig,
  *     survos_fw?: SurvosFwConfig,
  *     survos_js_twig?: SurvosJsTwigConfig,
- *     fos_js_routing?: FosJsRoutingConfig,
  *     ux_map?: UxMapConfig,
  *     endroid_qr_code?: EndroidQrCodeConfig,
  *     knpu_oauth2_client?: KnpuOauth2ClientConfig,
@@ -2210,7 +2196,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         survos_field?: SurvosFieldConfig,
  *         survos_fw?: SurvosFwConfig,
  *         survos_js_twig?: SurvosJsTwigConfig,
- *         fos_js_routing?: FosJsRoutingConfig,
  *         survos_command?: SurvosCommandConfig,
  *         ux_map?: UxMapConfig,
  *         endroid_qr_code?: EndroidQrCodeConfig,
@@ -2241,7 +2226,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         survos_field?: SurvosFieldConfig,
  *         survos_fw?: SurvosFwConfig,
  *         survos_js_twig?: SurvosJsTwigConfig,
- *         fos_js_routing?: FosJsRoutingConfig,
  *         ux_map?: UxMapConfig,
  *         endroid_qr_code?: EndroidQrCodeConfig,
  *         knpu_oauth2_client?: KnpuOauth2ClientConfig,
@@ -2270,7 +2254,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         survos_field?: SurvosFieldConfig,
  *         survos_fw?: SurvosFwConfig,
  *         survos_js_twig?: SurvosJsTwigConfig,
- *         fos_js_routing?: FosJsRoutingConfig,
  *         survos_command?: SurvosCommandConfig,
  *         ux_map?: UxMapConfig,
  *         endroid_qr_code?: EndroidQrCodeConfig,
